@@ -1,0 +1,5 @@
+
+_:node1fgs1inf1x375 a <http://xmlns.com/foaf/0.1/Organisation>;
+  <http://purl.org/dc/terms/spatial> _:node1fgs1inf1x376;
+  <http://xmlns.com/foaf/0.1/name> "Orphanet" .
+
