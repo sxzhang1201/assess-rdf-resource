@@ -25,8 +25,14 @@ def get_http_status_code(list_of_uri):
     # Initiate a dictionary
     content_type_for_resolvable_uris = {}
 
+    progress_count = 1
+
     for single_uri in list_of_uri:
-        print(" Getting status code of {}".format(single_uri))
+
+        print(" Getting status code of {} - Progress {}/{}".format(single_uri, progress_count, len(list_of_uri)))
+
+        progress_count = progress_count + 1
+
         try:
             # Get HTTP Status Code and append URI to corresponding lists
             # Bug fixed: do not use request.head(URI), which is outdated.

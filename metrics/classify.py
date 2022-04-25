@@ -8,7 +8,7 @@ def extract_type(content_type_for_resolvable_uris):
     """
 
     :param content_type_for_resolvable_uris: a dictionary with URIs as keys (str) corresponding to their content-type as values (str)
-    :return:
+    :return: 6 lists, respectively containing URIs of different types
     """
     # Initiate 4 lists
     class_list = []
