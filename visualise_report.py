@@ -1,3 +1,5 @@
+#!/usr/bin/env python3
+
 from functions.save_or_load_report import load_object
 from functions.load_resource import parse_data_local_or_remote as load_resource
 from functions.inspect_items import inspect_item_in_list, inspect_item_in_dict
