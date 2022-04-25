@@ -1,0 +1,164 @@
+
+<http://purl.org/ejp-rd/vocabulary/Biobank> <http://www.w3.org/2000/01/rdf-schema#label>
+    "Biobank";
+  <http://www.w3.org/2004/02/skos/core#altLabel> "BiobankDataset" .
+
+<http://purl.org/ejp-rd/vocabulary/PatientRegistry> <http://www.w3.org/2000/01/rdf-schema#label>
+    "Patient Registry";
+  <http://www.w3.org/2004/02/skos/core#altLabel> "PatientRegistryDataset" .
+
+<http://www.wikidata.org/entity/Q142> <http://www.w3.org/2000/01/rdf-schema#label>
+    "France";
+  <http://www.wikidata.org/prop/direct/P297> "FR" .
+
+<http://www.wikidata.org/entity/Q145> <http://www.w3.org/2000/01/rdf-schema#label>
+    "United Kingdom";
+  <http://www.wikidata.org/prop/direct/P297> "GB" .
+
+<http://www.wikidata.org/entity/Q16> <http://www.w3.org/2000/01/rdf-schema#label>
+    "Canada";
+  <http://www.wikidata.org/prop/direct/P297> "CA" .
+
+<http://www.wikidata.org/entity/Q183> <http://www.w3.org/2000/01/rdf-schema#label>
+    "Germany";
+  <http://www.wikidata.org/prop/direct/P297> "DE" .
+
+<http://www.wikidata.org/entity/Q189> <http://www.w3.org/2000/01/rdf-schema#label>
+    "Iceland";
+  <http://www.wikidata.org/prop/direct/P297> "IS" .
+
+<http://www.wikidata.org/entity/Q191> <http://www.w3.org/2000/01/rdf-schema#label>
+    "Estonia";
+  <http://www.wikidata.org/prop/direct/P297> "EE" .
+
+<http://www.wikidata.org/entity/Q20> <http://www.w3.org/2000/01/rdf-schema#label>
+    "Norway";
+  <http://www.wikidata.org/prop/direct/P297> "NO" .
+
+<http://www.wikidata.org/entity/Q211> <http://www.w3.org/2000/01/rdf-schema#label>
+    "Latvia";
+  <http://www.wikidata.org/prop/direct/P297> "LV" .
+
+<http://www.wikidata.org/entity/Q212> <http://www.w3.org/2000/01/rdf-schema#label>
+    "Ukraine";
+  <http://www.wikidata.org/prop/direct/P297> "UA" .
+
+<http://www.wikidata.org/entity/Q213> <http://www.w3.org/2000/01/rdf-schema#label>
+    "Czech Republic";
+  <http://www.wikidata.org/prop/direct/P297> "CZ" .
+
+<http://www.wikidata.org/entity/Q214> <http://www.w3.org/2000/01/rdf-schema#label>
+    "Slovakia";
+  <http://www.wikidata.org/prop/direct/P297> "SK" .
+
+<http://www.wikidata.org/entity/Q215> <http://www.w3.org/2000/01/rdf-schema#label>
+    "Slovenia";
+  <http://www.wikidata.org/prop/direct/P297> "SI" .
+
+<http://www.wikidata.org/entity/Q218> <http://www.w3.org/2000/01/rdf-schema#label>
+    "Romania";
+  <http://www.wikidata.org/prop/direct/P297> "RO" .
+
+<http://www.wikidata.org/entity/Q219> <http://www.w3.org/2000/01/rdf-schema#label>
+    "Bulgaria";
+  <http://www.wikidata.org/prop/direct/P297> "BG" .
+
+<http://www.wikidata.org/entity/Q221> <http://www.w3.org/2000/01/rdf-schema#label>
+    "North Macedonia";
+  <http://www.wikidata.org/prop/direct/P297> "MK" .
+
+<http://www.wikidata.org/entity/Q224> <http://www.w3.org/2000/01/rdf-schema#label>
+    "Croatia";
+  <http://www.wikidata.org/prop/direct/P297> "HR" .
+
+<http://www.wikidata.org/entity/Q229> <http://www.w3.org/2000/01/rdf-schema#label>
+    "Cyprus";
+  <http://www.wikidata.org/prop/direct/P297> "CY" .
+
+<http://www.wikidata.org/entity/Q233> <http://www.w3.org/2000/01/rdf-schema#label>
+    "Malta";
+  <http://www.wikidata.org/prop/direct/P297> "MT" .
+
+<http://www.wikidata.org/entity/Q27> <http://www.w3.org/2000/01/rdf-schema#label>
+    "Ireland";
+  <http://www.wikidata.org/prop/direct/P297> "IE" .
+
+<http://www.wikidata.org/entity/Q28> <http://www.w3.org/2000/01/rdf-schema#label>
+    "Hungary";
+  <http://www.wikidata.org/prop/direct/P297> "HU" .
+
+<http://www.wikidata.org/entity/Q29> <http://www.w3.org/2000/01/rdf-schema#label>
+    "Spain";
+  <http://www.wikidata.org/prop/direct/P297> "ES" .
+
+<http://www.wikidata.org/entity/Q30> <http://www.w3.org/2000/01/rdf-schema#label>
+    "United States of America";
+  <http://www.wikidata.org/prop/direct/P297> "US" .
+
+<http://www.wikidata.org/entity/Q31> <http://www.w3.org/2000/01/rdf-schema#label>
+    "Belgium";
+  <http://www.wikidata.org/prop/direct/P297> "BE" .
+
+<http://www.wikidata.org/entity/Q32> <http://www.w3.org/2000/01/rdf-schema#label>
+    "Luxembourg";
+  <http://www.wikidata.org/prop/direct/P297> "LU" .
+
+<http://www.wikidata.org/entity/Q33> <http://www.w3.org/2000/01/rdf-schema#label>
+    "Finland";
+  <http://www.wikidata.org/prop/direct/P297> "FI" .
+
+<http://www.wikidata.org/entity/Q34> <http://www.w3.org/2000/01/rdf-schema#label>
+    "Sweden";
+  <http://www.wikidata.org/prop/direct/P297> "SE" .
+
+<http://www.wikidata.org/entity/Q35> <http://www.w3.org/2000/01/rdf-schema#label>
+    "Denmark";
+  <http://www.wikidata.org/prop/direct/P297> "DK" .
+
+<http://www.wikidata.org/entity/Q36> <http://www.w3.org/2000/01/rdf-schema#label>
+    "Poland";
+  <http://www.wikidata.org/prop/direct/P297> "PL" .
+
+<http://www.wikidata.org/entity/Q37> <http://www.w3.org/2000/01/rdf-schema#label>
+    "Lithuania";
+  <http://www.wikidata.org/prop/direct/P297> "LT" .
+
+<http://www.wikidata.org/entity/Q38> <http://www.w3.org/2000/01/rdf-schema#label>
+    "Italy";
+  <http://www.wikidata.org/prop/direct/P297> "IT" .
+
+<http://www.wikidata.org/entity/Q39> <http://www.w3.org/2000/01/rdf-schema#label>
+    "Switzerland";
+  <http://www.wikidata.org/prop/direct/P297> "CH" .
+
+<http://www.wikidata.org/entity/Q40> <http://www.w3.org/2000/01/rdf-schema#label>
+    "Austria";
+  <http://www.wikidata.org/prop/direct/P297> "AT" .
+
+<http://www.wikidata.org/entity/Q403> <http://www.w3.org/2000/01/rdf-schema#label>
+    "Serbia";
+  <http://www.wikidata.org/prop/direct/P297> "RS" .
+
+<http://www.wikidata.org/entity/Q408> <http://www.w3.org/2000/01/rdf-schema#label>
+    "Australia";
+  <http://www.wikidata.org/prop/direct/P297> "AU" .
+
+<http://www.wikidata.org/entity/Q41> <http://www.w3.org/2000/01/rdf-schema#label>
+    "Greece";
+  <http://www.wikidata.org/prop/direct/P297> "GR" .
+
+<http://www.wikidata.org/entity/Q43> <http://www.w3.org/2000/01/rdf-schema#label>
+    "Turkey";
+  <http://www.wikidata.org/prop/direct/P297> "TR" .
+
+<http://www.wikidata.org/entity/Q45> <http://www.w3.org/2000/01/rdf-schema#label>
+    "Portugal";
+  <http://www.wikidata.org/prop/direct/P297> "PT" .
+
+<http://www.wikidata.org/entity/Q55> <http://www.w3.org/2000/01/rdf-schema#label>
+    "Netherlands";
+  <http://www.wikidata.org/prop/direct/P297> "NL" .
+
+<http://www.wikidata.org/entity/Q801> <http://www.w3.org/2000/01/rdf-schema#label>
+    "Israel";
+  <http://www.wikidata.org/prop/direct/P297> "IL" .

@@ -1,0 +1,42 @@
+
+<https://w3id.org/ejp-rd/fairdatapoints/orphanet-catalog-fdp> a <http://www.re3data.org/schema/3-0#Repository>,
+    <http://www.w3.org/ns/dcat#Resource>;
+  <http://purl.org/dc/terms/accessRights> <https://w3id.org/ejp-rd/fairdatapoints/orphanet-catalog-fdp#accessRights>;
+  <http://purl.org/dc/terms/conformsTo> <https://www.purl.org/fairtools/fdp/schema/0.1/fdpMetadata>;
+  <http://purl.org/dc/terms/description> "This is POC FAIR Data Point to describe biobank and patient registry. The content of this FAIR Data Point is extracted via EJPRD LDP";
+  <http://purl.org/dc/terms/hasVersion> "1.0";
+  <http://purl.org/dc/terms/language> <http://id.loc.gov/vocabulary/iso639-1/en>;
+  <http://purl.org/dc/terms/license> <http://rdflicense.appspot.com/rdflicense/cc-by-nc-nd3.0>;
+  <http://purl.org/dc/terms/publisher> <https://w3id.org/ejp-rd/fairdatapoints/orphanet-catalog-fdp#publisher>;
+  <http://purl.org/dc/terms/title> "Orphanet catalog FAIR Data Point";
+  <http://rdf.biosemantics.org/ontologies/fdp-o#metadataIdentifier> <https://w3id.org/ejp-rd/fairdatapoints/orphanet-catalog-fdp#identifier>;
+  <http://rdf.biosemantics.org/ontologies/fdp-o#metadataIssued> "2021-09-30T19:06:01.332647138Z"^^<http://www.w3.org/2001/XMLSchema#dateTime>;
+  <http://rdf.biosemantics.org/ontologies/fdp-o#metadataModified> "2021-09-30T19:56:34.89854084Z"^^<http://www.w3.org/2001/XMLSchema#dateTime>;
+  <http://semanticscience.org/resource/SIO_000628> <https://w3id.org/ejp-rd/fairdatapoints/orphanet-catalog-fdp/metrics/445c0a70d1e214e545b261559e2842f4>,
+    <https://w3id.org/ejp-rd/fairdatapoints/orphanet-catalog-fdp/metrics/5d27e854a9e78eb3f663331cd47cdc13>;
+  <http://www.re3data.org/schema/3-0#dataCatalog> <https://w3id.org/ejp-rd/fairdatapoints/orphanet-catalog-fdp/catalog/2a3f1a0e-ddbb-4a07-960e-fa92e1e9f4bc>;
+  <http://www.re3data.org/schema/3-0#repositoryIdentifier> <https://w3id.org/ejp-rd/fairdatapoints/orphanet-catalog-fdp#identifier>;
+  <http://www.w3.org/2000/01/rdf-schema#label> "Orphanet catalog FAIR Data Point" .
+
+<https://w3id.org/ejp-rd/fairdatapoints/orphanet-catalog-fdp#accessRights> a <http://purl.org/dc/terms/RightsStatement>;
+  <http://purl.org/dc/terms/description> "This resource has no access restriction" .
+
+<https://w3id.org/ejp-rd/fairdatapoints/orphanet-catalog-fdp#identifier> a <http://purl.org/spar/datacite/Identifier>;
+  <http://purl.org/dc/terms/identifier> "https://w3id.org/ejp-rd/fairdatapoints/orphanet-catalog-fdp" .
+
+<https://w3id.org/ejp-rd/fairdatapoints/orphanet-catalog-fdp#publisher> a <http://xmlns.com/foaf/0.1/Agent>;
+  <http://xmlns.com/foaf/0.1/name> "Rajaram Kaliyaperumal" .
+
+<https://w3id.org/ejp-rd/fairdatapoints/orphanet-catalog-fdp/catalog/> a <http://www.w3.org/ns/ldp#DirectContainer>;
+  <http://purl.org/dc/terms/title> "Catalogs";
+  <http://www.w3.org/ns/ldp#contains> <https://w3id.org/ejp-rd/fairdatapoints/orphanet-catalog-fdp/catalog/2a3f1a0e-ddbb-4a07-960e-fa92e1e9f4bc>;
+  <http://www.w3.org/ns/ldp#hasMemberRelation> <http://www.re3data.org/schema/3-0#dataCatalog>;
+  <http://www.w3.org/ns/ldp#membershipResource> <https://w3id.org/ejp-rd/fairdatapoints/orphanet-catalog-fdp> .
+
+<https://w3id.org/ejp-rd/fairdatapoints/orphanet-catalog-fdp/metrics/445c0a70d1e214e545b261559e2842f4>
+  <http://semanticscience.org/resource/SIO_000332> <https://www.ietf.org/rfc/rfc3986.txt>;
+  <http://semanticscience.org/resource/SIO_000628> <https://www.ietf.org/rfc/rfc3986.txt> .
+
+<https://w3id.org/ejp-rd/fairdatapoints/orphanet-catalog-fdp/metrics/5d27e854a9e78eb3f663331cd47cdc13>
+  <http://semanticscience.org/resource/SIO_000332> <https://www.wikidata.org/wiki/Q8777>;
+  <http://semanticscience.org/resource/SIO_000628> <https://www.wikidata.org/wiki/Q8777> .
