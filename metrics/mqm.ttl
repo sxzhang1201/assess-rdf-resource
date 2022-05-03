@@ -1,0 +1,75 @@
+### Exisiting top-level ontologies
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix dct: <http://purl.org/dc/terms/>.
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix foaf: <http://xmlns.com/foaf/0.1/>.
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+
+### Existing ontologies related to RDF resource assessment
+@prefix dqv: <http://www.w3.org/ns/dqv#> .  # data Quality Vocabulary
+@prefix ldqd: <https://www.w3.org/2016/05/ldqd#> .   # Linked data Quality Dimension
+@prefix dqm:     <http://purl.org/eis/vocab/dqm#> .
+
+### Newly-defined vocabularies
+@prefix mqm:<http://purl.org/mqm#> .
+
+mqm:
+	a owl:Ontology ;
+    dct:title "Minimal Quality Metrics (MQM)"@en ;
+    dct:description "The Minimal Quality metrics (mqm) vocabulary describes a set of objective metrics as minimal requirements for RDF resources to be reused. "@en ;
+    dct:creator [
+    		foaf:name "Shuxin Zhang";
+    		foaf:mbox <mailto:s.x.zhang@amsterdamumc.nl>
+    	] ;
+    dct:modified "2020-05-03"^^xsd:date ;
+    dct:language "en"^^xsd:language .
+#	foaf:homepage <http://purl.org/mqm#> .
+
+mqm:uriNotResolvableMetric
+    a dqv:Metric ;
+    rdfs:label 'Non-resolvable URIs' ;
+    skos:definition 'Check if a URI is resolvable.' ;
+    dqv:inDimension ldqd:availability ;
+    skos:relatd dqm:DereferenceabilityMetric .
+
+mqm:uriNotParsableMetric
+    a dqv:Metric ;
+    rdfs:label 'Non-parsable URIs' ;
+    skos:definition 'Check if any RDF content can be prased by a URI with RDF content-type.' ;
+    dqv:inDimension ldqd:availability ;
+    skos:relatd dqm:MisreportedContentTypesMetric .
+
+mqm:uriUndefinedMetric
+    a dqv:Metric ;
+    rdfs:label 'Undefined URIs' ;
+    skos:definition 'If a parsable URI is defined in its parsed RDF content.' ;
+    dqv:inDimension ldqd:consistency, ldqd:interpretability ;
+    skos:relatd dqm:UndefinedClassesAndPropertiesMetric .
+
+mqm:misplacedClassesOrPropertiesMetric
+    a dqv:Metric ;
+    rdfs:label 'Misplaced classes or properties metric' ;
+    skos:definition 'Find resources that are - defined as a property but also appear on subject or object positions in other triples (except cases like ex:prop rdf:type rdf:Property, ex:prop rds:subPropetyOf) - defined as a class but also appear on predicate position in other triples.' ;
+    dqv:inDimension ldqd:consistency ;
+    skos:relatd dqm:MisplacedClassesOrPropertiesMetric .
+
+mqm:misusedOwlDatatypeOrObjectPropertiesMetric
+    a dqv:Metric ;
+    rdfs:label 'Misuse Owl datatype or object properties metric' ;
+    skos:definition 'Detect properties that are defined as a owl:datatypeProperty but is used as objectProperty and properties defined as a owl:object property and used as datatype property.' ;
+    dqv:inDimension ldqd:consistency ;
+    skos:relatd dqm:MisusedOwlDatatypeOrObjectPropertiesMetric .
+
+mqm:usageOfDeprecatedClassesOrProperties
+    a dqv:Metric ;
+    rdfs:label 'Usage of Deprecated Classes or Deprecated Properties' ;
+    skos:definition "Check if a resource makes use of Deprecated Classes as resource types (defined as owl:DeprecatedClass) or Properties (defined as owl:DeprecatedProperty) in a resource property" ;
+    dqv:inDimension ldqd:consistency ;
+    skos:relatd dqm:UsageOfDeprecatedClassesOrProperties .
+
+
+
+
+
