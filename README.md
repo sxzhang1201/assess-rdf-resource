@@ -11,7 +11,7 @@ Run the following command to install dependencies with `pip` installed:
 pip install -r requirements.txt
 ```
 
-## Getting Started
+## Basic Usage
 Two steps need to be performed to validate an RDF resource:
 1. Edit `config.py`. 
     1. Decide the `LABEL`. This `LABEL` will be used to name the assessment report for this tested RDF resource. 
@@ -22,10 +22,15 @@ Two steps need to be performed to validate an RDF resource:
      
     All keys (`LABEL`) and values (`Path of RDF resource`, `Path of Assessment Report`) should be string.
     
-2. Run `run_assessment.py`.
-    After evaluation, an assessment report can be generated in the specified `Path of Assessment Report`.
+2. Run 
 
-3. Run `visualise_report.py` (optional)
+`$ python run_assessment.py`.
+    
+  After evaluation, an assessment report can be generated in the specified `Path of Assessment Report`.
+
+3. Run
+ 
+`$ python visualise_report.py` (optional)
    
     
 ### To Play with It 

@@ -53,7 +53,7 @@ class AssessReport:
     # Resolvability
     def add_non_res_uri(self, non_resolvable_uri_list):
         if len(non_resolvable_uri_list) == 0:
-            print("Warning: no non-resolvable URI added")
+            print("Warning: no non-resolvable URI is added")
         self.resolvability_errors = non_resolvable_uri_list
 
     # Parsability

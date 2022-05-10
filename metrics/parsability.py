@@ -46,7 +46,7 @@ def validate_rdf_content_type(res_uri_indicate_rdf):
 
     # Inspect each resolvable URI (note that this URI is string not URIRef)
     for res_uri_str, content_type in res_uri_indicate_rdf.items():
-        print(res_uri_str, content_type)
+        # print(res_uri_str, content_type)
 
         print(" {}'s content-type is {} - Progress {}/{}".format(res_uri_str, content_type,
                                                                  progress_count, len(res_uri_indicate_rdf)))
@@ -60,7 +60,7 @@ def validate_rdf_content_type(res_uri_indicate_rdf):
 
             # Zero indicating that no single triple is obtained.
             if len(temp_graph) == 0:
-                print(" This URI (though indicated as an RDF content-type) cannot refer to any triples.")
+                print("  - This URI (though indicated as an RDF content-type) cannot refer to any triples.")
                 error1_rdf_content_no_triple[res_uri_str] = content_type
                 continue
 
@@ -70,6 +70,7 @@ def validate_rdf_content_type(res_uri_indicate_rdf):
 
             # if zero, indicating such term (URI) is not defined in the resolved content.
             if len(validate_graph) == 0:
+                print(" - This URI is not defined in the resolved RDF content. ")
                 error2_uri_is_not_defined.append(URIRef(res_uri_str))
 
             else:

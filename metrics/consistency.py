@@ -18,12 +18,12 @@ def detect_misplaced_class(g, class_list):
         # If zero, indicating this is no misused classes.
         if len(temp_graph) != 0:
             misused_class_list.append(class_uri)
-            print("The class {} is not correctly used in this triple".format(class_uri))
+            print("  - The class {} is not correctly used in this triple".format(class_uri))
             for s, p, o in temp_graph:
                 print(s, p, o)
 
     if len(misused_class_list) == 0:
-        print("No classes is used as predicate")
+        print("  - No class is used as predicate")
 
     return misused_class_list
 
@@ -44,12 +44,12 @@ def detect_misplaced_property(g, property_list):
         # If zero, indicating this is no misused classes.
         if len(temp_graph) != 0:
             misplaced_property_list.append(property_uri)
-            print("The property {} is not correctly used in this triple".format(property_uri))
+            print("  - The property {} is not correctly used in this triple".format(property_uri))
             for s, p, o in temp_graph:
                 print(s, p, o)
 
     if len(misplaced_property_list) == 0:
-        print("No property is used as the class, i.e., the object in the rdf:type triples.")
+        print("  - No property is used as the class, i.e., the object in the rdf:type triples.")
 
     return misplaced_property_list
 
@@ -64,11 +64,11 @@ def detect_misused_datatype_property(g, datatype_property_list):
         for _, _, o in temp_graph:
             if not isinstance(o, Literal):
                 misused_datatype_property_list.append(datatype_property_uri)
-                print(" The owl:Datatype Property {} is incorrectly used because {} is not literal".
+                print("  - The owl:DatatypeProperty {} is incorrectly used because {} is not literal".
                       format(datatype_property_uri, o))
 
     if len(misused_datatype_property_list) == 0:
-        print("No owl:Datatype Property is incorrectly used")
+        print("  - No owl:Datatype Property is incorrectly used")
 
     return misused_datatype_property_list
 
@@ -84,11 +84,11 @@ def detect_misused_object_property(g, object_property_list):
         for _, _, o in temp_graph:
             if not isinstance(o, URIRef):
                 misused_object_property_list.append(object_property_uri)
-                print(" The owl:ObjectProperty  {} is incorrectly used because {} is not an URI".
+                print("  - The owl:ObjectProperty  {} is incorrectly used because {} is not an URI".
                       format(object_property_uri, o))
 
     if len(misused_object_property_list) == 0:
-        print("No owl:Datatype Property is incorrectly used")
+        print("  - No owl:DatatypeProperty is incorrectly used")
 
     return misused_object_property_list
 

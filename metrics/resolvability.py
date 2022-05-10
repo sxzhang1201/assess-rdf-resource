@@ -29,7 +29,7 @@ def get_http_status_code(list_of_uri):
 
     for single_uri in list_of_uri:
 
-        print(" Getting status code of {} - Progress {}/{}".format(single_uri, progress_count, len(list_of_uri)))
+        print("  - Getting status code of {} - Progress {}/{}".format(single_uri, progress_count, len(list_of_uri)))
 
         progress_count = progress_count + 1
 
@@ -49,11 +49,11 @@ def get_http_status_code(list_of_uri):
                 continue
             if status_code.startswith("4"):
                 non_res_uri_list.append(single_uri)
-                print(" This URI is not resolvable with status code: {}".format(status_code))
+                print("  - This URI is not resolvable with status code: {}".format(status_code))
                 continue
             if status_code.startswith("5"):
                 non_res_uri_list.append(single_uri)
-                print(" This URI is not resolvable with status code: {}".format(status_code))
+                print("  - This URI is not resolvable with status code: {}".format(status_code))
                 continue
 
             # If HTTP status code is not any of above types, add it to "others"

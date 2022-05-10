@@ -16,10 +16,11 @@ def extract_type(content_type_for_resolvable_uris):
     owl_object_property = []
     other_property_list = []
 
-    print("To get rdf:type information of {} parsable URIs".format(len(content_type_for_resolvable_uris)))
+    # print(" To get rdf:type information of {} parsable URIs".format(len(content_type_for_resolvable_uris)))
 
     # Investigate an URI
     for res_uri, content_type in content_type_for_resolvable_uris.items():
+        print(" To get rdf:type information of {}".format(res_uri))
         print(res_uri)
 
         temp_graph = Graph().parse(res_uri, format=corpus.MapContentTypeToParserFormat[content_type])
