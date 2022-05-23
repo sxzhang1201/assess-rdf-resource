@@ -5,10 +5,10 @@ from rdflib.graph import Graph
 def parse_data_local_or_remote(data_path):
     g = Graph()
     if 'http' in str(data_path):
-        print(" Parse Remote Graph!")
+        # print(" Parse Remote Graph!")
         g.parse(data_path)
     else:
-        print(" Parse Local Graph!")
+        # print(" Parse Local Graph!")
         # Check 1) if the file exists and 2) if RDF graphs in that file is parsable
         if os.path.exists(data_path):
             try:

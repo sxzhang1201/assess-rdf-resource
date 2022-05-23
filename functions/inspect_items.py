@@ -1,13 +1,14 @@
-def inspect_item_in_list(list_of_items):
+def inspect_item_in_list(list_of_items, f):
 
     for item in list_of_items:
-        print(item)
+        print(item, file=f)
 
 
-def inspect_item_in_dict(dict_of_items):
+def inspect_item_in_dict(dict_of_items, f):
 
     for key, value in dict_of_items.items():
-        print(key, value)
+        # print(key, value)
+        print(key, file=f)
 
 
 def view_graph(graph, limit_triple_num):

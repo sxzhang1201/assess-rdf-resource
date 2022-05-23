@@ -1,4 +1,4 @@
-LABEL = 'addison'
+LABEL = 'hpscreg'
 
 WhichResource = {
     # ordo catalog fdp
@@ -27,7 +27,25 @@ WhichResource = {
     'fhir': 'resources/fhir/fhir.ttl',
 
     # others
-    'addison': 'resources/addison_dataset.ttl'
+    'addison': 'resources/addison_dataset.ttl',
+
+    # 'SIO': 'http://semanticscience.org/ontology/sio.owl',
+    'SIO': 'resources/sio-release.owl',
+
+    'rdf': 'http://www.w3.org/1999/02/22-rdf-syntax-ns#',
+
+    'grddl': 'http://www.w3.org/2003/g/data-view#',
+
+    'rim': 'resources/fhir/rim.ttl',
+
+    'dct': 'http://purl.org/dc/elements/1.1/',
+
+    'foaf': 'resources/foaf.rdf',
+
+    'test': 'resources/test.ttl',
+
+    'wikipathway': 'https://wikipathways-data.wmcloud.org/20220410/rdf/wikipathways-20220410-rdf-void.ttl'
+
 }
 
 
@@ -56,7 +74,21 @@ WhichReport = {
     'fhir': 'report/rd-resources/fhir.pickle',
 
     # others
-    'addison': 'report/addison_dataset.ttl'
+    'addison': 'report/addison_dataset.pickle',
+
+    'SIO': 'report/SIO_000332.pickle',
+
+    'rdf': 'report/rdf.pickle',
+
+    'grddl': 'report/grddl.pickle',
+
+    'rim': 'report/rim.pickle',
+
+    'dct': 'report/dct.pickle',
+
+    'foaf': 'report/foaf.pickle',
+
+    'test': 'report/test.pickle'
 
 
 }

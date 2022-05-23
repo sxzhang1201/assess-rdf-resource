@@ -94,10 +94,7 @@ if __name__ == '__main__':
 
     # Calculate affected triples of non-resolvable URIs
     non_res_rate = r.resolvability_statistics()
-    print('The proportion of affected triples is {}.'.format(non_res_rate))
-
-    # End Time
-    # print("\nThe Processing Time is {}min".format(# format((time.time() - start_time) / 60, ".2f")))
+    print('The proportion of triples affected by non-resolvable URIs is {}.'.format(non_res_rate))
 
     # Get time cost (seconds) and remove decimals
     end_time = time.time()
