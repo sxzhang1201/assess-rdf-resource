@@ -30,7 +30,9 @@ Two steps need to be performed to validate an RDF resource:
 
 3. Run
  
-`$ python visualise_report.py` (optional)
+`$ python visualise_report.py` 
+
+A report file in txt format will be generated in the `report` directory to list errors. 
    
     
 ### To Play with It 
