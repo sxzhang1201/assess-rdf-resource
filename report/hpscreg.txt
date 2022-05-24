@@ -1,0 +1,685 @@
+# 1. Load report labelled by 'hpscreg' 
+# In the test RDF resource:
+# - There are 1000 triples
+# - There are 943 URIs
+# 2. Resolvability Report
+# - The following 114 URIs are not resolvable
+http://purl.obolibrary.org/obo/BFO_0000117
+http://www.ebi.ac.uk/efo/EFO_0000784
+http://purl.obolibrary.org/obo/GENO_0000654
+http://purl.obolibrary.org/obo/BFO_0000059
+http://purl.obolibrary.org/obo/BFO_0000086
+http://purl.obolibrary.org/obo/GENO_0000920
+http://www.orpha.net/ORDO/Orphanet_#symbol
+http://purl.obolibrary.org/obo/BFO_0000159
+http://purl.obolibrary.org/obo/GENO_0000252
+http://www.ebi.ac.uk/efo/ArrayExpress_label
+http://purl.obolibrary.org/obo/chebi#is_conjugate_acid_of
+http://purl.obolibrary.org/obo/CLO_0100005
+http://purl.obolibrary.org/obo/uberon/core#conduit_for
+http://purl.obolibrary.org/obo/CLO_0100021
+http://purl.obolibrary.org/obo/BFO_0000080
+http://purl.obolibrary.org/obo/uberon/core#subdivision_of
+http://purl.obolibrary.org/obo/BFO_0000155
+http://purl.obolibrary.org/obo/GENO_0000726
+http://purl.obolibrary.org/obo/CLO_0100003
+http://purl.obolibrary.org/obo/GENO_0000683
+http://purl.obolibrary.org/obo/BFO_0000125
+http://purl.obolibrary.org/obo/BFO_0000082
+http://purl.obolibrary.org/obo/uberon/core#channel_for
+http://purl.obolibrary.org/obo/BFO_0000126
+http://purl.obolibrary.org/obo/GENO_0000678
+http://purl.obolibrary.org/obo/chebi/mass
+http://purl.obolibrary.org/obo/ECO_0000205
+http://purl.obolibrary.org/obo/GENO_0000784
+http://purl.obolibrary.org/obo/CLO_0100009
+http://www.ebi.ac.uk/efo/source_definition
+http://purl.obolibrary.org/obo/uberon/core#distally_connected_to
+http://purl.obolibrary.org/obo/uberon/core#proximally_connected_to
+http://purl.obolibrary.org/obo/chebi/smiles
+http://www.ebi.ac.uk/efo/primary_source
+http://purl.obolibrary.org/obo/uberon/core#channels_from
+http://purl.obolibrary.org/obo/GENO_0000904
+http://purl.obolibrary.org/obo/uberon/core#existence_starts_and_ends_during
+http://purl.obolibrary.org/obo/BFO_0000139
+http://purl.obolibrary.org/obo/CLO_0100006
+http://www.orpha.net/ORDO/Orphanet_317343
+http://purl.obolibrary.org/obo/BFO_0000151
+http://purl.obolibrary.org/obo/CLO_0100004
+http://purl.obolibrary.org/obo/GENO_0000655
+http://purl.obolibrary.org/obo/BFO_0000132
+https://hpscreg.eu/ontologies/hpscreg_clo.owl/v1
+http://purl.obolibrary.org/obo/chebi/monoisotopicmass
+http://purl.obolibrary.org/obo/BFO_0000176
+http://purl.obolibrary.org/obo/GENO_0000413
+http://www.ebi.ac.uk/efo/obsoleted_in_version
+http://purl.obolibrary.org/obo/GENO_0000815
+http://purl.obolibrary.org/obo/chebi#is_tautomer_of
+http://purl.obolibrary.org/obo/BFO_0000162
+http://purl.obolibrary.org/obo/uberon/core#channels_into
+http://www.ebi.ac.uk/efo/definition
+http://purl.obolibrary.org/obo/uberon/core#sexually_homologous_to
+http://purl.obolibrary.org/obo/BFO_0000108
+http://purl.obolibrary.org/obo/GENO_0000903
+http://www.ebi.ac.uk/cellline/definition
+http://purl.obolibrary.org/obo/BFO_0000152
+http://purl.obolibrary.org/obo/BFO_0000107
+http://purl.obolibrary.org/obo/BFO_0000156
+http://purl.obolibrary.org/obo/chebi/charge
+http://purl.obolibrary.org/obo/BFO_0000123
+http://purl.obolibrary.org/obo/ECO_0000218
+http://www.ebi.ac.uk/efo/organizational_class
+http://purl.obolibrary.org/obo/BFO_0000153
+http://purl.obolibrary.org/obo/chebi/inchikey
+http://purl.obolibrary.org/obo/GENO_0000919
+http://purl.obolibrary.org/obo/ERO_0000572
+http://purl.obolibrary.org/obo/GENO_0000251
+http://purl.obolibrary.org/obo/BFO_0000121
+http://purl.obolibrary.org/obo/chebi/inchi
+http://purl.obolibrary.org/obo/BFO_0000178
+definition:citation
+http://purl.obolibrary.org/obo/GENO_0000481
+http://purl.obolibrary.org/obo/GENO_0000896
+http://purl.obolibrary.org/obo/BFO_0000157
+http://www.ebi.ac.uk/efo/EFO_URI
+http://www.ebi.ac.uk/efo/EFO_0006351
+http://purl.obolibrary.org/obo/uberon/core#posteriorly_connected_to
+http://purl.obolibrary.org/obo/BFO_0000070
+http://purl.obolibrary.org/obo/GENO_0000834
+http://purl.obolibrary.org/obo/RO_0002577
+http://purl.obolibrary.org/obo/CLO_0100001
+http://purl.obolibrary.org/obo/BFO_0000130
+http://purl.obolibrary.org/obo/GENO_0000239
+http://purl.obolibrary.org/obo/chebi/formula
+http://purl.obolibrary.org/obo/uberon/core#protects
+http://purl.obolibrary.org/obo/BFO_0000052
+http://www.ebi.ac.uk/efo/alternative_term
+http://purl.obolibrary.org/obo/GENO_0000702
+http://purl.obolibrary.org/obo/BFO_0000169
+http://purl.obolibrary.org/obo/GENO_0000408
+http://purl.obolibrary.org/obo/BFO_0000158
+http://purl.obolibrary.org/obo/uberon/core#extends_fibers_into
+http://purl.obolibrary.org/obo/BFO_0000168
+http://www.ebi.ac.uk/efo/EFO_0000785
+http://purl.obolibrary.org/obo/BFO_0000083
+http://www.ebi.ac.uk/efo/definition_citation
+http://purl.obolibrary.org/obo/chebi#is_conjugate_base_of
+http://purl.obolibrary.org/obo/uberon/core#anteriorly_connected_to
+http://www.ebi.ac.uk/efo/definition_editor
+http://purl.obolibrary.org/obo/BFO_0000154
+http://purl.obolibrary.org/obo/BFO_0000058
+http://www.ebi.ac.uk/efo/gwas_trait
+http://purl.obolibrary.org/obo/uberon/core#filtered_through
+http://www.ebi.ac.uk/cellline/definition_editor
+http://purl.obolibrary.org/obo/CLO_0100010
+http://www.ebi.ac.uk/efo/reason_for_obsolescence
+http://purl.obolibrary.org/obo/chebi#is_substituent_group_from
+http://purl.obolibrary.org/obo/chebi#has_parent_hydride
+http://purl.obolibrary.org/obo/chebi#has_functional_parent
+http://purl.obolibrary.org/obo/GENO_0000905
+http://www.ebi.ac.uk/efo/branch_class
+# 3. Parsability Report
+# - The following 0 URIs are not parsable
+# 4. Consistency Report
+# - The following 6 URIs are not defined
+http://xmlns.com/foaf/0.1/IAO_0000232
+http://xmlns.com/foaf/0.1/IAO_0000116
+http://xmlns.com/foaf/0.1/IAO_0000115
+http://xmlns.com/foaf/0.1/depicted_by
+http://xmlns.com/foaf/0.1/UBPROP_0000012
+http://www.w3.org/2000/01/rdf-schema#source
+# - The following 0 classes are incorrectly used as predicates
+# - The following 0 properties are incorrectly used as classes
+# - The following 0 owl:dataTypeProperty are not correctly used
+# - The following 0 owl:objectProperty are not correctly used
+# 5. To measure effect of errors
+# - These non-resolvable URIs have affected 126 triples out of 1000
+# - The percentage is 0.126
+# 1. Load report labelled by 'hpscreg' 
+# In the test RDF resource:
+# - There are 1000 triples
+# - There are 943 URIs
+# 2. Resolvability Report
+# - The following 114 URI(s) are not resolvable
+http://purl.obolibrary.org/obo/BFO_0000117
+http://www.ebi.ac.uk/efo/EFO_0000784
+http://purl.obolibrary.org/obo/GENO_0000654
+http://purl.obolibrary.org/obo/BFO_0000059
+http://purl.obolibrary.org/obo/BFO_0000086
+http://purl.obolibrary.org/obo/GENO_0000920
+http://www.orpha.net/ORDO/Orphanet_#symbol
+http://purl.obolibrary.org/obo/BFO_0000159
+http://purl.obolibrary.org/obo/GENO_0000252
+http://www.ebi.ac.uk/efo/ArrayExpress_label
+http://purl.obolibrary.org/obo/chebi#is_conjugate_acid_of
+http://purl.obolibrary.org/obo/CLO_0100005
+http://purl.obolibrary.org/obo/uberon/core#conduit_for
+http://purl.obolibrary.org/obo/CLO_0100021
+http://purl.obolibrary.org/obo/BFO_0000080
+http://purl.obolibrary.org/obo/uberon/core#subdivision_of
+http://purl.obolibrary.org/obo/BFO_0000155
+http://purl.obolibrary.org/obo/GENO_0000726
+http://purl.obolibrary.org/obo/CLO_0100003
+http://purl.obolibrary.org/obo/GENO_0000683
+http://purl.obolibrary.org/obo/BFO_0000125
+http://purl.obolibrary.org/obo/BFO_0000082
+http://purl.obolibrary.org/obo/uberon/core#channel_for
+http://purl.obolibrary.org/obo/BFO_0000126
+http://purl.obolibrary.org/obo/GENO_0000678
+http://purl.obolibrary.org/obo/chebi/mass
+http://purl.obolibrary.org/obo/ECO_0000205
+http://purl.obolibrary.org/obo/GENO_0000784
+http://purl.obolibrary.org/obo/CLO_0100009
+http://www.ebi.ac.uk/efo/source_definition
+http://purl.obolibrary.org/obo/uberon/core#distally_connected_to
+http://purl.obolibrary.org/obo/uberon/core#proximally_connected_to
+http://purl.obolibrary.org/obo/chebi/smiles
+http://www.ebi.ac.uk/efo/primary_source
+http://purl.obolibrary.org/obo/uberon/core#channels_from
+http://purl.obolibrary.org/obo/GENO_0000904
+http://purl.obolibrary.org/obo/uberon/core#existence_starts_and_ends_during
+http://purl.obolibrary.org/obo/BFO_0000139
+http://purl.obolibrary.org/obo/CLO_0100006
+http://www.orpha.net/ORDO/Orphanet_317343
+http://purl.obolibrary.org/obo/BFO_0000151
+http://purl.obolibrary.org/obo/CLO_0100004
+http://purl.obolibrary.org/obo/GENO_0000655
+http://purl.obolibrary.org/obo/BFO_0000132
+https://hpscreg.eu/ontologies/hpscreg_clo.owl/v1
+http://purl.obolibrary.org/obo/chebi/monoisotopicmass
+http://purl.obolibrary.org/obo/BFO_0000176
+http://purl.obolibrary.org/obo/GENO_0000413
+http://www.ebi.ac.uk/efo/obsoleted_in_version
+http://purl.obolibrary.org/obo/GENO_0000815
+http://purl.obolibrary.org/obo/chebi#is_tautomer_of
+http://purl.obolibrary.org/obo/BFO_0000162
+http://purl.obolibrary.org/obo/uberon/core#channels_into
+http://www.ebi.ac.uk/efo/definition
+http://purl.obolibrary.org/obo/uberon/core#sexually_homologous_to
+http://purl.obolibrary.org/obo/BFO_0000108
+http://purl.obolibrary.org/obo/GENO_0000903
+http://www.ebi.ac.uk/cellline/definition
+http://purl.obolibrary.org/obo/BFO_0000152
+http://purl.obolibrary.org/obo/BFO_0000107
+http://purl.obolibrary.org/obo/BFO_0000156
+http://purl.obolibrary.org/obo/chebi/charge
+http://purl.obolibrary.org/obo/BFO_0000123
+http://purl.obolibrary.org/obo/ECO_0000218
+http://www.ebi.ac.uk/efo/organizational_class
+http://purl.obolibrary.org/obo/BFO_0000153
+http://purl.obolibrary.org/obo/chebi/inchikey
+http://purl.obolibrary.org/obo/GENO_0000919
+http://purl.obolibrary.org/obo/ERO_0000572
+http://purl.obolibrary.org/obo/GENO_0000251
+http://purl.obolibrary.org/obo/BFO_0000121
+http://purl.obolibrary.org/obo/chebi/inchi
+http://purl.obolibrary.org/obo/BFO_0000178
+definition:citation
+http://purl.obolibrary.org/obo/GENO_0000481
+http://purl.obolibrary.org/obo/GENO_0000896
+http://purl.obolibrary.org/obo/BFO_0000157
+http://www.ebi.ac.uk/efo/EFO_URI
+http://www.ebi.ac.uk/efo/EFO_0006351
+http://purl.obolibrary.org/obo/uberon/core#posteriorly_connected_to
+http://purl.obolibrary.org/obo/BFO_0000070
+http://purl.obolibrary.org/obo/GENO_0000834
+http://purl.obolibrary.org/obo/RO_0002577
+http://purl.obolibrary.org/obo/CLO_0100001
+http://purl.obolibrary.org/obo/BFO_0000130
+http://purl.obolibrary.org/obo/GENO_0000239
+http://purl.obolibrary.org/obo/chebi/formula
+http://purl.obolibrary.org/obo/uberon/core#protects
+http://purl.obolibrary.org/obo/BFO_0000052
+http://www.ebi.ac.uk/efo/alternative_term
+http://purl.obolibrary.org/obo/GENO_0000702
+http://purl.obolibrary.org/obo/BFO_0000169
+http://purl.obolibrary.org/obo/GENO_0000408
+http://purl.obolibrary.org/obo/BFO_0000158
+http://purl.obolibrary.org/obo/uberon/core#extends_fibers_into
+http://purl.obolibrary.org/obo/BFO_0000168
+http://www.ebi.ac.uk/efo/EFO_0000785
+http://purl.obolibrary.org/obo/BFO_0000083
+http://www.ebi.ac.uk/efo/definition_citation
+http://purl.obolibrary.org/obo/chebi#is_conjugate_base_of
+http://purl.obolibrary.org/obo/uberon/core#anteriorly_connected_to
+http://www.ebi.ac.uk/efo/definition_editor
+http://purl.obolibrary.org/obo/BFO_0000154
+http://purl.obolibrary.org/obo/BFO_0000058
+http://www.ebi.ac.uk/efo/gwas_trait
+http://purl.obolibrary.org/obo/uberon/core#filtered_through
+http://www.ebi.ac.uk/cellline/definition_editor
+http://purl.obolibrary.org/obo/CLO_0100010
+http://www.ebi.ac.uk/efo/reason_for_obsolescence
+http://purl.obolibrary.org/obo/chebi#is_substituent_group_from
+http://purl.obolibrary.org/obo/chebi#has_parent_hydride
+http://purl.obolibrary.org/obo/chebi#has_functional_parent
+http://purl.obolibrary.org/obo/GENO_0000905
+http://www.ebi.ac.uk/efo/branch_class
+# 3. Parsability Report
+# - The following 0 URI(s) are not parsable
+# 4. Consistency Report
+# - The following 6 URI(s) are not defined
+http://xmlns.com/foaf/0.1/IAO_0000232
+http://xmlns.com/foaf/0.1/IAO_0000116
+http://xmlns.com/foaf/0.1/IAO_0000115
+http://xmlns.com/foaf/0.1/depicted_by
+http://xmlns.com/foaf/0.1/UBPROP_0000012
+http://www.w3.org/2000/01/rdf-schema#source
+# - The following 0 classes are incorrectly used as predicates
+# - The following 0 properties are incorrectly used as classes
+# - The following 0 owl:dataTypeProperty are not correctly used
+# - The following 0 owl:objectProperty are not correctly used
+# 5. To measure effect of errors on the graph
+# - These non-resolvable URIs have affected 126 triples out of 1000
+# - The percentage is 0.126
+# 1. Load report labelled by 'hpscreg' 
+# In the test RDF resource:
+# - There are 1000 triples
+# - There are 943 URIs
+# 2. Resolvability Report
+# - The following 114 URI(s) are not resolvable
+http://purl.obolibrary.org/obo/BFO_0000117
+http://www.ebi.ac.uk/efo/EFO_0000784
+http://purl.obolibrary.org/obo/GENO_0000654
+http://purl.obolibrary.org/obo/BFO_0000059
+http://purl.obolibrary.org/obo/BFO_0000086
+http://purl.obolibrary.org/obo/GENO_0000920
+http://www.orpha.net/ORDO/Orphanet_#symbol
+http://purl.obolibrary.org/obo/BFO_0000159
+http://purl.obolibrary.org/obo/GENO_0000252
+http://www.ebi.ac.uk/efo/ArrayExpress_label
+http://purl.obolibrary.org/obo/chebi#is_conjugate_acid_of
+http://purl.obolibrary.org/obo/CLO_0100005
+http://purl.obolibrary.org/obo/uberon/core#conduit_for
+http://purl.obolibrary.org/obo/CLO_0100021
+http://purl.obolibrary.org/obo/BFO_0000080
+http://purl.obolibrary.org/obo/uberon/core#subdivision_of
+http://purl.obolibrary.org/obo/BFO_0000155
+http://purl.obolibrary.org/obo/GENO_0000726
+http://purl.obolibrary.org/obo/CLO_0100003
+http://purl.obolibrary.org/obo/GENO_0000683
+http://purl.obolibrary.org/obo/BFO_0000125
+http://purl.obolibrary.org/obo/BFO_0000082
+http://purl.obolibrary.org/obo/uberon/core#channel_for
+http://purl.obolibrary.org/obo/BFO_0000126
+http://purl.obolibrary.org/obo/GENO_0000678
+http://purl.obolibrary.org/obo/chebi/mass
+http://purl.obolibrary.org/obo/ECO_0000205
+http://purl.obolibrary.org/obo/GENO_0000784
+http://purl.obolibrary.org/obo/CLO_0100009
+http://www.ebi.ac.uk/efo/source_definition
+http://purl.obolibrary.org/obo/uberon/core#distally_connected_to
+http://purl.obolibrary.org/obo/uberon/core#proximally_connected_to
+http://purl.obolibrary.org/obo/chebi/smiles
+http://www.ebi.ac.uk/efo/primary_source
+http://purl.obolibrary.org/obo/uberon/core#channels_from
+http://purl.obolibrary.org/obo/GENO_0000904
+http://purl.obolibrary.org/obo/uberon/core#existence_starts_and_ends_during
+http://purl.obolibrary.org/obo/BFO_0000139
+http://purl.obolibrary.org/obo/CLO_0100006
+http://www.orpha.net/ORDO/Orphanet_317343
+http://purl.obolibrary.org/obo/BFO_0000151
+http://purl.obolibrary.org/obo/CLO_0100004
+http://purl.obolibrary.org/obo/GENO_0000655
+http://purl.obolibrary.org/obo/BFO_0000132
+https://hpscreg.eu/ontologies/hpscreg_clo.owl/v1
+http://purl.obolibrary.org/obo/chebi/monoisotopicmass
+http://purl.obolibrary.org/obo/BFO_0000176
+http://purl.obolibrary.org/obo/GENO_0000413
+http://www.ebi.ac.uk/efo/obsoleted_in_version
+http://purl.obolibrary.org/obo/GENO_0000815
+http://purl.obolibrary.org/obo/chebi#is_tautomer_of
+http://purl.obolibrary.org/obo/BFO_0000162
+http://purl.obolibrary.org/obo/uberon/core#channels_into
+http://www.ebi.ac.uk/efo/definition
+http://purl.obolibrary.org/obo/uberon/core#sexually_homologous_to
+http://purl.obolibrary.org/obo/BFO_0000108
+http://purl.obolibrary.org/obo/GENO_0000903
+http://www.ebi.ac.uk/cellline/definition
+http://purl.obolibrary.org/obo/BFO_0000152
+http://purl.obolibrary.org/obo/BFO_0000107
+http://purl.obolibrary.org/obo/BFO_0000156
+http://purl.obolibrary.org/obo/chebi/charge
+http://purl.obolibrary.org/obo/BFO_0000123
+http://purl.obolibrary.org/obo/ECO_0000218
+http://www.ebi.ac.uk/efo/organizational_class
+http://purl.obolibrary.org/obo/BFO_0000153
+http://purl.obolibrary.org/obo/chebi/inchikey
+http://purl.obolibrary.org/obo/GENO_0000919
+http://purl.obolibrary.org/obo/ERO_0000572
+http://purl.obolibrary.org/obo/GENO_0000251
+http://purl.obolibrary.org/obo/BFO_0000121
+http://purl.obolibrary.org/obo/chebi/inchi
+http://purl.obolibrary.org/obo/BFO_0000178
+definition:citation
+http://purl.obolibrary.org/obo/GENO_0000481
+http://purl.obolibrary.org/obo/GENO_0000896
+http://purl.obolibrary.org/obo/BFO_0000157
+http://www.ebi.ac.uk/efo/EFO_URI
+http://www.ebi.ac.uk/efo/EFO_0006351
+http://purl.obolibrary.org/obo/uberon/core#posteriorly_connected_to
+http://purl.obolibrary.org/obo/BFO_0000070
+http://purl.obolibrary.org/obo/GENO_0000834
+http://purl.obolibrary.org/obo/RO_0002577
+http://purl.obolibrary.org/obo/CLO_0100001
+http://purl.obolibrary.org/obo/BFO_0000130
+http://purl.obolibrary.org/obo/GENO_0000239
+http://purl.obolibrary.org/obo/chebi/formula
+http://purl.obolibrary.org/obo/uberon/core#protects
+http://purl.obolibrary.org/obo/BFO_0000052
+http://www.ebi.ac.uk/efo/alternative_term
+http://purl.obolibrary.org/obo/GENO_0000702
+http://purl.obolibrary.org/obo/BFO_0000169
+http://purl.obolibrary.org/obo/GENO_0000408
+http://purl.obolibrary.org/obo/BFO_0000158
+http://purl.obolibrary.org/obo/uberon/core#extends_fibers_into
+http://purl.obolibrary.org/obo/BFO_0000168
+http://www.ebi.ac.uk/efo/EFO_0000785
+http://purl.obolibrary.org/obo/BFO_0000083
+http://www.ebi.ac.uk/efo/definition_citation
+http://purl.obolibrary.org/obo/chebi#is_conjugate_base_of
+http://purl.obolibrary.org/obo/uberon/core#anteriorly_connected_to
+http://www.ebi.ac.uk/efo/definition_editor
+http://purl.obolibrary.org/obo/BFO_0000154
+http://purl.obolibrary.org/obo/BFO_0000058
+http://www.ebi.ac.uk/efo/gwas_trait
+http://purl.obolibrary.org/obo/uberon/core#filtered_through
+http://www.ebi.ac.uk/cellline/definition_editor
+http://purl.obolibrary.org/obo/CLO_0100010
+http://www.ebi.ac.uk/efo/reason_for_obsolescence
+http://purl.obolibrary.org/obo/chebi#is_substituent_group_from
+http://purl.obolibrary.org/obo/chebi#has_parent_hydride
+http://purl.obolibrary.org/obo/chebi#has_functional_parent
+http://purl.obolibrary.org/obo/GENO_0000905
+http://www.ebi.ac.uk/efo/branch_class
+# 3. Parsability Report
+# - The following 0 URI(s) are not parsable
+# 4. Consistency Report
+# - The following 6 URI(s) are not defined
+http://xmlns.com/foaf/0.1/IAO_0000232
+http://xmlns.com/foaf/0.1/IAO_0000116
+http://xmlns.com/foaf/0.1/IAO_0000115
+http://xmlns.com/foaf/0.1/depicted_by
+http://xmlns.com/foaf/0.1/UBPROP_0000012
+http://www.w3.org/2000/01/rdf-schema#source
+# - The following 0 classes are incorrectly used as predicates
+# - The following 0 properties are incorrectly used as classes
+# - The following 0 owl:dataTypeProperty are not correctly used
+# - The following 0 owl:objectProperty are not correctly used
+# 5. To measure effect of errors on the graph
+# - These non-resolvable URIs have affected 126 triples out of 1000
+# - The percentage is 0.126
+# 1. Load report labelled by 'hpscreg' 
+# In the test RDF resource:
+# - There are 1000 triples
+# - There are 943 URIs
+# 2. Resolvability Report
+# - The following 114 URI(s) are not resolvable
+http://purl.obolibrary.org/obo/BFO_0000117
+http://www.ebi.ac.uk/efo/EFO_0000784
+http://purl.obolibrary.org/obo/GENO_0000654
+http://purl.obolibrary.org/obo/BFO_0000059
+http://purl.obolibrary.org/obo/BFO_0000086
+http://purl.obolibrary.org/obo/GENO_0000920
+http://www.orpha.net/ORDO/Orphanet_#symbol
+http://purl.obolibrary.org/obo/BFO_0000159
+http://purl.obolibrary.org/obo/GENO_0000252
+http://www.ebi.ac.uk/efo/ArrayExpress_label
+http://purl.obolibrary.org/obo/chebi#is_conjugate_acid_of
+http://purl.obolibrary.org/obo/CLO_0100005
+http://purl.obolibrary.org/obo/uberon/core#conduit_for
+http://purl.obolibrary.org/obo/CLO_0100021
+http://purl.obolibrary.org/obo/BFO_0000080
+http://purl.obolibrary.org/obo/uberon/core#subdivision_of
+http://purl.obolibrary.org/obo/BFO_0000155
+http://purl.obolibrary.org/obo/GENO_0000726
+http://purl.obolibrary.org/obo/CLO_0100003
+http://purl.obolibrary.org/obo/GENO_0000683
+http://purl.obolibrary.org/obo/BFO_0000125
+http://purl.obolibrary.org/obo/BFO_0000082
+http://purl.obolibrary.org/obo/uberon/core#channel_for
+http://purl.obolibrary.org/obo/BFO_0000126
+http://purl.obolibrary.org/obo/GENO_0000678
+http://purl.obolibrary.org/obo/chebi/mass
+http://purl.obolibrary.org/obo/ECO_0000205
+http://purl.obolibrary.org/obo/GENO_0000784
+http://purl.obolibrary.org/obo/CLO_0100009
+http://www.ebi.ac.uk/efo/source_definition
+http://purl.obolibrary.org/obo/uberon/core#distally_connected_to
+http://purl.obolibrary.org/obo/uberon/core#proximally_connected_to
+http://purl.obolibrary.org/obo/chebi/smiles
+http://www.ebi.ac.uk/efo/primary_source
+http://purl.obolibrary.org/obo/uberon/core#channels_from
+http://purl.obolibrary.org/obo/GENO_0000904
+http://purl.obolibrary.org/obo/uberon/core#existence_starts_and_ends_during
+http://purl.obolibrary.org/obo/BFO_0000139
+http://purl.obolibrary.org/obo/CLO_0100006
+http://www.orpha.net/ORDO/Orphanet_317343
+http://purl.obolibrary.org/obo/BFO_0000151
+http://purl.obolibrary.org/obo/CLO_0100004
+http://purl.obolibrary.org/obo/GENO_0000655
+http://purl.obolibrary.org/obo/BFO_0000132
+https://hpscreg.eu/ontologies/hpscreg_clo.owl/v1
+http://purl.obolibrary.org/obo/chebi/monoisotopicmass
+http://purl.obolibrary.org/obo/BFO_0000176
+http://purl.obolibrary.org/obo/GENO_0000413
+http://www.ebi.ac.uk/efo/obsoleted_in_version
+http://purl.obolibrary.org/obo/GENO_0000815
+http://purl.obolibrary.org/obo/chebi#is_tautomer_of
+http://purl.obolibrary.org/obo/BFO_0000162
+http://purl.obolibrary.org/obo/uberon/core#channels_into
+http://www.ebi.ac.uk/efo/definition
+http://purl.obolibrary.org/obo/uberon/core#sexually_homologous_to
+http://purl.obolibrary.org/obo/BFO_0000108
+http://purl.obolibrary.org/obo/GENO_0000903
+http://www.ebi.ac.uk/cellline/definition
+http://purl.obolibrary.org/obo/BFO_0000152
+http://purl.obolibrary.org/obo/BFO_0000107
+http://purl.obolibrary.org/obo/BFO_0000156
+http://purl.obolibrary.org/obo/chebi/charge
+http://purl.obolibrary.org/obo/BFO_0000123
+http://purl.obolibrary.org/obo/ECO_0000218
+http://www.ebi.ac.uk/efo/organizational_class
+http://purl.obolibrary.org/obo/BFO_0000153
+http://purl.obolibrary.org/obo/chebi/inchikey
+http://purl.obolibrary.org/obo/GENO_0000919
+http://purl.obolibrary.org/obo/ERO_0000572
+http://purl.obolibrary.org/obo/GENO_0000251
+http://purl.obolibrary.org/obo/BFO_0000121
+http://purl.obolibrary.org/obo/chebi/inchi
+http://purl.obolibrary.org/obo/BFO_0000178
+definition:citation
+http://purl.obolibrary.org/obo/GENO_0000481
+http://purl.obolibrary.org/obo/GENO_0000896
+http://purl.obolibrary.org/obo/BFO_0000157
+http://www.ebi.ac.uk/efo/EFO_URI
+http://www.ebi.ac.uk/efo/EFO_0006351
+http://purl.obolibrary.org/obo/uberon/core#posteriorly_connected_to
+http://purl.obolibrary.org/obo/BFO_0000070
+http://purl.obolibrary.org/obo/GENO_0000834
+http://purl.obolibrary.org/obo/RO_0002577
+http://purl.obolibrary.org/obo/CLO_0100001
+http://purl.obolibrary.org/obo/BFO_0000130
+http://purl.obolibrary.org/obo/GENO_0000239
+http://purl.obolibrary.org/obo/chebi/formula
+http://purl.obolibrary.org/obo/uberon/core#protects
+http://purl.obolibrary.org/obo/BFO_0000052
+http://www.ebi.ac.uk/efo/alternative_term
+http://purl.obolibrary.org/obo/GENO_0000702
+http://purl.obolibrary.org/obo/BFO_0000169
+http://purl.obolibrary.org/obo/GENO_0000408
+http://purl.obolibrary.org/obo/BFO_0000158
+http://purl.obolibrary.org/obo/uberon/core#extends_fibers_into
+http://purl.obolibrary.org/obo/BFO_0000168
+http://www.ebi.ac.uk/efo/EFO_0000785
+http://purl.obolibrary.org/obo/BFO_0000083
+http://www.ebi.ac.uk/efo/definition_citation
+http://purl.obolibrary.org/obo/chebi#is_conjugate_base_of
+http://purl.obolibrary.org/obo/uberon/core#anteriorly_connected_to
+http://www.ebi.ac.uk/efo/definition_editor
+http://purl.obolibrary.org/obo/BFO_0000154
+http://purl.obolibrary.org/obo/BFO_0000058
+http://www.ebi.ac.uk/efo/gwas_trait
+http://purl.obolibrary.org/obo/uberon/core#filtered_through
+http://www.ebi.ac.uk/cellline/definition_editor
+http://purl.obolibrary.org/obo/CLO_0100010
+http://www.ebi.ac.uk/efo/reason_for_obsolescence
+http://purl.obolibrary.org/obo/chebi#is_substituent_group_from
+http://purl.obolibrary.org/obo/chebi#has_parent_hydride
+http://purl.obolibrary.org/obo/chebi#has_functional_parent
+http://purl.obolibrary.org/obo/GENO_0000905
+http://www.ebi.ac.uk/efo/branch_class
+# 3. Parsability Report
+# - The following 0 URI(s) are not parsable
+# 4. Consistency Report
+# - The following 6 URI(s) are not defined
+http://xmlns.com/foaf/0.1/IAO_0000232
+http://xmlns.com/foaf/0.1/IAO_0000116
+http://xmlns.com/foaf/0.1/IAO_0000115
+http://xmlns.com/foaf/0.1/depicted_by
+http://xmlns.com/foaf/0.1/UBPROP_0000012
+http://www.w3.org/2000/01/rdf-schema#source
+# - The following 0 classes are incorrectly used as predicates
+# - The following 0 properties are incorrectly used as classes
+# - The following 0 owl:dataTypeProperty are not correctly used
+# - The following 0 owl:objectProperty are not correctly used
+# 5. To measure effect of errors on the graph
+# - These non-resolvable URIs have affected 126 triples out of 1000
+# - The percentage is 0.126
+# 1. Load report labelled by 'hpscreg' 
+# In the test RDF resource:
+# - There are 1000 triples
+# - There are 943 URIs
+# 2. Resolvability Report
+# - The following 114 URI(s) are not resolvable
+http://purl.obolibrary.org/obo/BFO_0000117
+http://www.ebi.ac.uk/efo/EFO_0000784
+http://purl.obolibrary.org/obo/GENO_0000654
+http://purl.obolibrary.org/obo/BFO_0000059
+http://purl.obolibrary.org/obo/BFO_0000086
+http://purl.obolibrary.org/obo/GENO_0000920
+http://www.orpha.net/ORDO/Orphanet_#symbol
+http://purl.obolibrary.org/obo/BFO_0000159
+http://purl.obolibrary.org/obo/GENO_0000252
+http://www.ebi.ac.uk/efo/ArrayExpress_label
+http://purl.obolibrary.org/obo/chebi#is_conjugate_acid_of
+http://purl.obolibrary.org/obo/CLO_0100005
+http://purl.obolibrary.org/obo/uberon/core#conduit_for
+http://purl.obolibrary.org/obo/CLO_0100021
+http://purl.obolibrary.org/obo/BFO_0000080
+http://purl.obolibrary.org/obo/uberon/core#subdivision_of
+http://purl.obolibrary.org/obo/BFO_0000155
+http://purl.obolibrary.org/obo/GENO_0000726
+http://purl.obolibrary.org/obo/CLO_0100003
+http://purl.obolibrary.org/obo/GENO_0000683
+http://purl.obolibrary.org/obo/BFO_0000125
+http://purl.obolibrary.org/obo/BFO_0000082
+http://purl.obolibrary.org/obo/uberon/core#channel_for
+http://purl.obolibrary.org/obo/BFO_0000126
+http://purl.obolibrary.org/obo/GENO_0000678
+http://purl.obolibrary.org/obo/chebi/mass
+http://purl.obolibrary.org/obo/ECO_0000205
+http://purl.obolibrary.org/obo/GENO_0000784
+http://purl.obolibrary.org/obo/CLO_0100009
+http://www.ebi.ac.uk/efo/source_definition
+http://purl.obolibrary.org/obo/uberon/core#distally_connected_to
+http://purl.obolibrary.org/obo/uberon/core#proximally_connected_to
+http://purl.obolibrary.org/obo/chebi/smiles
+http://www.ebi.ac.uk/efo/primary_source
+http://purl.obolibrary.org/obo/uberon/core#channels_from
+http://purl.obolibrary.org/obo/GENO_0000904
+http://purl.obolibrary.org/obo/uberon/core#existence_starts_and_ends_during
+http://purl.obolibrary.org/obo/BFO_0000139
+http://purl.obolibrary.org/obo/CLO_0100006
+http://www.orpha.net/ORDO/Orphanet_317343
+http://purl.obolibrary.org/obo/BFO_0000151
+http://purl.obolibrary.org/obo/CLO_0100004
+http://purl.obolibrary.org/obo/GENO_0000655
+http://purl.obolibrary.org/obo/BFO_0000132
+https://hpscreg.eu/ontologies/hpscreg_clo.owl/v1
+http://purl.obolibrary.org/obo/chebi/monoisotopicmass
+http://purl.obolibrary.org/obo/BFO_0000176
+http://purl.obolibrary.org/obo/GENO_0000413
+http://www.ebi.ac.uk/efo/obsoleted_in_version
+http://purl.obolibrary.org/obo/GENO_0000815
+http://purl.obolibrary.org/obo/chebi#is_tautomer_of
+http://purl.obolibrary.org/obo/BFO_0000162
+http://purl.obolibrary.org/obo/uberon/core#channels_into
+http://www.ebi.ac.uk/efo/definition
+http://purl.obolibrary.org/obo/uberon/core#sexually_homologous_to
+http://purl.obolibrary.org/obo/BFO_0000108
+http://purl.obolibrary.org/obo/GENO_0000903
+http://www.ebi.ac.uk/cellline/definition
+http://purl.obolibrary.org/obo/BFO_0000152
+http://purl.obolibrary.org/obo/BFO_0000107
+http://purl.obolibrary.org/obo/BFO_0000156
+http://purl.obolibrary.org/obo/chebi/charge
+http://purl.obolibrary.org/obo/BFO_0000123
+http://purl.obolibrary.org/obo/ECO_0000218
+http://www.ebi.ac.uk/efo/organizational_class
+http://purl.obolibrary.org/obo/BFO_0000153
+http://purl.obolibrary.org/obo/chebi/inchikey
+http://purl.obolibrary.org/obo/GENO_0000919
+http://purl.obolibrary.org/obo/ERO_0000572
+http://purl.obolibrary.org/obo/GENO_0000251
+http://purl.obolibrary.org/obo/BFO_0000121
+http://purl.obolibrary.org/obo/chebi/inchi
+http://purl.obolibrary.org/obo/BFO_0000178
+definition:citation
+http://purl.obolibrary.org/obo/GENO_0000481
+http://purl.obolibrary.org/obo/GENO_0000896
+http://purl.obolibrary.org/obo/BFO_0000157
+http://www.ebi.ac.uk/efo/EFO_URI
+http://www.ebi.ac.uk/efo/EFO_0006351
+http://purl.obolibrary.org/obo/uberon/core#posteriorly_connected_to
+http://purl.obolibrary.org/obo/BFO_0000070
+http://purl.obolibrary.org/obo/GENO_0000834
+http://purl.obolibrary.org/obo/RO_0002577
+http://purl.obolibrary.org/obo/CLO_0100001
+http://purl.obolibrary.org/obo/BFO_0000130
+http://purl.obolibrary.org/obo/GENO_0000239
+http://purl.obolibrary.org/obo/chebi/formula
+http://purl.obolibrary.org/obo/uberon/core#protects
+http://purl.obolibrary.org/obo/BFO_0000052
+http://www.ebi.ac.uk/efo/alternative_term
+http://purl.obolibrary.org/obo/GENO_0000702
+http://purl.obolibrary.org/obo/BFO_0000169
+http://purl.obolibrary.org/obo/GENO_0000408
+http://purl.obolibrary.org/obo/BFO_0000158
+http://purl.obolibrary.org/obo/uberon/core#extends_fibers_into
+http://purl.obolibrary.org/obo/BFO_0000168
+http://www.ebi.ac.uk/efo/EFO_0000785
+http://purl.obolibrary.org/obo/BFO_0000083
+http://www.ebi.ac.uk/efo/definition_citation
+http://purl.obolibrary.org/obo/chebi#is_conjugate_base_of
+http://purl.obolibrary.org/obo/uberon/core#anteriorly_connected_to
+http://www.ebi.ac.uk/efo/definition_editor
+http://purl.obolibrary.org/obo/BFO_0000154
+http://purl.obolibrary.org/obo/BFO_0000058
+http://www.ebi.ac.uk/efo/gwas_trait
+http://purl.obolibrary.org/obo/uberon/core#filtered_through
+http://www.ebi.ac.uk/cellline/definition_editor
+http://purl.obolibrary.org/obo/CLO_0100010
+http://www.ebi.ac.uk/efo/reason_for_obsolescence
+http://purl.obolibrary.org/obo/chebi#is_substituent_group_from
+http://purl.obolibrary.org/obo/chebi#has_parent_hydride
+http://purl.obolibrary.org/obo/chebi#has_functional_parent
+http://purl.obolibrary.org/obo/GENO_0000905
+http://www.ebi.ac.uk/efo/branch_class
+# 3. Parsability Report
+# - The following 0 URI(s) are not parsable
+# 4. Consistency Report
+# - The following 6 URI(s) are not defined
+http://xmlns.com/foaf/0.1/IAO_0000232
+http://xmlns.com/foaf/0.1/IAO_0000116
+http://xmlns.com/foaf/0.1/IAO_0000115
+http://xmlns.com/foaf/0.1/depicted_by
+http://xmlns.com/foaf/0.1/UBPROP_0000012
+http://www.w3.org/2000/01/rdf-schema#source
+# - The following 0 classes are incorrectly used as predicates
+# - The following 0 properties are incorrectly used as classes
+# - The following 0 owl:dataTypeProperty are not correctly used
+# - The following 0 owl:objectProperty are not correctly used
+# 5. To measure effect of errors on the graph
+# - These non-resolvable URIs have affected 126 triples out of 1000
+# - The percentage is 0.126
