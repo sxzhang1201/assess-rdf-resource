@@ -27,14 +27,14 @@ fqm:
     dct:language "en"^^xsd:language ;
 	foaf:homepage <http://purl.org/fqm#> .
 
-fqm:uriNotResolvableMetric
+fqm:uriNonResolvableMetric
     a dqv:Metric ;
     rdfs:label 'Non-resolvable URIs' ;
     skos:definition '1) Check if an RDF resource is resolvable (Boolean), or 2) check if URIs in that RDF resource are resolvable, and measure the proportion of non-resolvable URIs to all unique URIs.' ;
     dqv:inDimension ldqd:availability ;
     skos:relatd dqm:DereferenceabilityMetric .
 
-fqm:uriNotParsableMetric
+fqm:uriNonParsableMetric
     a dqv:Metric ;
     rdfs:label 'Non-parsable URIs' ;
     skos:definition '1) Check if an RDF resource is parsable (Boolean), or 2) check if URIs in that RDF resource which already indicate RDF content-type are parsable, and measure the proportion of non-parsable URIs to all unique URIs in that RDF resource;' ;
