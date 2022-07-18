@@ -1,0 +1,8 @@
+GRDDL: https://www.w3.org/2003/g/data-view#
+DCT: http://purl.org/dc/elements/1.1/
+FOAF: https://xmlns.com/foaf/spec/index.rdf
+SIO: http://semanticscience.org/ontology/sio.owl
+RIM: https://www.hl7.org/fhir/rim.ttl
+FHIR: https://www.hl7.org/fhir/fhir.ttl
+CDASH: https://www.cdisc.org/standards/foundational/cdash
+ORDO: https://bioportal.bioontology.org/ontologies/ORDO
