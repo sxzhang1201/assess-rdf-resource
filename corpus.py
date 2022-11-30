@@ -56,5 +56,13 @@ MapContentTypeToParserFormat = {
     "application/rdf+xml": 'xml',
     "application/ld+json": 'json-ld',
     "text/n3": 'n3',
-    "application/x-turtle": 'turtle'
+    "application/x-turtle": 'turtle',
+    'text/plain': 'xml'
 }
+
+
+Headers = {"Accept": "text/turtle, application/x-turtle,"   # Turtle
+                         "application/rdf+xml;q=0.9, "          # RDF/XML
+                         "application/ld+json;q=0.8, "          # JSON-LD
+                         "text/n3;q=0.7,"                       # Notion 3
+                         "*/*;q=0.1"}                           # Others
