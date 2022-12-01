@@ -1,4 +1,24 @@
 import requests
+import time
+import datetime
+from rdflib.term import URIRef
+import corpus
+
+# Import metrics
+from metrics.coverage import count_rdf_component as count_uri
+from metrics.parsability import assess_parsable
+from metrics.classify import extract_type as classify_uri
+from metrics.consistency import run_consistency as assess_consistency
+
+# Import basic functions
+from functions.load_resource import parse_data_local_or_remote as load_resource
+from functions.assessment_report import AssessReport
+from functions.save_or_load_report import save_object
+from functions.inspect_items import view_graph
+from functions.inspect_items import inspect_item_in_list, inspect_item_in_dict
+
+# Import human-configurable
+from config import WhichResource, WhichReport, LABEL
 
 
 def get_http_status_code(list_of_uri):
@@ -9,10 +29,10 @@ def get_http_status_code(list_of_uri):
     """
 
     # Define headers for content-negotiation
-    headers = {"Accept": "text/turtle, application/x-turtle,"  # Turtle
+    headers = {"Accept": "text/turtle, application/x-turtle,"   # Turtle
                          "application/rdf+xml;q=0.9, "          # RDF/XML
                          "application/ld+json;q=0.8, "          # JSON-LD
-                         "text/n3;q=0.7"                        # Notion 3
+                         "text/n3;q=0.7,"                       # Notion 3
                          "*/*;q=0.1"}                           # Others
 
     # Initiate 5 lists
@@ -66,5 +86,4 @@ def get_http_status_code(list_of_uri):
     # Consolidate all together for output
 
     return res_uri_list, non_res_uri_list, content_type_for_resolvable_uris
-
 

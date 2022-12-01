@@ -71,7 +71,7 @@ class AssessReport:
         self.misplaced_property = misplaced_property_list
 
     def add_misused_owl_datatype_property(self, misused_owl_datatype_property):
-        self.misplaced_class = misused_owl_datatype_property
+        self.misused_owl_datatype_property = misused_owl_datatype_property
 
     def add_misused_owl_object_property(self, misused_owl_object_property):
         self.misused_owl_object_property = misused_owl_object_property
@@ -100,18 +100,22 @@ class AssessReport:
 
         uri_effect_dict = {}
 
+        # Initiate a graph to store affected triples
+        temp_graph = Graph()
+
         for bad_uri in error_list:
-            temp_graph = Graph()
 
             # Be aware that one URI may be used correctly and incorrectly in the same dataset
             temp_graph += target_graph.triples((bad_uri, None, None))
             temp_graph += target_graph.triples((None, bad_uri, None))
             temp_graph += target_graph.triples((None, None, bad_uri))
+            #
+            # overall_count = overall_count + len(temp_graph)
+            #
+            # # Get affected triples per URI
+            # uri_effect_dict[str(bad_uri)] = len(temp_graph)
 
-            overall_count = overall_count + len(temp_graph)
+        count_of_affected_triples = len(temp_graph)
 
-            # Get affected triples per URI
-            uri_effect_dict[str(bad_uri)] = len(temp_graph)
-
-        return overall_count, uri_effect_dict
+        return count_of_affected_triples
 

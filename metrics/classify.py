@@ -16,6 +16,9 @@ def extract_type(content_type_for_resolvable_uris):
     owl_object_property = []
     other_property_list = []
 
+    # New list (August 22)
+    no_parsed_content_uri_list = {}
+
     # print(" To get rdf:type information of {} parsable URIs".format(len(content_type_for_resolvable_uris)))
 
     # Investigate an URI
@@ -24,6 +27,9 @@ def extract_type(content_type_for_resolvable_uris):
         print(res_uri)
 
         temp_graph = Graph().parse(res_uri, format=corpus.MapContentTypeToParserFormat[content_type])
+
+        if len(temp_graph) == 0:
+            no_parsed_content_uri_list[res_uri] = content_type
 
         # Get a list of "type" for that URI
         all_rdf_type_triples = Graph()
@@ -59,6 +65,8 @@ def extract_type(content_type_for_resolvable_uris):
     property_list = owl_datatype_property + owl_object_property + other_property_list
     others_list = [item for item in content_type_for_resolvable_uris.keys() if item not in property_list + class_list]
 
+    # Update tempoary August 22nd
+    for this_uri, this_content_type in no_parsed_content_uri_list.items():
+        print('{},{}'.format(this_uri, this_content_type))
+
     return class_list, property_list, owl_datatype_property, owl_object_property, other_property_list, others_list
-
-
