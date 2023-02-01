@@ -1,107 +1,162 @@
 #!/usr/bin/env python3
-
+import os
 import time
 import datetime
-from rdflib.term import URIRef
+import pandas as pd
+from rdflib.term import URIRef, BNode, Literal
 
 # Import metrics
-from metrics.coverage import count_rdf_component as count_uri
-from metrics.resolvability import get_http_status_code as assess_resolvability
+from metrics.coverage import count_rdf_component
+from metrics.resolvability import get_http_status_code_and_content_type
 from metrics.parsability import assess_parsable
-from metrics.classify import extract_type as classify_uri
-from metrics.consistency import run_consistency as assess_consistency
+from metrics.classify import get_uri_type
+from metrics.consistency import run_consistency_assessment
 
 # Import basic functions
 from functions.load_resource import parse_data_local_or_remote as load_resource
-from functions.assessment_report import AssessReport
-from functions.save_or_load_report import save_object
 from functions.inspect_items import view_graph
+from functions.generate_report import build_graph
+from functions.create_directory import create_directory
+from identify_errors import quantitative_analysis
 
 # Import human-configurable
-from config import WhichResource, WhichReport, LABEL
+from config import WhichResource, ListOfLabelsForRareDiseaseResources
+
+
+def run_assessment(label, assess_resolvable=True, test_parsable=True, re_classify=True, assess_consistency=True):
+    """
+    Decide whether run-assess a metric (True) or load existing results (False)
+    :param label: string.
+    :param assess_resolvable: Boolean. If true, this process will be run again. Else, load existing results.
+    :param test_parsable: Boolean. If true, this process will be run again. Else, load existing results.
+    :param re_classify: Boolean. If true, this process will be run again. Else, load existing results.
+    :param assess_consistency: Boolean. If true, this process will be run again. Else, load existing results.
+    :return:
+    """
+
+    # Calculate Time Cost
+    print("Start quality assessment on the resource: {}: ".format(label))
+
+    # create a directory for storing results
+    create_directory("output/{}".format(label))
+
+    # Load resource with path based on a label
+    g = load_resource(WhichResource[label])
+
+    # Preview part of triples
+    view_number_of_triples = 5
+    print("View the first " + str(view_number_of_triples) + " triples: ")
+    view_graph(g, view_number_of_triples)
+
+    # get a list of unique URIs in the test resource
+    uris = count_rdf_component(rdf_graph=g, rdf_term=URIRef)
+    print("\nThis RDF resource has {} unique URIs. ".format(len(uris)))
+
+    path_dic = {
+        'resolvable': 'output/{}/uri-resolvable-{}.csv'.format(label, label),
+        'parsable': 'output/{}/uri-parsable-{}.csv'.format(label, label),
+        'consistent': 'output/{}/uri-consistent-{}.csv'.format(label, label),
+        'intermediate': 'output/{}/uri-intermediate-{}.csv'.format(label, label),
+        'report': 'output/{}/report-{}.ttl'.format(label, label),
+    }
+
+    print("\nStep I. Test Resolvability of all URIs. ")
+    if assess_resolvable:
+        # run resolvable test
+        df_uris = get_http_status_code_and_content_type(uris)
+
+        # export results
+        print("Resolvability results stored.")
+        df_uris.to_csv(path_dic['resolvable'])
+
+    print("Resolvability results loaded.")
+    df_uris = pd.read_csv(path_dic['resolvable'], index_col=0)
+
+    print("\nStep II. Test Parsability of resolvable URIs.")
+
+    # run Parsable test and export as csv
+    if test_parsable:
+        df_uris_parsable = assess_parsable(df_uris)
+        print("Parsability results stored.")
+        df_uris_parsable.to_csv(path_dic['parsable'])
+
+    print("Parsability results loaded.")
+    df_uris_parsable = pd.read_csv(path_dic['parsable'], index_col=0)
+
+    print("\nStep III. Classify Parsable URIs.")
+    if re_classify:
+    # classify those parsable URIs
+        uris_defined = get_uri_type(df_uris_parsable)
+        print("Classification finishes. "
+              "URIs are categorized into 'class', 'property', and 'unknown'. ")
+
+        print("\nStep IV. Test Consistency - Undefined URIs ")
+        print("Intermediate results stored.")
+        uris_defined.to_csv(path_dic['intermediate'])
+
+    print("Intermediate results loaded.")
+    uris_defined = pd.read_csv(path_dic['intermediate'], index_col=0)
+
+    # Run consistency
+    print("\nStep V. Test Consistency ")
+    if assess_consistency:
+        uris_consistency_check = run_consistency_assessment(graph=g, df_uris_defined=uris_defined)
+        print("Consistency results stored.")
+        uris_consistency_check.to_csv(path_dic['consistent'])
+
+    print("Consistency results loaded.")
+    uris_consistency_check = pd.read_csv(path_dic['consistent'], index_col=0)
+
+    # extract errors from df
+    print("\nStep VI: Get errors and calculate statistics from stored results.")
+    assessment_result = quantitative_analysis(label)
+
+    print("Step VII: Generate assessment report. ")
+    # get some baseline numbers
+    num_of_uris = len(uris)
+    num_of_classes = len(uris_consistency_check.loc[uris_consistency_check['uri type'] == 'class'])
+    num_of_properties = len(uris_consistency_check.loc[uris_consistency_check['uri type'] == 'property'])
+
+    report_graph = build_graph(resource_uri=WhichResource[label],
+                               report_label=label,
+                               assessment_result=assessment_result,
+                               num_of_uris=num_of_uris,
+                               num_of_classes=num_of_classes,
+                               num_of_properties=num_of_properties)
+
+    report_graph.serialize(destination=path_dic['report'])
+
+    # # Remove unneeded files
+    # if os.path.exists(path_dic['intermediate']):
+    #     os.remove(path_dic['intermediate'])
+    # else:
+    #     print("The file does not exist")
+
+
+def execution():
+
+    # decide whether run-assess a metric (True) or load existing results (False)
+    whether_re_run = {'assess_resolvable': False,
+                      'test_parsable': False,
+                      're_classify': False,
+                      'assess_consistency': False}
+
+    for label in ListOfLabelsForRareDiseaseResources[14:]:
+        print(label)
+        # set start time
+        label = 'test'
+        start_time = time.time()
+
+        run_assessment(label, **whether_re_run)
+
+        # set end time
+        end_time = time.time()
+
+        # calculate running time for each resource
+        time_cost = int(end_time - start_time)
+        print('Time Cost (hh:mm:ss) is: \n {}'.format(str(datetime.timedelta(seconds=time_cost))))
 
 
 if __name__ == '__main__':
 
-    # Calculate Time Cost
-    print("Start assessment!")
-    start_time = time.time()
-
-    # Load data
-    path = WhichResource[LABEL]
-    g = load_resource(path)
-
-    # Quick view of first {10} triples
-    view_number_of_triples = 10
-    print("View the first {} triples".format(view_number_of_triples))
-    view_graph(g, view_number_of_triples)
-
-    # Run coverage and get basic characteristics
-    uri_list = count_uri(g=g, rdf_component_type=URIRef)
-    print("0. There are {} URIs in the test RDF graph".format(len(uri_list)))
-
-    print("1. Test Resolvability ")
-    # Run resolvable test
-    res_uri_list, non_res_uri_list, resolvable_uris_with_content_type = assess_resolvability(uri_list)
-
-    print("2.1 Test Parsability ")
-    # Run Parsable test
-    res_uri_rdf, res_uri_not_rdf, error1_rdf_no_triple, error2_uri_undefined, parsable_uri = \
-        assess_parsable(resolvable_uris_with_content_type)
-
-    print("2.2 Classify URIs ")
-    # Run pre-consistency - classify URIs
-    class_list, property_list, owl_datatype_property, owl_object_property, other_property_list, others_list = \
-        classify_uri(parsable_uri)
-
-    # Run consistency
-    print("3. Test Consistency")
-    misplaced_class_list, misplaced_property_list, misused_datatype_property_list, misused_object_property_list = \
-        assess_consistency(g=g, class_list=class_list,
-                           property_list=property_list,
-                           datatype_property_list=owl_datatype_property,
-                           object_property_list=owl_object_property)
-
-    print("4. Generate Report")
-    # Populate reports
-    r = AssessReport()
-
-    # Populate basics
-    r.add_uri_list(uri_list)
-    r.add_class_list(class_list)
-    r.add_property_list(property_list)
-    r.add_owl_datatype_property(owl_datatype_property)
-    r.add_owl_object_property(owl_object_property)
-    r.add_other_property_list(other_property_list)
-    r.add_others_list(others_list)
-
-    r.add_misplaced_class(misplaced_class_list)
-    r.add_misplaced_property(misplaced_property_list)
-    r.add_misused_owl_datatype_property(misused_datatype_property_list)
-    r.add_misused_owl_object_property(misused_object_property_list)
-
-    # Populate Resolvability test result
-    r.add_non_res_uri(non_res_uri_list)
-
-    # Populate Parsability test result
-    r.add_parsability_errors(error1_rdf_no_triple)
-
-    # Populate Consistency test result
-    r.add_undefined_uri(error2_uri_undefined)
-
-    # Save Report
-    save_object(obj=r, filename=WhichReport[LABEL])
-
-    # Calculate affected triples of non-resolvable URIs
-    non_res_rate = r.resolvability_statistics()
-    print('The proportion of triples affected by non-resolvable URIs is {}.'.format(non_res_rate))
-
-    # Get time cost (seconds) and remove decimals
-    end_time = time.time()
-    time_cost = int(end_time - start_time)
-
-    print('Time Cost (hh:mm:ss) is: \n {}'.format(str(datetime.timedelta(seconds=time_cost))))
-
-
-
-
+    execution()

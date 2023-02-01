@@ -1,89 +1,88 @@
 import requests
-import time
-import datetime
-from rdflib.term import URIRef
-import corpus
-
-# Import metrics
-from metrics.coverage import count_rdf_component as count_uri
-from metrics.parsability import assess_parsable
-from metrics.classify import extract_type as classify_uri
-from metrics.consistency import run_consistency as assess_consistency
-
-# Import basic functions
-from functions.load_resource import parse_data_local_or_remote as load_resource
-from functions.assessment_report import AssessReport
-from functions.save_or_load_report import save_object
-from functions.inspect_items import view_graph
-from functions.inspect_items import inspect_item_in_list, inspect_item_in_dict
-
-# Import human-configurable
-from config import WhichResource, WhichReport, LABEL
+from requests.adapters import HTTPAdapter
+from urllib3.util.retry import Retry
+import pandas as pd
 
 
-def get_http_status_code(list_of_uri):
+from corpus import Headers
+
+
+def get_http_status_code_and_content_type(uris):
     """
 
-    :param list_of_uri: list of RDFLib.URIRef objects
-    :return: 2 lists and 1 dictionary
+    :param uris: a list of strings, each as a URI.
+    :return: a pandas data frame with two columns: 'uris' and 'status_code'.
     """
+    # get a list of status code
+    # r = [*map(lambda x: str(requests.get(x, headers=Headers).status_code), uris)]
 
-    # Define headers for content-negotiation
-    headers = {"Accept": "text/turtle, application/x-turtle,"   # Turtle
-                         "application/rdf+xml;q=0.9, "          # RDF/XML
-                         "application/ld+json;q=0.8, "          # JSON-LD
-                         "text/n3;q=0.7,"                       # Notion 3
-                         "*/*;q=0.1"}                           # Others
+    code_list = []
+    type_list = []
 
-    # Initiate 5 lists
-    res_uri_list = []
+    count = 1
 
-    # here we regard unofficial ones as non-resolvable (discussion?)
-    non_res_uri_list = []
-    # code_unofficial_list = []
+    for uri in uris:
+        print("Analyzing URIs (" + "{}/{}".format(count, len(uris)) + ') :' + str(uri))
 
-    # Initiate a dictionary
-    content_type_for_resolvable_uris = {}
-
-    progress_count = 1
-
-    for single_uri in list_of_uri:
-
-        print("  - Getting status code of {} - Progress {}/{}".format(single_uri, progress_count, len(list_of_uri)))
-
-        progress_count = progress_count + 1
+        s = requests.Session()
+        retry = Retry(connect=3, backoff_factor=0.5)
+        adapter = HTTPAdapter(max_retries=retry)
+        s.mount('http://', adapter)
+        s.mount('https://', adapter)
 
         try:
-            # Get HTTP Status Code and append URI to corresponding lists
-            # Bug fixed: do not use request.head(URI), which is outdated.
-            r = requests.get(single_uri, headers=headers)
+            r = s.get(uri, headers=Headers)
             status_code = str(r.status_code)
-
-            if status_code.startswith("2"):
-                res_uri_list.append(single_uri)
-                content_type_for_resolvable_uris[str(single_uri)] = r.headers["content-type"].split(";", 1)[0]
-                continue
-            if status_code.startswith("3"):
-                res_uri_list.append(single_uri)
-                content_type_for_resolvable_uris[str(single_uri)] = r.headers["content-type"].split(";", 1)[0]
-                continue
-            if status_code.startswith("4"):
-                non_res_uri_list.append(single_uri)
-                print("  - This URI is not resolvable with status code: {}".format(status_code))
-                continue
-            if status_code.startswith("5"):
-                non_res_uri_list.append(single_uri)
-                print("  - This URI is not resolvable with status code: {}".format(status_code))
-                continue
-
-            # If HTTP status code is not any of above types, add it to "others"
-            non_res_uri_list.append(single_uri)
+            content_type = r.headers["content-type"].split(";", 1)[0]
 
         except Exception as e:
-            non_res_uri_list.append(single_uri)
-            print(e)
+            status_code = e
+            content_type = e
 
-    # Consolidate all together for output
+        # get items (i.e., status-code and content-type) to lists
+        code_list.append(status_code)
+        type_list.append(content_type)
 
-    return res_uri_list, non_res_uri_list, content_type_for_resolvable_uris
+        count = count + 1
+
+    # put URIs with their status codes into a data frame
+    df_uris = pd.DataFrame({'uris': uris,
+                            'status_code': code_list,
+                            'content-type': type_list})
+
+    return df_uris
+
+
+def divide_uris_by_resolvability(df_uris):
+    """
+    Category URIs based on their status code: 2XX and 3XX as resolvable while 4XX and 5XX as non-resolvable
+    :param df_uris: a two-column data frame.
+                    'uris": a list of URIs as string;
+                    'status_code": a list of status code as string;
+    :return: two lists, respectively containing URIs with "2XX + 3XX" and "4XX + 5XX".
+    """
+    uris_status_23 = df_uris[df_uris['status_code'].str.startswith(('2', '3'))]
+    uris_status_45 = df_uris[df_uris['status_code'].str.startswith(('4', '5'))]
+
+    return uris_status_23, uris_status_45
+
+
+def group_uris_by_resolvability(uris):
+    """
+    A function getting a list of URIs as input and returning two lists of URIs. Besides, a CSV file
+    is generated containing all URIs with their status codes.
+    :param uris: a list of strings, each as a URI.
+    :return: two lists, respectively containing URIs with "2XX + 3XX" and "4XX + 5XX".
+    """
+    # get a data frame containing all URIs with status-code and content-type
+    df_uris = get_http_status_code_and_content_type(uris)
+
+    # divide URIs into two group lists, based on status-code
+    uris_status_23, uris_status_45 = divide_uris_by_resolvability(df_uris)
+
+    return uris_status_23, uris_status_45
+
+
+
+
 

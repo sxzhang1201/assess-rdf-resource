@@ -5,25 +5,52 @@ import corpus
 
 
 def parse_data_local_or_remote(data_path):
+
+    # initiate a graph
     g = Graph()
+
     if 'http' in str(data_path):
-        # print(" Parse Remote Graph!")
+        print("Loading resource from " + str(data_path))
         r = requests.get(data_path, headers=corpus.Headers)
         content_type_this_uri = r.headers["content-type"].split(";", 1)[0]
-        print(content_type_this_uri)
+
+        print("The Content-type of this resource is " + str(content_type_this_uri))
         parse_format = corpus.MapContentTypeToParserFormat[content_type_this_uri]
-        g.parse(data_path, format=parse_format)
+        try:
+            g.parse(data_path, format=parse_format)
+        except:
+            raise Exception(
+                print("The resource from " + str(data_path) + " cannot be parsed. Please check. ")
+            )
 
     else:
-        # print(" Parse Local Graph!")
-        # Check 1) if the file exists and 2) if RDF graphs in that file is parsable
+        print("Parse resource from local path: " + str(data_path))
+
+        # Check if the resource exists, otherwise it returns error
         if os.path.exists(data_path):
             try:
+                # Note that local resource we cannot specify parse type
                 g.parse(data_path)
             except:
                 raise Exception(
-                    "The file {} cannot be parsed into RDF triples due to syntactical errors. ".format(data_path))
+                    "The local resource from {} cannot be parsed. Please check. ".format(data_path))
         else:
-            raise OSError("The file {} is not found. ".format(data_path))
+            raise OSError("The resource at {} is not found. ".format(data_path))
+
+    if len(g) == 0:
+        print("The resource has no triples loaded. Please check! ")
+    else:
+        print("The resource is successfully loaded. \n")
 
     return g
+
+
+# if __name__ == '__main__':
+#     path_list = ['https://ejp-rd-dev1.vm.cesnet.cz/fdps/orphanet-catalog-fdp/?format=ttl',
+#                  '../resources/rd-resources/ordo-catalog-fdp/A multicenter registry for nasopharyngeal cancer in children.ttl']
+#
+#     for path in path_list:
+#
+#         g = parse_data_local_or_remote(path)
+#
+#         print("Graph has those triples: " + str(len(g)))

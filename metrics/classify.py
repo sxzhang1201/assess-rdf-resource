@@ -4,69 +4,94 @@ import corpus
 from rdflib.term import URIRef
 
 
-def extract_type(content_type_for_resolvable_uris):
+def get_uri_type(uris_rdf):
     """
 
-    :param content_type_for_resolvable_uris: a dictionary with URIs as keys (str) corresponding to their content-type as values (str)
-    :return: 6 lists, respectively containing URIs of different types
+    :param uris_rdf: a data frame with six columns:
+    'uris',
+    'status_code', all should be 2xx or 3xx
+    'content-type',
+    'if_rdf_content',
+    'parsing',
+    'undefined',
+    :return:
     """
-    # Initiate 4 lists
-    class_list = []
-    owl_datatype_property = []
-    owl_object_property = []
-    other_property_list = []
 
-    # New list (August 22)
-    no_parsed_content_uri_list = {}
+    uri_type = []
+    property_type = []
 
-    # print(" To get rdf:type information of {} parsable URIs".format(len(content_type_for_resolvable_uris)))
+    # only focus on defined URIs, so subset:
+    uris_defined = uris_rdf.loc[uris_rdf["whether defined"] == "defined"]
 
     # Investigate an URI
-    for res_uri, content_type in content_type_for_resolvable_uris.items():
-        print(" To get rdf:type information of {}".format(res_uri))
-        print(res_uri)
+    for index, row in uris_defined.iterrows():
 
-        temp_graph = Graph().parse(res_uri, format=corpus.MapContentTypeToParserFormat[content_type])
+        uri = row['uris']
 
-        if len(temp_graph) == 0:
-            no_parsed_content_uri_list[res_uri] = content_type
+        print(str(index) + '. ' + uri + ", " + row['content-type'])
 
-        # Get a list of "type" for that URI
-        all_rdf_type_triples = Graph()
-        all_rdf_type_triples += temp_graph.triples((URIRef(res_uri), RDF.type, None))
-        # Get a list of "subClassOf" for that URI
-        all_subclass_of_triples = Graph()
-        all_subclass_of_triples += temp_graph.triples((URIRef(res_uri), RDFS.subClassOf, None))
+        # get parsing content of the URI
+        g = Graph().parse(uri, format=corpus.MapContentTypeToParserFormat[row['content-type']])
 
-        all_types_graph = all_rdf_type_triples + all_subclass_of_triples
+        # 'contains' checking
+        if (URIRef(uri), RDF.type, URIRef("http://www.w3.org/2002/07/owl#DatatypeProperty")) in g or \
+                (URIRef(uri), RDFS.range, RDFS.Literal) in g:
+            uri_type.append("property")
+            property_type.append('owl_datatype_property')
+            continue
 
-        # All types of one URI
-        for s, p, o in all_types_graph:
-            print(s, p, o)
-            # owl:DatatypeProperty
-            if str(o) == "http://www.w3.org/2002/07/owl#DatatypeProperty":
-                owl_datatype_property.append(res_uri)
-                break
+        elif (URIRef(uri), RDF.type, URIRef("http://www.w3.org/2002/07/owl#ObjectProperty")) in g:
+            uri_type.append("property")
+            property_type.append('owl_object_property')
+            continue
 
-            # owl:ObjectProperty
-            if str(o) == "http://www.w3.org/2002/07/owl#ObjectProperty":
-                owl_object_property.append(res_uri)
-                break
+        elif (URIRef(uri), RDF.type, URIRef("http://www.w3.org/2002/07/owl#InverseFunctionalProperty")) in g \
+                or (URIRef(uri), RDF.type, URIRef("http://www.w3.org/2002/07/owl#FunctionalProperty")) in g:
+            uri_type.append("property")
+            property_type.append('other_property')
+            continue
 
-            # Other property
-            if str(o) in corpus.OtherPropertyList:
-                other_property_list.append(res_uri)
-                break
+        elif (URIRef(uri), RDF.type, URIRef("http://www.w3.org/2002/07/owl#TransitiveProperty")) in g:
+            uri_type.append("property")
+            property_type.append('other_property')
+            continue
 
-            if str(o) in corpus.ClassList:
-                class_list.append(res_uri)
-                break
+        elif (URIRef(uri), RDF.type, URIRef("http://www.w3.org/2002/07/owl#SymmetricProperty")) in g:
+            uri_type.append("property")
+            property_type.append('other_property')
+            continue
 
-    property_list = owl_datatype_property + owl_object_property + other_property_list
-    others_list = [item for item in content_type_for_resolvable_uris.keys() if item not in property_list + class_list]
+        elif (URIRef(uri), RDF.type, URIRef("http://www.w3.org/2002/07/owl#AnnotationProperty")) in g:
+            uri_type.append("property")
+            property_type.append('other_property')
+            continue
 
-    # Update tempoary August 22nd
-    for this_uri, this_content_type in no_parsed_content_uri_list.items():
-        print('{},{}'.format(this_uri, this_content_type))
+        elif (URIRef(uri), RDF.type, URIRef("http://www.w3.org/2002/07/owl#OntologyProperty")) in g:
+            uri_type.append("property")
+            property_type.append('other_property')
+            continue
 
-    return class_list, property_list, owl_datatype_property, owl_object_property, other_property_list, others_list
+        elif (URIRef(uri), RDF.type, URIRef("http://www.w3.org/2002/07/owl#DeprecatedProperty")) in g:
+            uri_type.append("property")
+            property_type.append('other_property')
+            continue
+
+        elif (URIRef(uri), RDF.type, URIRef("http://www.w3.org/1999/02/22-rdf-syntax-ns#Property")) in g:
+            uri_type.append("property")
+            property_type.append('other_property')
+            continue
+
+        elif (URIRef(uri), RDF.type, URIRef("http://www.w3.org/2000/01/rdf-schema#Class")) in g or \
+                (URIRef(uri), RDF.type, URIRef("http://www.w3.org/2002/07/owl#Class")) in g:
+            uri_type.append("class")
+            property_type.append('not applicable')
+            continue
+        else:
+            uri_type.append("unknown")
+            property_type.append('not applicable')
+
+    # add URI type to a new column
+    uris_defined.loc[:, 'uri type'] = uri_type
+    uris_defined.loc[:, 'property type'] = property_type
+
+    return uris_defined
