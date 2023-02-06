@@ -146,12 +146,6 @@ def run_assessment(label, assess_resolvable=True, test_parsable=True, re_classif
 
     report_graph.serialize(destination=path_dic['report'])
 
-    # # Remove unneeded files
-    # if os.path.exists(path_dic['intermediate']):
-    #     os.remove(path_dic['intermediate'])
-    # else:
-    #     print("The file does not exist")
-
     return assessment_result
 
 
@@ -201,8 +195,6 @@ def execution():
         # calculate running time for each resource
         time_cost = int(end_time - start_time)
         print('Time Cost (hh:mm:ss) is: \n {}'.format(str(datetime.timedelta(seconds=time_cost))))
-
-        quit()
 
     print("The Count of Affected Triples (COAT) due to non-resolvable URIs: ")
     print(coat_non_resolvable_dict)
