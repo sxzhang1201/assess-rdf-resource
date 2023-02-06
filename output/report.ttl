@@ -1,0 +1,782 @@
+@prefix dcat: <http://www.w3.org/ns/dcat#> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix dqv: <http://www.w3.org/ns/dqv#> .
+@prefix foaf: <http://xmlns.com/foaf/0.1/> .
+@prefix fqm: <http://purl.org/fqm#> .
+@prefix prov: <http://www.w3.org/ns/prov#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+
+<http://example.org/ejp-metadata-ontology-report#resolvabilityMeasurement> a dqv:QualityMeasurement ;
+    dcterms:relation <http://purl.obolibrary.org/obo/RO_0001901>,
+        <http://purl.obolibrary.org/obo/bfo/axiom/0000004>,
+        <http://purl.obolibrary.org/obo/bfo/axiom/0000005>,
+        <http://purl.obolibrary.org/obo/bfo/axiom/0000007>,
+        <http://purl.obolibrary.org/obo/bfo/axiom/001-001>,
+        <http://purl.obolibrary.org/obo/bfo/axiom/008-002>,
+        <http://purl.obolibrary.org/obo/bfo/axiom/009-002>,
+        <http://purl.obolibrary.org/obo/bfo/axiom/011-002>,
+        <http://purl.obolibrary.org/obo/bfo/axiom/017-002>,
+        <http://purl.obolibrary.org/obo/bfo/axiom/018-002>,
+        <http://purl.obolibrary.org/obo/bfo/axiom/050-003>,
+        <http://purl.obolibrary.org/obo/bfo/axiom/058-002>,
+        <http://purl.obolibrary.org/obo/bfo/axiom/060-002>,
+        <http://purl.obolibrary.org/obo/bfo/axiom/061-001>,
+        <http://purl.obolibrary.org/obo/bfo/axiom/074-001>,
+        <http://purl.obolibrary.org/obo/bfo/axiom/126-001>,
+        <http://purl.obolibrary.org/obo/bfo/axiom/134-001>,
+        <http://purl.org/ejp-rd/vocabulary/Guideline>,
+        <http://purl.org/ejp-rd/vocabulary/VPConnection>,
+        <http://purl.org/ejp-rd/vocabulary/VPDiscoverable>,
+        <http://purl.org/ejp-rd/vocabulary/VPQueryable>,
+        <http://purl.org/ejp-rd/vocabulary/ejprd_resource_metadata_ontology.owl>,
+        <http://purl.org/ejp-rd/vocabulary/vpQueryable>,
+        <http://semanticscience.org/resource/equivalentTo>,
+        <http://semanticscience.org/resource/subset>,
+        <http://www.referent-tracking.com/_RTU/papers/CeustersICbookRevised.pdf> ;
+    dqv:computedOn <https://raw.githubusercontent.com/ejp-rd-vp/resource-metadata-schema-ontology/main/ejprd_resource_metadata_ontology.owl> ;
+    dqv:isMeasurementOf fqm:uriNonResolvableMetric ;
+    dqv:value "0.1"^^xsd:float ;
+    prov:generatedAtTime "2022-12-30T10:10:30"^^xsd:dateTime .
+
+<http://example.org/ejp-metadata-ontology-report#undefinedURIsMeasurement> a dqv:QualityMeasurement ;
+    dcterms:relation <http://www.w3.org/ns/prov-o>,
+        <http://www.w3.org/ns/prov-o-20130312> ;
+    dqv:computedOn <https://raw.githubusercontent.com/ejp-rd-vp/resource-metadata-schema-ontology/main/ejprd_resource_metadata_ontology.owl> ;
+    dqv:isMeasurementOf fqm:uriUndefinedMetric ;
+    dqv:value "0.01"^^xsd:float ;
+    prov:generatedAtTime "2022-12-30T10:10:30"^^xsd:dateTime .
+
+<https://raw.githubusercontent.com/ejp-rd-vp/resource-metadata-schema-ontology/main/ejprd_resource_metadata_ontology.owl> a dcat:Resource ;
+    dcterms:title "ejp-metadata-ontology" ;
+    dqv:hasQualityMeasurement <http://example.org/ejp-metadata-ontology-report#resolvabilityMeasurement>,
+        <http://example.org/ejp-metadata-ontology-report#undefinedURIsMeasurement> .
+
+
+
+<http://example.org/atc-report#resolvabilityMeasurement> a dqv:QualityMeasurement ;
+    dcterms:relation <http://bioportal.bioontology.org/ontologies/umls/cui>,
+        <http://purl.bioontology.org/ontology/ATC/A07AA10>,
+        <http://purl.bioontology.org/ontology/ATC/ATC_LEVEL>,
+        <http://purl.bioontology.org/ontology/ATC/B01AC17>,
+        <http://purl.bioontology.org/ontology/ATC/IS_DRUG_CLASS> ;
+    dqv:computedOn <https://bioportal.bioontology.org/ontologies/ATC> ;
+    dqv:isMeasurementOf fqm:uriNonResolvableMetric ;
+    dqv:value "0.0"^^xsd:float ;
+    prov:generatedAtTime "2022-12-30T10:10:30"^^xsd:dateTime .
+
+<https://bioportal.bioontology.org/ontologies/ATC> a dcat:Resource ;
+    dcterms:title "atc" ;
+    dqv:hasQualityMeasurement <http://example.org/atc-report#resolvabilityMeasurement> .
+
+
+<http://example.org/geno-report#resolvabilityMeasurement> a dqv:QualityMeasurement ;
+    dcterms:relation <http://purl.obolibrary.org/obo/HsapDv_0000000>,
+        <http://purl.obolibrary.org/obo/RO_000244>,
+        <http://purl.org/oban/association>,
+        <http://purl.org/oban/association_has_object>,
+        <http://purl.org/oban/association_has_predicate>,
+        <http://purl.org/oban/association_has_subject>,
+        <http://www.geneontology.org/page/go-slim-and-subset-guide> ;
+    dqv:computedOn <http://purl.obolibrary.org/obo/geno.owl> ;
+    dqv:isMeasurementOf fqm:uriNonResolvableMetric ;
+    dqv:value "0.01"^^xsd:float ;
+    prov:generatedAtTime "2022-12-30T10:10:30"^^xsd:dateTime .
+
+<http://example.org/geno-report#undefinedURIsMeasurement> a dqv:QualityMeasurement ;
+    dcterms:relation <http://orcid.org/0000-0001-5208-3432>,
+        <https://doi.org/10.1186/s13326-017-0126-0> ;
+    dqv:computedOn <http://purl.obolibrary.org/obo/geno.owll> ;
+    dqv:isMeasurementOf fqm:uriUndefinedMetric ;
+    dqv:value "0.0"^^xsd:float ;
+    prov:generatedAtTime "2022-12-30T10:10:30"^^xsd:dateTime .
+
+<http://purl.obolibrary.org/obo/geno.owl> a dcat:Resource ;
+    dcterms:title "geno" ;
+    dqv:hasQualityMeasurement <http://example.org/geno-report#resolvabilityMeasurement>,
+        <http://example.org/geno-report#undefinedURIsMeasurement> .
+
+<http://example.org/head-and-neck-tumor-report#resolvabilityMeasurement> a dqv:QualityMeasurement ;
+    dcterms:relation <http://purl.obolibrary.org/obo/ERO_0001843>,
+        <http://purl.org/ejp-rd/vocabulary/populationCoverage>,
+        <http://rdflicense.appspot.com/rdflicense/cc-by-nc-nd3.0>,
+        foaf:Organisation,
+        <https://w3id.org/ejp-rd/fairdatapoints/orphanet-catalog-fdp/patientRegistry/6759d7b2-73ee-4711-bffe-c0483ec0f214/metrics/445c0a70d1e214e545b261559e2842f4>,
+        <https://w3id.org/ejp-rd/fairdatapoints/orphanet-catalog-fdp/patientRegistry/6759d7b2-73ee-4711-bffe-c0483ec0f214/metrics/5d27e854a9e78eb3f663331cd47cdc13> ;
+    dqv:computedOn <https://ejp-rd-dev1.vm.cesnet.cz/fdps/orphanet-catalog-fdp/patientRegistry/6759d7b2-73ee-4711-bffe-c0483ec0f214> ;
+    dqv:isMeasurementOf fqm:uriNonResolvableMetric ;
+    dqv:value "0.11"^^xsd:float ;
+    prov:generatedAtTime "2022-12-30T10:10:30"^^xsd:dateTime .
+
+<https://ejp-rd-dev1.vm.cesnet.cz/fdps/orphanet-catalog-fdp/patientRegistry/6759d7b2-73ee-4711-bffe-c0483ec0f214> a dcat:Resource ;
+    dcterms:title "head-and-neck-tumor" ;
+    dqv:hasQualityMeasurement <http://example.org/head-and-neck-tumor-report#resolvabilityMeasurement> .
+
+
+
+<http://example.org/hpo-report#misusedOwlObjectPropertyMeasurement> a dqv:QualityMeasurement ;
+    dcterms:relation skos:closeMatch ;
+    dqv:computedOn <http://purl.obolibrary.org/obo/hp.owl> ;
+    dqv:isMeasurementOf fqm:misusedOwlDatatypeOrObjectPropertiesMetric ;
+    dqv:value "0.01"^^xsd:float ;
+    prov:generatedAtTime "2022-12-30T10:10:30"^^xsd:dateTime .
+
+<http://example.org/hpo-report#resolvabilityMeasurement> a dqv:QualityMeasurement ;
+    dcterms:relation <http://anatomy.uams.edu/anatomyhtml/kidney.html>,
+        <http://dev.biologists.org/content/128/22/4573.full>,
+        <http://dictionary.reference.com/browse/mammary+ridge>,
+        <http://en.wikipedia.org/wiki/Bone_marrow_of_ovary_(hair)>,
+        <http://en.wikipedia.org/wiki/Bone_marrow_of_ovary_oblongata>,
+        <http://en.wikipedia.org/wiki/Bone_marrow_of_ovaryry_cavity>,
+        <http://en.wikipedia.org/wiki/Bone_marrow_of_ovaryry_interstitium>,
+        <http://en.wikipedia.org/wiki/Bone_marrow_of_ovaryry_ray_(anatomy)>,
+        <http://en.wikipedia.org/wiki/Capsule_of_the_temporomandibular_joint>,
+        <http://en.wikipedia.org/wiki/Ethmoid_bone_sinus>,
+        <http://en.wikipedia.org/wiki/Interlobular_ducts>,
+        <http://en.wikipedia.org/wiki/Large_intestine_(anatomy)>,
+        <http://en.wikipedia.org/wiki/Mental_part_of_inferior_alveolar_artery>,
+        <http://en.wikipedia.org/wiki/Nervous_system_fascicle>,
+        <http://en.wikipedia.org/wiki/Nervous_system_fiber>,
+        <http://en.wikipedia.org/wiki/Nervous_system_fiber_layer>,
+        <http://en.wikipedia.org/wiki/Nervous_system_plexus>,
+        <http://en.wikipedia.org/wiki/Neuroranium>,
+        <http://en.wikipedia.org/wiki/Pharyngeal_part_of_vagus_nerve>,
+        <http://en.wikipedia.org/wiki/Superficial_part_of_transverse_cervical_artery>,
+        <http://en.wikipedia.org/wiki/Thoracid_diaphragm>,
+        <http://evolution.berkeley.edu/evolibrary/images/history/notochords.jpg>,
+        <http://evolutionwiki.org/wiki/M._tibialis_cranialis>,
+        <http://flybase.org/reports/FBrf0178740.html>,
+        <http://icb.oxfordjournals.org/content/42/4/743.full>,
+        <http://mbe.oxfordjournals.org/content/26/3/613/F1.large.jpg>,
+        <http://medical-dictionary.thefreedictionary.com/dermomyotome>,
+        <http://medical-dictionary.thefreedictionary.com/incudomallear+joint>,
+        <http://medical-dictionary.thefreedictionary.com/palatal+shelf>,
+        <http://mw1.merriam-webster.com/medical/cranial%20fossa>,
+        <http://neurolex.org/wiki/Category:Embryonic_organism>,
+        <http://neurolex.org/wiki/Category:Juvenile_organism>,
+        <http://neurolex.org/wiki/Cumbo_terms>,
+        <http://orcid.org/0000-0002-1773-2692>,
+        <http://palaeos.com/vertebrates/bones/dermal/images/289x311xPalatine1.gif.pagespeed.ic.tglmNBrF4D.png>,
+        <http://palaeos.com/vertebrates/glossary/images/382x366xUnciform1.jpg.pagespeed.ic.NirdxtwNVu.jpg>,
+        <http://palaeos.com/vertebrates/glossary/images/450x218xEctocuneiform.gif.pagespeed.ic.kaiuLYQELL.png>,
+        <http://periowiki.wikispot.org/Taste_bud_histology>,
+        <http://php.med.unsw.edu.au>,
+        <http://purl.bioontology.org/ontology/provisional/a047a2d5-418f-4d9c-ad21-ee0b7c29c29d>,
+        <http://purl.obolibrary.org/obo/BFO_0000056>,
+        <http://purl.obolibrary.org/obo/BFO_0000169>,
+        <http://purl.obolibrary.org/obo/FMA_85990>,
+        <http://purl.obolibrary.org/obo/FMA_85994>,
+        <http://purl.obolibrary.org/obo/GO_0002009>,
+        <http://purl.obolibrary.org/obo/GO_0014063>,
+        <http://purl.obolibrary.org/obo/GO_0031076>,
+        <http://purl.obolibrary.org/obo/GO_0040014>,
+        <http://purl.obolibrary.org/obo/GO_0042069>,
+        <http://purl.obolibrary.org/obo/GO_0045444>,
+        <http://purl.obolibrary.org/obo/GO_0045684>,
+        <http://purl.obolibrary.org/obo/GO_0060920>,
+        <http://purl.obolibrary.org/obo/GO_0098590>,
+        <http://purl.obolibrary.org/obo/GO_1900424>,
+        <http://purl.obolibrary.org/obo/GO_1903078>,
+        <http://purl.obolibrary.org/obo/GO_1905223>,
+        <http://purl.obolibrary.org/obo/HsapDv_0000000>,
+        <http://purl.obolibrary.org/obo/HsapDv_0000001>,
+        <http://purl.obolibrary.org/obo/HsapDv_0000002>,
+        <http://purl.obolibrary.org/obo/HsapDv_0000037>,
+        <http://purl.obolibrary.org/obo/HsapDv_0000045>,
+        <http://purl.obolibrary.org/obo/HsapDv_0000080>,
+        <http://purl.obolibrary.org/obo/HsapDv_0000081>,
+        <http://purl.obolibrary.org/obo/HsapDv_0000082>,
+        <http://purl.obolibrary.org/obo/HsapDv_0000083>,
+        <http://purl.obolibrary.org/obo/HsapDv_0000086>,
+        <http://purl.obolibrary.org/obo/HsapDv_0000087>,
+        <http://purl.obolibrary.org/obo/HsapDv_0000088>,
+        <http://purl.obolibrary.org/obo/HsapDv_0000089>,
+        <http://purl.obolibrary.org/obo/HsapDv_0000091>,
+        <http://purl.obolibrary.org/obo/HsapDv_0000092>,
+        <http://purl.obolibrary.org/obo/HsapDv_0000204>,
+        <http://purl.obolibrary.org/obo/MAXO_0009071>,
+        <http://purl.obolibrary.org/obo/MAXO_0010306>,
+        <http://purl.obolibrary.org/obo/PR_000001327>,
+        <http://purl.obolibrary.org/obo/PR_000001850>,
+        <http://purl.obolibrary.org/obo/PR_000018263>,
+        <http://purl.obolibrary.org/obo/RO_0001901>,
+        <http://purl.obolibrary.org/obo/RO_0002577>,
+        <http://purl.obolibrary.org/obo/bfo/axiom/0000002>,
+        <http://purl.obolibrary.org/obo/bfo/axiom/0000004>,
+        <http://purl.obolibrary.org/obo/bfo/axiom/0000005>,
+        <http://purl.obolibrary.org/obo/bfo/axiom/0000007>,
+        <http://purl.obolibrary.org/obo/bfo/axiom/001-001>,
+        <http://purl.obolibrary.org/obo/bfo/axiom/008-002>,
+        <http://purl.obolibrary.org/obo/bfo/axiom/009-002>,
+        <http://purl.obolibrary.org/obo/bfo/axiom/011-002>,
+        <http://purl.obolibrary.org/obo/bfo/axiom/017-002>,
+        <http://purl.obolibrary.org/obo/bfo/axiom/018-002>,
+        <http://purl.obolibrary.org/obo/bfo/axiom/035-001>,
+        <http://purl.obolibrary.org/obo/bfo/axiom/036-001>,
+        <http://purl.obolibrary.org/obo/bfo/axiom/050-003>,
+        <http://purl.obolibrary.org/obo/bfo/axiom/058-002>,
+        <http://purl.obolibrary.org/obo/bfo/axiom/060-002>,
+        <http://purl.obolibrary.org/obo/bfo/axiom/061-001>,
+        <http://purl.obolibrary.org/obo/bfo/axiom/062-002>,
+        <http://purl.obolibrary.org/obo/bfo/axiom/063-002>,
+        <http://purl.obolibrary.org/obo/bfo/axiom/064-001>,
+        <http://purl.obolibrary.org/obo/bfo/axiom/126-001>,
+        <http://purl.obolibrary.org/obo/bfo/axiom/134-001>,
+        <http://purl.obolibrary.org/obo/chebi#1_STAR>,
+        <http://purl.obolibrary.org/obo/chebi#2_STAR>,
+        <http://purl.obolibrary.org/obo/chebi#3_STAR>,
+        <http://purl.obolibrary.org/obo/chebi#BRAND_NAME>,
+        <http://purl.obolibrary.org/obo/chebi#INN>,
+        <http://purl.obolibrary.org/obo/chebi#IUPAC_NAME>,
+        <http://purl.obolibrary.org/obo/chebi#has_functional_parent>,
+        <http://purl.obolibrary.org/obo/chebi#has_parent_hydride>,
+        <http://purl.obolibrary.org/obo/chebi#is_conjugate_acid_of>,
+        <http://purl.obolibrary.org/obo/chebi#is_conjugate_base_of>,
+        <http://purl.obolibrary.org/obo/chebi#is_enantiomer_of>,
+        <http://purl.obolibrary.org/obo/chebi#is_substituent_group_from>,
+        <http://purl.obolibrary.org/obo/chebi#is_tautomer_of>,
+        <http://purl.obolibrary.org/obo/chebi/charge>,
+        <http://purl.obolibrary.org/obo/chebi/formula>,
+        <http://purl.obolibrary.org/obo/chebi/inchi>,
+        <http://purl.obolibrary.org/obo/chebi/inchikey>,
+        <http://purl.obolibrary.org/obo/chebi/mass>,
+        <http://purl.obolibrary.org/obo/chebi/monoisotopicmass>,
+        <http://purl.obolibrary.org/obo/chebi/smiles>,
+        <http://purl.obolibrary.org/obo/hp/releases/2023-01-27/hp.owl>,
+        <http://purl.obolibrary.org/obo/ro/subsets#ro-eco>,
+        <http://purl.obolibrary.org/obo/uberon/core#ABBREVIATION>,
+        <http://purl.obolibrary.org/obo/uberon/core#COMPARATIVE_PREFERRED>,
+        <http://purl.obolibrary.org/obo/uberon/core#DEPRECATED>,
+        <http://purl.obolibrary.org/obo/uberon/core#DUBIOUS>,
+        <http://purl.obolibrary.org/obo/uberon/core#HOMOLOGY>,
+        <http://purl.obolibrary.org/obo/uberon/core#HUMAN_PREFERRED>,
+        <http://purl.obolibrary.org/obo/uberon/core#INCONSISTENT>,
+        <http://purl.obolibrary.org/obo/uberon/core#LATIN>,
+        <http://purl.obolibrary.org/obo/uberon/core#MISSPELLING>,
+        <http://purl.obolibrary.org/obo/uberon/core#NON_AMNIOTE>,
+        <http://purl.obolibrary.org/obo/uberon/core#NON_MAMMAL>,
+        <http://purl.obolibrary.org/obo/uberon/core#PENDING_REVIEW>,
+        <http://purl.obolibrary.org/obo/uberon/core#PLURAL>,
+        <http://purl.obolibrary.org/obo/uberon/core#SENSU>,
+        <http://purl.obolibrary.org/obo/uberon/core#SYSTEMATIC>,
+        <http://purl.obolibrary.org/obo/uberon/core#anteriorly_connected_to>,
+        <http://purl.obolibrary.org/obo/uberon/core#channel_for>,
+        <http://purl.obolibrary.org/obo/uberon/core#channels_from>,
+        <http://purl.obolibrary.org/obo/uberon/core#channels_into>,
+        <http://purl.obolibrary.org/obo/uberon/core#conduit_for>,
+        <http://purl.obolibrary.org/obo/uberon/core#cumbo>,
+        <http://purl.obolibrary.org/obo/uberon/core#cyclostome_subset>,
+        <http://purl.obolibrary.org/obo/uberon/core#defined_by_ordinal_series>,
+        <http://purl.obolibrary.org/obo/uberon/core#developmental_classification>,
+        <http://purl.obolibrary.org/obo/uberon/core#distally_connected_to>,
+        <http://purl.obolibrary.org/obo/uberon/core#early_development>,
+        <http://purl.obolibrary.org/obo/uberon/core#efo_slim>,
+        <http://purl.obolibrary.org/obo/uberon/core#emapa_ehdaa2>,
+        <http://purl.obolibrary.org/obo/uberon/core#extends_fibers_into>,
+        <http://purl.obolibrary.org/obo/uberon/core#feed_aligned>,
+        <http://purl.obolibrary.org/obo/uberon/core#filtered_through>,
+        <http://purl.obolibrary.org/obo/uberon/core#functional_classification>,
+        <http://purl.obolibrary.org/obo/uberon/core#grouping_class>,
+        <http://purl.obolibrary.org/obo/uberon/core#homology_grouping>,
+        <http://purl.obolibrary.org/obo/uberon/core#human_reference_atlas>,
+        <http://purl.obolibrary.org/obo/uberon/core#in_central_side_of>,
+        <http://purl.obolibrary.org/obo/uberon/core#in_innermost_side_of>,
+        <http://purl.obolibrary.org/obo/uberon/core#in_outermost_side_of>,
+        <http://purl.obolibrary.org/obo/uberon/core#inconsistent_with_fma>,
+        <http://purl.obolibrary.org/obo/uberon/core#indirectly_supplies>,
+        <http://purl.obolibrary.org/obo/uberon/core#layer_part_of>,
+        <http://purl.obolibrary.org/obo/uberon/core#location_grouping>,
+        <http://purl.obolibrary.org/obo/uberon/core#major_organ>,
+        <http://purl.obolibrary.org/obo/uberon/core#non_informative>,
+        <http://purl.obolibrary.org/obo/uberon/core#organ_slim>,
+        <http://purl.obolibrary.org/obo/uberon/core#pheno_slim>,
+        <http://purl.obolibrary.org/obo/uberon/core#phenotype_rcn>,
+        <http://purl.obolibrary.org/obo/uberon/core#posteriorly_connected_to>,
+        <http://purl.obolibrary.org/obo/uberon/core#protects>,
+        <http://purl.obolibrary.org/obo/uberon/core#proximally_connected_to>,
+        <http://purl.obolibrary.org/obo/uberon/core#sexually_homologous_to>,
+        <http://purl.obolibrary.org/obo/uberon/core#site_of>,
+        <http://purl.obolibrary.org/obo/uberon/core#subdivision_of>,
+        <http://purl.obolibrary.org/obo/uberon/core#synapsed_by>,
+        <http://purl.obolibrary.org/obo/uberon/core#transitively_anteriorly_connected_to>,
+        <http://purl.obolibrary.org/obo/uberon/core#transitively_connected_to>,
+        <http://purl.obolibrary.org/obo/uberon/core#transitively_distally_connected_to>,
+        <http://purl.obolibrary.org/obo/uberon/core#transitively_proximally_connected_to>,
+        <http://purl.obolibrary.org/obo/uberon/core#trunk_part_of>,
+        <http://purl.obolibrary.org/obo/uberon/core#uberon_slim>,
+        <http://purl.obolibrary.org/obo/uberon/core#unverified_taxonomic_grouping>,
+        <http://purl.obolibrary.org/obo/uberon/core#upper_level>,
+        <http://purl.obolibrary.org/obo/uberon/core#vertebrate_core>,
+        <http://purl.obolibrary.org/obo/uberon/http/:www.medterms.com/script/main/art.asp?articlekey=9458>,
+        <http://purl.obolibrary.org/obo/uberon/images/lamprey_sucker_rosava_3238889218.jpg>,
+        <http://species-identification.org/species.php?species_group=nasc&selected=definitie&menuentry=woordenlijst&record=Anal%20teeth>,
+        <http://tolweb.org/Chordata/2499>,
+        <http://tolweb.org/Hyperoartia>,
+        <http://uri.neuinfo.org/nif/nifstd/FMAID_7191>,
+        <http://uri.neuinfo.org/nif/nifstd/nifext_11>,
+        <http://www.asccp.org/practicemanagement/cervix/histologyofthenormalcervix/tabid/5842/default.aspx>,
+        <http://www.avdc.org/Nomenclature.pdf>,
+        <http://www.biology-online.org/dictionary/>,
+        <http://www.biology-online.org/dictionary/Hyoid_apparatus>,
+        <http://www.biology-online.org/dictionary/Otic_capsule>,
+        <http://www.dartmouth.edu/~humananatomy/part_8/chapter_44.html>,
+        <http://www.drugs.com/dict/cardiogenic-mesoderm.html>,
+        <http://www.drugs.com/dict/desmodentium.html>,
+        <http://www.drugs.com/dict/dorsum-of-tongue.html>,
+        <http://www.drugs.com/dict/margin-of-tongue.html>,
+        <http://www.drugs.com/dict/masseteric-veins.html>,
+        <http://www.drugs.com/dict/stroma-of-iris.html>,
+        <http://www.drugs.com/dict/stroma-of-thyroid-gland.html>,
+        <http://www.drugs.com/dict/visceral-mesoderm.html>,
+        <http://www.embryology.ch/anglais/pcardio/venen01.html>,
+        <http://www.feedexp.org/wiki/Mammalian_Muscle_Ontology_Workshop>,
+        <http://www.gudmap.org/Images/Organ_Summaries/Metanephros/NZ.png>,
+        <http://www.lab.anhb.uwa.edu.au/mb140/corepages/eye/eye.htm>,
+        <http://www.referent-tracking.com/_RTU/papers/CeustersICbookRevised.pdf>,
+        <http://www.researchgate.net/publication/255909975_Relationship_between_intermaxillary_suture_and_midline_diastema>,
+        <http://www.sciencedirect.com/science/article/pii/S0079612305510069>,
+        <http://www.sciencemag.org/content/313/5795/1922/F1.large.jpg>,
+        <http://www.stedmans.com/>,
+        <http://www.termwiki.com/EN:postcanine_teeth>,
+        <http://www.thyroidmanager.org/Chapter1/chapter01.htm>,
+        <http://www.usm.maine.edu/bio/courses/bio205/bio205_26_sex.html>,
+        <http://www.veinsurg.com/fr/biblio/echodoppler/echodoppler_11.php>,
+        <http://www.vivo.colostate.edu/hbooks/pathphys/misc_topics/peritoneum.html>,
+        foaf:depicted_by,
+        <https://doi.org/10.1006/bijl.2000.0436>,
+        <https://github.com/seger/aao/issues/4>,
+        <https://sourceforge.net/p/fbbtdv/tickets/52>,
+        <https://upload.wikimedia.org/wikipedia/commons/thumb/1/16/Gray834.svg/180px-Gray834.svg.png>,
+        <https://upload.wikimedia.org/wikipedia/commons/thumb/a/ac/Corticogenesis_in_a_wild-type_mouse_with_captions_in_english_copy.png/360px-Corticogenesis_in_a_wild-type_mouse_with_captions_in_english_copy.png>,
+        <https://www.cdc.gov/cancer/npcr/pdf/abstracting/colon.pdf>,
+        <https://www.imaios.com/en/e-Anatomy/Anatomical-Parts/Angle-of-mouth> ;
+    dqv:computedOn <http://purl.obolibrary.org/obo/hp.owl> ;
+    dqv:isMeasurementOf fqm:uriNonResolvableMetric ;
+    dqv:value "0.01"^^xsd:float ;
+    prov:generatedAtTime "2022-12-30T10:10:30"^^xsd:dateTime .
+
+<http://example.org/hpo-report#undefinedURIsMeasurement> a dqv:QualityMeasurement ;
+    dcterms:relation <http://orcid.org/0000-0001-5208-3432>,
+        <http://orcid.org/0000-0001-6595-0902>,
+        <http://orcid.org/0000-0001-7258-9596>,
+        <http://orcid.org/0000-0001-7655-4833>,
+        <http://orcid.org/0000-0001-7920-5321>,
+        <http://orcid.org/0000-0001-7941-2961>,
+        <http://orcid.org/0000-0001-9114-8737>,
+        <http://orcid.org/0000-0001-9990-8331>,
+        <http://orcid.org/0000-0002-1572-1316>,
+        <http://orcid.org/0000-0002-2825-0621>,
+        <http://orcid.org/0000-0002-3293-5463>,
+        <http://orcid.org/0000-0002-5316-1399>,
+        <http://orcid.org/0000-0002-6387-4317>,
+        <http://orcid.org/0000-0002-6601-2165>,
+        <http://orcid.org/0000-0002-6826-8770>,
+        <http://orcid.org/0000-0002-7073-9172>,
+        <http://orcid.org/0000-0003-2034-601X>,
+        <http://orcid.org/0000-0003-2699-3066>,
+        <http://orcid.org/0000-0003-3440-1876>,
+        <http://orcid.org/0000-0003-4183-8865>,
+        dc:license,
+        <https://doi.org/10.1002/ajmg.a.32600>,
+        <https://doi.org/10.1002/ar.20664>,
+        <https://doi.org/10.1002/ar.21355>,
+        <https://doi.org/10.1002/ar.22886>,
+        <https://doi.org/10.1002/ca.23705>,
+        <https://doi.org/10.1002/cphy.c120027>,
+        <https://doi.org/10.1002/dvdy.22617>,
+        <https://doi.org/10.1007/978-3-319-26938-2_8>,
+        <https://doi.org/10.1007/BF02547558>,
+        <https://doi.org/10.1007/s11064-015-1581-6>,
+        <https://doi.org/10.1016/B978-1-4377-2206-2.00068-3>,
+        <https://doi.org/10.1016/j.cub.2008.12.005>,
+        <https://doi.org/10.1016/j.resp.2006.06.003>,
+        <https://doi.org/10.1016/j.tins.2013.06.004>,
+        <https://doi.org/10.1038/ki.1991.49>,
+        <https://doi.org/10.1038/nature10346>,
+        <https://doi.org/10.1046/j.1365-2540.2001.00961.x>,
+        <https://doi.org/10.1046/j.1469-7580.2002.00073.x>,
+        <https://doi.org/10.1046/j.1525-142x.2000.00076.x>,
+        <https://doi.org/10.1093/icb/icr067>,
+        <https://doi.org/10.1101/gr.157586.113>,
+        <https://doi.org/10.1111/j.1432-0436.2006.00088.x>,
+        <https://doi.org/10.1111/j.1439-0426.2012.01987.x>,
+        <https://doi.org/10.1111/j.1440-169X.2007.00942.x>,
+        <https://doi.org/10.1111/j.1469-7580.2005.00441.x>,
+        <https://doi.org/10.1111/j.1469-7580.2006.00524.x>,
+        <https://doi.org/10.1111/j.1469-7580.2009.01111.x>,
+        <https://doi.org/10.1111/j.1749-6632.1969.tb20432.x>,
+        <https://doi.org/10.1111/joa.12381>,
+        <https://doi.org/10.1148/rg.2015150037>,
+        <https://doi.org/10.1152/japplphysiol.00201.2013>,
+        <https://doi.org/10.1152/physrev.00006.2003>,
+        <https://doi.org/10.1177/0192623311409597>,
+        <https://doi.org/10.1186/s12983-014-0089-2>,
+        <https://doi.org/10.1242/dev.091751>,
+        <https://doi.org/10.1371/journal.pone.0099864>,
+        <https://doi.org/10.1523/JNEUROSCI.5142-05.2006>,
+        <https://doi.org/10.5935/abc.20130138>,
+        <https://doi.org/10.5962/bhl.title.1013> ;
+    dqv:computedOn <http://purl.obolibrary.org/obo/hp.owl> ;
+    dqv:isMeasurementOf fqm:uriUndefinedMetric ;
+    dqv:value "0.0"^^xsd:float ;
+    prov:generatedAtTime "2022-12-30T10:10:30"^^xsd:dateTime .
+
+<http://purl.obolibrary.org/obo/hp.owl> a dcat:Resource ;
+    dcterms:title "hpo" ;
+    dqv:hasQualityMeasurement <http://example.org/hpo-report#misusedOwlObjectPropertyMeasurement>,
+        <http://example.org/hpo-report#resolvabilityMeasurement>,
+        <http://example.org/hpo-report#undefinedURIsMeasurement> .
+
+
+
+<http://example.org/nextprot-schema-report#undefinedURIsMeasurement> a dqv:QualityMeasurement ;
+    dcterms:relation owl: ;
+    dqv:computedOn <http://nextprot.org/rdf#> ;
+    dqv:isMeasurementOf fqm:uriUndefinedMetric ;
+    dqv:value "0.0"^^xsd:float ;
+    prov:generatedAtTime "2022-12-30T10:10:30"^^xsd:dateTime .
+
+<http://nextprot.org/rdf#> a dcat:Resource ;
+    dcterms:title "nextprot-schema" ;
+    dqv:hasQualityMeasurement <http://example.org/nextprot-schema-report#undefinedURIsMeasurement> .
+
+    <http://example.org/hpscreg-report#resolvabilityMeasurement> a dqv:QualityMeasurement ;
+    dcterms:relation <http://purl.obolibrary.org/obo/BFO_0000052>,
+        <http://purl.obolibrary.org/obo/BFO_0000058>,
+        <http://purl.obolibrary.org/obo/BFO_0000059>,
+        <http://purl.obolibrary.org/obo/BFO_0000070>,
+        <http://purl.obolibrary.org/obo/BFO_0000080>,
+        <http://purl.obolibrary.org/obo/BFO_0000082>,
+        <http://purl.obolibrary.org/obo/BFO_0000083>,
+        <http://purl.obolibrary.org/obo/BFO_0000086>,
+        <http://purl.obolibrary.org/obo/BFO_0000107>,
+        <http://purl.obolibrary.org/obo/BFO_0000108>,
+        <http://purl.obolibrary.org/obo/BFO_0000117>,
+        <http://purl.obolibrary.org/obo/BFO_0000121>,
+        <http://purl.obolibrary.org/obo/BFO_0000123>,
+        <http://purl.obolibrary.org/obo/BFO_0000125>,
+        <http://purl.obolibrary.org/obo/BFO_0000126>,
+        <http://purl.obolibrary.org/obo/BFO_0000130>,
+        <http://purl.obolibrary.org/obo/BFO_0000132>,
+        <http://purl.obolibrary.org/obo/BFO_0000139>,
+        <http://purl.obolibrary.org/obo/BFO_0000151>,
+        <http://purl.obolibrary.org/obo/BFO_0000152>,
+        <http://purl.obolibrary.org/obo/BFO_0000153>,
+        <http://purl.obolibrary.org/obo/BFO_0000154>,
+        <http://purl.obolibrary.org/obo/BFO_0000155>,
+        <http://purl.obolibrary.org/obo/BFO_0000156>,
+        <http://purl.obolibrary.org/obo/BFO_0000157>,
+        <http://purl.obolibrary.org/obo/BFO_0000158>,
+        <http://purl.obolibrary.org/obo/BFO_0000159>,
+        <http://purl.obolibrary.org/obo/BFO_0000162>,
+        <http://purl.obolibrary.org/obo/BFO_0000168>,
+        <http://purl.obolibrary.org/obo/BFO_0000169>,
+        <http://purl.obolibrary.org/obo/BFO_0000176>,
+        <http://purl.obolibrary.org/obo/BFO_0000178>,
+        <http://purl.obolibrary.org/obo/CLO_0100001>,
+        <http://purl.obolibrary.org/obo/CLO_0100003>,
+        <http://purl.obolibrary.org/obo/CLO_0100004>,
+        <http://purl.obolibrary.org/obo/CLO_0100005>,
+        <http://purl.obolibrary.org/obo/CLO_0100006>,
+        <http://purl.obolibrary.org/obo/CLO_0100009>,
+        <http://purl.obolibrary.org/obo/CLO_0100010>,
+        <http://purl.obolibrary.org/obo/CLO_0100021>,
+        <http://purl.obolibrary.org/obo/ERO_0000572>,
+        <http://purl.obolibrary.org/obo/RO_0002577>,
+        <http://purl.obolibrary.org/obo/chebi#has_functional_parent>,
+        <http://purl.obolibrary.org/obo/chebi#has_parent_hydride>,
+        <http://purl.obolibrary.org/obo/chebi#is_conjugate_acid_of>,
+        <http://purl.obolibrary.org/obo/chebi#is_conjugate_base_of>,
+        <http://purl.obolibrary.org/obo/chebi#is_substituent_group_from>,
+        <http://purl.obolibrary.org/obo/chebi#is_tautomer_of>,
+        <http://purl.obolibrary.org/obo/chebi/charge>,
+        <http://purl.obolibrary.org/obo/chebi/formula>,
+        <http://purl.obolibrary.org/obo/chebi/inchi>,
+        <http://purl.obolibrary.org/obo/chebi/inchikey>,
+        <http://purl.obolibrary.org/obo/chebi/mass>,
+        <http://purl.obolibrary.org/obo/chebi/monoisotopicmass>,
+        <http://purl.obolibrary.org/obo/chebi/smiles>,
+        <http://purl.obolibrary.org/obo/uberon/core#anteriorly_connected_to>,
+        <http://purl.obolibrary.org/obo/uberon/core#channel_for>,
+        <http://purl.obolibrary.org/obo/uberon/core#channels_from>,
+        <http://purl.obolibrary.org/obo/uberon/core#channels_into>,
+        <http://purl.obolibrary.org/obo/uberon/core#conduit_for>,
+        <http://purl.obolibrary.org/obo/uberon/core#distally_connected_to>,
+        <http://purl.obolibrary.org/obo/uberon/core#existence_starts_and_ends_during>,
+        <http://purl.obolibrary.org/obo/uberon/core#extends_fibers_into>,
+        <http://purl.obolibrary.org/obo/uberon/core#filtered_through>,
+        <http://purl.obolibrary.org/obo/uberon/core#posteriorly_connected_to>,
+        <http://purl.obolibrary.org/obo/uberon/core#protects>,
+        <http://purl.obolibrary.org/obo/uberon/core#proximally_connected_to>,
+        <http://purl.obolibrary.org/obo/uberon/core#sexually_homologous_to>,
+        <http://purl.obolibrary.org/obo/uberon/core#subdivision_of>,
+        <http://www.ebi.ac.uk/cellline/definition>,
+        <http://www.ebi.ac.uk/cellline/definition_editor>,
+        <http://www.ebi.ac.uk/efo/ArrayExpress_label>,
+        <http://www.ebi.ac.uk/efo/EFO_0000784>,
+        <http://www.ebi.ac.uk/efo/EFO_0000785>,
+        <http://www.ebi.ac.uk/efo/EFO_0006351>,
+        <http://www.ebi.ac.uk/efo/EFO_URI>,
+        <http://www.ebi.ac.uk/efo/alternative_term>,
+        <http://www.ebi.ac.uk/efo/branch_class>,
+        <http://www.ebi.ac.uk/efo/definition>,
+        <http://www.ebi.ac.uk/efo/definition_citation>,
+        <http://www.ebi.ac.uk/efo/definition_editor>,
+        <http://www.ebi.ac.uk/efo/gwas_trait>,
+        <http://www.ebi.ac.uk/efo/obsoleted_in_version>,
+        <http://www.ebi.ac.uk/efo/organizational_class>,
+        <http://www.ebi.ac.uk/efo/primary_source>,
+        <http://www.ebi.ac.uk/efo/reason_for_obsolescence>,
+        <http://www.ebi.ac.uk/efo/source_definition>,
+        <http://www.orpha.net/ORDO/Orphanet_#symbol>,
+        <http://www.orpha.net/ORDO/Orphanet_317343>,
+        foaf:IAO_0000115,
+        foaf:IAO_0000116,
+        foaf:IAO_0000232,
+        foaf:UBPROP_0000012,
+        foaf:depicted_by,
+        <https://hpscreg.eu/ontologies/hpscreg_clo.owl/v1> ;
+    dqv:computedOn <https://hpscreg.eu/ontologies/hpscreg_clo.owl/v1> ;
+    dqv:isMeasurementOf fqm:uriNonResolvableMetric ;
+    dqv:value "0.1"^^xsd:float ;
+    prov:generatedAtTime "2022-12-30T10:10:30"^^xsd:dateTime .
+
+<http://example.org/hpscreg-report#undefinedURIsMeasurement> a dqv:QualityMeasurement ;
+    dcterms:relation rdfs:source ;
+    dqv:computedOn <https://hpscreg.eu/ontologies/hpscreg_clo.owl/v1> ;
+    dqv:isMeasurementOf fqm:uriUndefinedMetric ;
+    dqv:value "0.0"^^xsd:float ;
+    prov:generatedAtTime "2022-12-30T10:10:30"^^xsd:dateTime .
+
+<https://hpscreg.eu/ontologies/hpscreg_clo.owl/v1> a dcat:Resource ;
+    dcterms:title "hpscreg" ;
+    dqv:hasQualityMeasurement <http://example.org/hpscreg-report#resolvabilityMeasurement>,
+        <http://example.org/hpscreg-report#undefinedURIsMeasurement> .
+
+
+
+
+
+<http://example.org/primary-immune-deficiency-report#resolvabilityMeasurement> a dqv:QualityMeasurement ;
+    dcterms:relation <http://rdflicense.appspot.com/rdflicense/cc-by-nc-nd3.0>,
+        <http://www.uzgent.be/nl/zorgaanbod/mdteams/Primaire-Immuunstoornissen/Paginas/default.aspx>,
+        foaf:Organisation,
+        <https://w3id.org/ejp-rd/fairdatapoints/orphanet-catalog-fdp/biobank/d7cdf993-e7f8-459f-9aad-3a5cf437bf20/metrics/445c0a70d1e214e545b261559e2842f4>,
+        <https://w3id.org/ejp-rd/fairdatapoints/orphanet-catalog-fdp/biobank/d7cdf993-e7f8-459f-9aad-3a5cf437bf20/metrics/5d27e854a9e78eb3f663331cd47cdc13> ;
+    dqv:computedOn <https://ejp-rd-dev1.vm.cesnet.cz/fdps/orphanet-catalog-fdp/biobank/d7cdf993-e7f8-459f-9aad-3a5cf437bf20> ;
+    dqv:isMeasurementOf fqm:uriNonResolvableMetric ;
+    dqv:value "0.11"^^xsd:float ;
+    prov:generatedAtTime "2022-12-30T10:10:30"^^xsd:dateTime .
+
+<https://ejp-rd-dev1.vm.cesnet.cz/fdps/orphanet-catalog-fdp/biobank/d7cdf993-e7f8-459f-9aad-3a5cf437bf20> a dcat:Resource ;
+    dcterms:title "primary-immune-deficiency" ;
+    dqv:hasQualityMeasurement <http://example.org/primary-immune-deficiency-report#resolvabilityMeasurement> .
+
+<http://example.org/ordo-catalog-fdp-report#resolvabilityMeasurement> a dqv:QualityMeasurement ;
+    dcterms:relation <http://rdflicense.appspot.com/rdflicense/cc-by-nc-nd3.0>,
+        <https://w3id.org/ejp-rd/fairdatapoints/orphanet-catalog-fdp/catalog/>,
+        <https://w3id.org/ejp-rd/fairdatapoints/orphanet-catalog-fdp/metrics/445c0a70d1e214e545b261559e2842f4>,
+        <https://w3id.org/ejp-rd/fairdatapoints/orphanet-catalog-fdp/metrics/5d27e854a9e78eb3f663331cd47cdc13> ;
+    dqv:computedOn <https://ejp-rd-dev1.vm.cesnet.cz/fdps/orphanet-catalog-fdp/?format=ttl> ;
+    dqv:isMeasurementOf fqm:uriNonResolvableMetric ;
+    dqv:value "0.09"^^xsd:float ;
+    prov:generatedAtTime "2022-12-30T10:10:30"^^xsd:dateTime .
+
+<https://ejp-rd-dev1.vm.cesnet.cz/fdps/orphanet-catalog-fdp/?format=ttl> a dcat:Resource ;
+    dcterms:title "ordo-catalog-fdp" ;
+    dqv:hasQualityMeasurement <http://example.org/ordo-catalog-fdp-report#resolvabilityMeasurement> .
+
+<http://nextprot.org/rdf/terminology/> a dcat:Resource ;
+    dcterms:title "nextprot-terminology" .
+
+<http://example.org/rare-disease-resources-report#resolvabilityMeasurement> a dqv:QualityMeasurement ;
+    dcterms:relation <http://rdflicense.appspot.com/rdflicense/cc-by-nc-nd3.0>,
+        <https://w3id.org/ejp-rd/fairdatapoints/orphanet-catalog-fdp/biobank/>,
+        <https://w3id.org/ejp-rd/fairdatapoints/orphanet-catalog-fdp/catalog/2a3f1a0e-ddbb-4a07-960e-fa92e1e9f4bc/metrics/445c0a70d1e214e545b261559e2842f4>,
+        <https://w3id.org/ejp-rd/fairdatapoints/orphanet-catalog-fdp/catalog/2a3f1a0e-ddbb-4a07-960e-fa92e1e9f4bc/metrics/5d27e854a9e78eb3f663331cd47cdc13>,
+        <https://w3id.org/ejp-rd/fairdatapoints/orphanet-catalog-fdp/patientRegistry/> ;
+    dqv:computedOn <https://ejp-rd-dev1.vm.cesnet.cz/fdps/orphanet-catalog-fdp/catalog/2a3f1a0e-ddbb-4a07-960e-fa92e1e9f4bc> ;
+    dqv:isMeasurementOf fqm:uriNonResolvableMetric ;
+    dqv:value "0.0"^^xsd:float ;
+    prov:generatedAtTime "2022-12-30T10:10:30"^^xsd:dateTime .
+
+<https://ejp-rd-dev1.vm.cesnet.cz/fdps/orphanet-catalog-fdp/catalog/2a3f1a0e-ddbb-4a07-960e-fa92e1e9f4bc> a dcat:Resource ;
+    dcterms:title "rare-disease-resources" ;
+    dqv:hasQualityMeasurement <http://example.org/rare-disease-resources-report#resolvabilityMeasurement> .
+
+
+
+<http://example.org/uniprot-ontology-report#undefinedURIsMeasurement> a dqv:QualityMeasurement ;
+    dcterms:relation <http://www.w3.org/1999/02/22-rdf-syntax-ns>,
+        <http://www.w3.org/2000/01/rdf-schema> ;
+    dqv:computedOn <http://purl.uniprot.org/core/> ;
+    dqv:isMeasurementOf fqm:uriUndefinedMetric ;
+    dqv:value "0.01"^^xsd:float ;
+    prov:generatedAtTime "2022-12-30T10:10:30"^^xsd:dateTime .
+
+<http://purl.uniprot.org/core/> a dcat:Resource ;
+    dcterms:title "uniprot-ontology" ;
+    dqv:hasQualityMeasurement <http://example.org/uniprot-ontology-report#undefinedURIsMeasurement> .
+
+
+
+<http://example.org/wikipathway-report#misusedOwlObjectPropertyMeasurement> a dqv:QualityMeasurement ;
+    dcterms:relation dcat:mediaType ;
+    dqv:computedOn <https://wikipathways-data.wmcloud.org/20220410/rdf/wikipathways-20220410-rdf-void.ttl> ;
+    dqv:isMeasurementOf fqm:misusedOwlDatatypeOrObjectPropertiesMetric ;
+    dqv:value "0.05"^^xsd:float ;
+    prov:generatedAtTime "2022-12-30T10:10:30"^^xsd:dateTime .
+
+<http://example.org/wikipathway-report#resolvabilityMeasurement> a dqv:QualityMeasurement ;
+    dcterms:relation <http://data.wikipathways.org/20220410/datasetDescription/>,
+        <http://data.wikipathways.org/20220410/linkset/chebi>,
+        <http://data.wikipathways.org/20220410/linkset/complexportal>,
+        <http://data.wikipathways.org/20220410/linkset/ensembl>,
+        <http://data.wikipathways.org/20220410/linkset/inchikey>,
+        <http://data.wikipathways.org/20220410/linkset/lipidmaps>,
+        <http://data.wikipathways.org/20220410/linkset/pubchem>,
+        <http://data.wikipathways.org/20220410/linkset/rhea>,
+        <http://data.wikipathways.org/20220410/linkset/uniprot>,
+        <http://data.wikipathways.org/20220410/linkset/wikidata>,
+        <http://data.wikipathways.org/20220410/rdf/gpml>,
+        <http://data.wikipathways.org/20220410/rdf/wp>,
+        <http://identifiers.org/uniprot/17928>,
+        <http://www.wikipathways.org/wpi/webservice/webservice.php>,
+        foaf:primaryTopic,
+        <https://identifiers.org/obo.chebi/17242>,
+        <https://jenkins.bigcat.unimaas.nl/job/GPML%20to%20GPML%20+%20WP%20RDF/> ;
+    dqv:computedOn <https://wikipathways-data.wmcloud.org/20220410/rdf/wikipathways-20220410-rdf-void.ttl> ;
+    dqv:isMeasurementOf fqm:uriNonResolvableMetric ;
+    dqv:value "0.14"^^xsd:float ;
+    prov:generatedAtTime "2022-12-30T10:10:30"^^xsd:dateTime .
+
+<http://example.org/wikipathway-report#undefinedURIsMeasurement> a dqv:QualityMeasurement ;
+    dcterms:relation dcterms:accuralPeriodicity ;
+    dqv:computedOn <https://wikipathways-data.wmcloud.org/20220410/rdf/wikipathways-20220410-rdf-void.ttl> ;
+    dqv:isMeasurementOf fqm:uriUndefinedMetric ;
+    dqv:value "0.01"^^xsd:float ;
+    prov:generatedAtTime "2022-12-30T10:10:30"^^xsd:dateTime .
+
+<https://wikipathways-data.wmcloud.org/20220410/rdf/wikipathways-20220410-rdf-void.ttl> a dcat:Resource ;
+    dcterms:title "wikipathway" ;
+    dqv:hasQualityMeasurement <http://example.org/wikipathway-report#misusedOwlObjectPropertyMeasurement>,
+        <http://example.org/wikipathway-report#resolvabilityMeasurement>,
+        <http://example.org/wikipathway-report#undefinedURIsMeasurement> .
+
+
+<http://example.org/hpscreg-report#resolvabilityMeasurement> a dqv:QualityMeasurement ;
+    dcterms:relation <http://purl.obolibrary.org/obo/BFO_0000052>,
+        <http://purl.obolibrary.org/obo/BFO_0000058>,
+        <http://purl.obolibrary.org/obo/BFO_0000059>,
+        <http://purl.obolibrary.org/obo/BFO_0000070>,
+        <http://purl.obolibrary.org/obo/BFO_0000080>,
+        <http://purl.obolibrary.org/obo/BFO_0000082>,
+        <http://purl.obolibrary.org/obo/BFO_0000083>,
+        <http://purl.obolibrary.org/obo/BFO_0000086>,
+        <http://purl.obolibrary.org/obo/BFO_0000107>,
+        <http://purl.obolibrary.org/obo/BFO_0000108>,
+        <http://purl.obolibrary.org/obo/BFO_0000117>,
+        <http://purl.obolibrary.org/obo/BFO_0000121>,
+        <http://purl.obolibrary.org/obo/BFO_0000123>,
+        <http://purl.obolibrary.org/obo/BFO_0000125>,
+        <http://purl.obolibrary.org/obo/BFO_0000126>,
+        <http://purl.obolibrary.org/obo/BFO_0000130>,
+        <http://purl.obolibrary.org/obo/BFO_0000132>,
+        <http://purl.obolibrary.org/obo/BFO_0000139>,
+        <http://purl.obolibrary.org/obo/BFO_0000151>,
+        <http://purl.obolibrary.org/obo/BFO_0000152>,
+        <http://purl.obolibrary.org/obo/BFO_0000153>,
+        <http://purl.obolibrary.org/obo/BFO_0000154>,
+        <http://purl.obolibrary.org/obo/BFO_0000155>,
+        <http://purl.obolibrary.org/obo/BFO_0000156>,
+        <http://purl.obolibrary.org/obo/BFO_0000157>,
+        <http://purl.obolibrary.org/obo/BFO_0000158>,
+        <http://purl.obolibrary.org/obo/BFO_0000159>,
+        <http://purl.obolibrary.org/obo/BFO_0000162>,
+        <http://purl.obolibrary.org/obo/BFO_0000168>,
+        <http://purl.obolibrary.org/obo/BFO_0000169>,
+        <http://purl.obolibrary.org/obo/BFO_0000176>,
+        <http://purl.obolibrary.org/obo/BFO_0000178>,
+        <http://purl.obolibrary.org/obo/CLO_0100001>,
+        <http://purl.obolibrary.org/obo/CLO_0100003>,
+        <http://purl.obolibrary.org/obo/CLO_0100004>,
+        <http://purl.obolibrary.org/obo/CLO_0100005>,
+        <http://purl.obolibrary.org/obo/CLO_0100006>,
+        <http://purl.obolibrary.org/obo/CLO_0100009>,
+        <http://purl.obolibrary.org/obo/CLO_0100010>,
+        <http://purl.obolibrary.org/obo/CLO_0100021>,
+        <http://purl.obolibrary.org/obo/ERO_0000572>,
+        <http://purl.obolibrary.org/obo/RO_0002577>,
+        <http://purl.obolibrary.org/obo/chebi#has_functional_parent>,
+        <http://purl.obolibrary.org/obo/chebi#has_parent_hydride>,
+        <http://purl.obolibrary.org/obo/chebi#is_conjugate_acid_of>,
+        <http://purl.obolibrary.org/obo/chebi#is_conjugate_base_of>,
+        <http://purl.obolibrary.org/obo/chebi#is_substituent_group_from>,
+        <http://purl.obolibrary.org/obo/chebi#is_tautomer_of>,
+        <http://purl.obolibrary.org/obo/chebi/charge>,
+        <http://purl.obolibrary.org/obo/chebi/formula>,
+        <http://purl.obolibrary.org/obo/chebi/inchi>,
+        <http://purl.obolibrary.org/obo/chebi/inchikey>,
+        <http://purl.obolibrary.org/obo/chebi/mass>,
+        <http://purl.obolibrary.org/obo/chebi/monoisotopicmass>,
+        <http://purl.obolibrary.org/obo/chebi/smiles>,
+        <http://purl.obolibrary.org/obo/uberon/core#anteriorly_connected_to>,
+        <http://purl.obolibrary.org/obo/uberon/core#channel_for>,
+        <http://purl.obolibrary.org/obo/uberon/core#channels_from>,
+        <http://purl.obolibrary.org/obo/uberon/core#channels_into>,
+        <http://purl.obolibrary.org/obo/uberon/core#conduit_for>,
+        <http://purl.obolibrary.org/obo/uberon/core#distally_connected_to>,
+        <http://purl.obolibrary.org/obo/uberon/core#existence_starts_and_ends_during>,
+        <http://purl.obolibrary.org/obo/uberon/core#extends_fibers_into>,
+        <http://purl.obolibrary.org/obo/uberon/core#filtered_through>,
+        <http://purl.obolibrary.org/obo/uberon/core#posteriorly_connected_to>,
+        <http://purl.obolibrary.org/obo/uberon/core#protects>,
+        <http://purl.obolibrary.org/obo/uberon/core#proximally_connected_to>,
+        <http://purl.obolibrary.org/obo/uberon/core#sexually_homologous_to>,
+        <http://purl.obolibrary.org/obo/uberon/core#subdivision_of>,
+        <http://www.ebi.ac.uk/cellline/definition>,
+        <http://www.ebi.ac.uk/cellline/definition_editor>,
+        <http://www.ebi.ac.uk/efo/ArrayExpress_label>,
+        <http://www.ebi.ac.uk/efo/EFO_0000784>,
+        <http://www.ebi.ac.uk/efo/EFO_0000785>,
+        <http://www.ebi.ac.uk/efo/EFO_0006351>,
+        <http://www.ebi.ac.uk/efo/EFO_URI>,
+        <http://www.ebi.ac.uk/efo/alternative_term>,
+        <http://www.ebi.ac.uk/efo/branch_class>,
+        <http://www.ebi.ac.uk/efo/definition>,
+        <http://www.ebi.ac.uk/efo/definition_citation>,
+        <http://www.ebi.ac.uk/efo/definition_editor>,
+        <http://www.ebi.ac.uk/efo/gwas_trait>,
+        <http://www.ebi.ac.uk/efo/obsoleted_in_version>,
+        <http://www.ebi.ac.uk/efo/organizational_class>,
+        <http://www.ebi.ac.uk/efo/primary_source>,
+        <http://www.ebi.ac.uk/efo/reason_for_obsolescence>,
+        <http://www.ebi.ac.uk/efo/source_definition>,
+        <http://www.orpha.net/ORDO/Orphanet_#symbol>,
+        <http://www.orpha.net/ORDO/Orphanet_317343>,
+        foaf:IAO_0000115,
+        foaf:IAO_0000116,
+        foaf:IAO_0000232,
+        foaf:UBPROP_0000012,
+        foaf:depicted_by,
+        <https://hpscreg.eu/ontologies/hpscreg_clo.owl/v1> ;
+    dqv:computedOn <https://hpscreg.eu/ontologies/hpscreg_clo.owl/v1> ;
+    dqv:isMeasurementOf fqm:uriNonResolvableMetric ;
+    dqv:value "0.1"^^xsd:float ;
+    prov:generatedAtTime "2022-12-30T10:10:30"^^xsd:dateTime .
+
+<http://example.org/hpscreg-report#undefinedURIsMeasurement> a dqv:QualityMeasurement ;
+    dcterms:relation rdfs:source ;
+    dqv:computedOn <https://hpscreg.eu/ontologies/hpscreg_clo.owl/v1> ;
+    dqv:isMeasurementOf fqm:uriUn definedMetric ;
+    dqv:value "0.0"^^xsd:float ;
+    prov:generatedAtTime "2022-12-30T10:10:30"^^xsd:dateTime .
+
+<https://hpscreg.eu/ontologies/hpscreg_clo.owl/v1> a dcat:Resource ;
+    dcterms:title "hpscreg" ;
+    dqv:hasQualityMeasurement <http://example.org/hpscreg-report#resolvabilityMeasurement>,
+        <http://example.org/hpscreg-report#undefinedURIsMeasurement> .
+
+
