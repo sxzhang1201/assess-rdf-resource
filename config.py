@@ -95,16 +95,16 @@ ListOfLabelsForRareDiseaseResources = [
                       'primary-immune-deficiency',  # 3
                       'ejp-metadata-ontology',      # 4
                       'wikipathway',                # 5
-                      'hpscreg',                    #6
-                      'nextprot-schema',            #7
-                      'nextprot-terminology',       #8
-                      'uniprot-ontology',           #9
-                      'ordo',                       # 10
+                      'hpscreg',                    # 6
+                      'nextprot-schema',            # 7
+                      'nextprot-terminology',       # 8
+                      'uniprot-ontology',           # 9
+                      'ordo',                       # 10    x
                       'atc',                        # 11
                       'geno',                       # 12
-                      'hpo',                        # 13
-                      'ncit',                       # 14
-                      'snomedct'                    # 15
+                      'hpo',                        # 13    x
+                      'ncit',                       # 14    x
+                      'snomedct'                    # 15    x
 ]
 
 WhichRareDiseaseResource = {
@@ -138,3 +138,49 @@ ListOfLabelsForConceptualPaper = [
     'cdash',
     'ordo'
 ]
+
+
+QUERY1 = """
+    PREFIX  dcat: <http://www.w3.org/ns/dcat#>
+    PREFIX  dqv:  <http://www.w3.org/ns/dqv#>
+    PREFIX  fqm:  <http://purl.org/fqm#>
+    
+    SELECT DISTINCT ?rname  ?value
+    WHERE {
+        ?rname a dcat:Resource .
+        ?rname dqv:hasQualityMeasurement ?resolvable_measure .
+        ?resolvable_measure dqv:isMeasurementOf fqm:uriNonResolvableMetric .
+        ?resolvable_measure dqv:value ?value .
+        FILTER (?value > 0.1)
+    }
+    """
+
+QUERY2 = """
+    PREFIX  dcat: <http://www.w3.org/ns/dcat#>
+    PREFIX  dqv:  <http://www.w3.org/ns/dqv#>
+    PREFIX  fqm:  <http://purl.org/fqm#>
+    PREFIX  dcterms:  <http://purl.org/dc/terms/>
+    
+    SELECT DISTINCT ?resource  ?undefined_uris
+    WHERE {
+        ?resource a dcat:Resource .
+        ?resource dqv:hasQualityMeasurement ?measure .
+        ?measure  dqv:isMeasurementOf fqm:uriUndefinedMetric .
+        ?measure  dcterms:relation ?undefined_uris .
+    }
+    """
+
+QUERY3 = """
+    PREFIX  dcat: <http://www.w3.org/ns/dcat#>
+    PREFIX  dqv:  <http://www.w3.org/ns/dqv#>
+    PREFIX  fqm:  <http://purl.org/fqm#>    
+    PREFIX  skos:  <http://www.w3.org/2004/02/skos/core#>
+    
+    SELECT DISTINCT ?measure ?metric ?definition
+    WHERE {
+        <https://wikipathways-data.wmcloud.org/20220410/rdf/wikipathways-20220410-rdf-void.ttl> dqv:hasQualityMeasurement ?measure .
+        ?measure  dqv:isMeasurementOf ?metric .
+    
+        ?metric skos:definition  ?definition .
+    }
+    """

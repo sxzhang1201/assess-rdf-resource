@@ -17,10 +17,11 @@ from functions.load_resource import parse_data_local_or_remote as load_resource
 from functions.inspect_items import view_graph
 from functions.generate_report import build_graph
 from functions.create_directory import create_directory
-from identify_errors import quantitative_analysis
+from functions.split_list import split
+from quantitative_analysis import quantitative_analysis, calculate_affected_triples_all
 
 # Import human-configurable
-from config import WhichResource, ListOfLabelsForRareDiseaseResources
+from config import WhichResource, ListOfLabelsForRareDiseaseResources, ListOfLABEL
 
 
 def run_assessment(label, assess_resolvable=True, test_parsable=True, re_classify=True, assess_consistency=True):
@@ -62,15 +63,34 @@ def run_assessment(label, assess_resolvable=True, test_parsable=True, re_classif
 
     print("\nStep I. Test Resolvability of all URIs. ")
     if assess_resolvable:
-        # run resolvable test
-        df_uris = get_http_status_code_and_content_type(uris)
+        # uris = uris[253551:]
+        # set chunks for a large list (so far 500)
+        if len(uris) > 500:
+            split_uris = list(split(list_a=uris, chunk_size=500))
 
-        # export results
-        print("Resolvability results stored.")
-        df_uris.to_csv(path_dic['resolvable'])
+            for i in range(len(split_uris)):
+                # run resolvable test
+                df_uris = get_http_status_code_and_content_type(split_uris[i])
+
+                # only add header for the first iteration
+                if i == 0:
+                    df_uris.to_csv(path_dic['resolvable'], mode='a', header=True)
+
+                df_uris.to_csv(path_dic['resolvable'], mode='a', header=False)
+
+        else:
+            # run resolvable test
+            df_uris = get_http_status_code_and_content_type(uris)
+
+            # export results
+            print("Resolvability results stored.")
+            df_uris.to_csv(path_dic['resolvable'])
 
     print("Resolvability results loaded.")
     df_uris = pd.read_csv(path_dic['resolvable'], index_col=0)
+
+    # remove duplicates
+    df_uris.drop_duplicates(inplace=True)
 
     print("\nStep II. Test Parsability of resolvable URIs.")
 
@@ -132,22 +152,48 @@ def run_assessment(label, assess_resolvable=True, test_parsable=True, re_classif
     # else:
     #     print("The file does not exist")
 
+    return assessment_result
+
 
 def execution():
 
     # decide whether run-assess a metric (True) or load existing results (False)
-    whether_re_run = {'assess_resolvable': False,
-                      'test_parsable': False,
-                      're_classify': False,
-                      'assess_consistency': False}
+    whether_re_run = {'assess_resolvable': True,
+                      'test_parsable': True,
+                      're_classify': True,
+                      'assess_consistency': True}
 
-    for label in ListOfLabelsForRareDiseaseResources[14:]:
+    coat_non_resolvable_dict = {}
+    coat_undefined_dict = {}
+
+    for label in ListOfLABEL:
         print(label)
         # set start time
-        label = 'test'
         start_time = time.time()
 
-        run_assessment(label, **whether_re_run)
+        assessment_result = run_assessment(label, **whether_re_run)
+
+        g = load_resource(WhichResource[label])
+
+        # get affected triples (optional)
+        # for non-resolvable URIs
+        result_resolvability = assessment_result['non_resolvable_uris']
+        coat_non_resolvability = calculate_affected_triples_all(list_of_bad_uris=result_resolvability,
+                                                                target_graph=g)
+
+        # get count of affected triples (coat) due to non-resolvable URIs
+        coat_non_resolvable_text = "{}/{}".format(coat_non_resolvability, len(g)) + \
+                                   " (" + f"{coat_non_resolvability/len(g):.1%}" + ")"
+        coat_non_resolvable_dict[label] = coat_non_resolvable_text
+
+        # for undefined URIs
+        undefined_uris = assessment_result['undefined_uris']
+        coat_undefined = calculate_affected_triples_all(list_of_bad_uris=undefined_uris,
+                                                        target_graph=g)
+
+        coat_undefined_text = "{}/{}".format(coat_undefined,
+                                             len(g)) + " (" + f"{coat_undefined / len(g):.1%}" + ")"
+        coat_undefined_dict[label] = coat_undefined_text
 
         # set end time
         end_time = time.time()
@@ -155,6 +201,14 @@ def execution():
         # calculate running time for each resource
         time_cost = int(end_time - start_time)
         print('Time Cost (hh:mm:ss) is: \n {}'.format(str(datetime.timedelta(seconds=time_cost))))
+
+        quit()
+
+    print("The Count of Affected Triples (COAT) due to non-resolvable URIs: ")
+    print(coat_non_resolvable_dict)
+
+    print("The Count of Affected Triples (COAT) due to undefined URIs: ")
+    print(coat_undefined_dict)
 
 
 if __name__ == '__main__':

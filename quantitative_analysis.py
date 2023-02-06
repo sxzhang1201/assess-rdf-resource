@@ -1,4 +1,6 @@
 import pandas as pd
+from rdflib.graph import Graph
+from rdflib.term import URIRef
 
 
 def quantitative_analysis(label):
@@ -91,14 +93,42 @@ def quantitative_analysis(label):
     return assessment_result
 
 
-# def run_analysis():
-#
-#     label = 'head-and-neck-tumor'
-#     # path to record
-#
-#     quantitative_analysis(label=label)
-#
-#
-# if __name__ == '__main__':
-#     run_analysis()
+def calculate_affected_triples_per_uri(bad_uri, target_graph):
+    """
+    Get the count of triples affected by the bad URI. This count is fitting to resolvable and parsable issues, but
+    it is NOT suitable for classes and properties.
+    :param bad_uri: string.
+    :param target_graph: rdflib graph.
+    :return: int. The count of triples that are affected by this URI.
+    """
 
+    # initiate an empty graph for storing affected triples
+    temp_graph = Graph()
+
+    # collect all triples using this URI
+    temp_graph = temp_graph + target_graph.triples((URIRef(bad_uri), None, None))
+    temp_graph = temp_graph + target_graph.triples((None, URIRef(bad_uri), None))
+    temp_graph = temp_graph + target_graph.triples((None, None, URIRef(bad_uri)))
+
+    return len(temp_graph)
+
+
+def calculate_affected_triples_all(list_of_bad_uris, target_graph):
+    """
+
+    :param list_of_bad_uris:
+    :param target_graph:
+    :return:
+    """
+
+    # initiate an empty graph for storing affected triples
+    overall_graph = Graph()
+
+    for bad_uri in list_of_bad_uris:
+
+        # collect all triples using this URI
+        overall_graph += target_graph.triples((URIRef(bad_uri), None, None))
+        overall_graph += target_graph.triples((None, URIRef(bad_uri), None))
+        overall_graph += target_graph.triples((None, None, URIRef(bad_uri)))
+
+    return len(overall_graph)

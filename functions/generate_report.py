@@ -1,6 +1,6 @@
 from rdflib.graph import Graph
 from rdflib.term import URIRef, Literal
-from rdflib.namespace import RDF, RDFS, DCTERMS, DCAT
+from rdflib.namespace import RDF, RDFS, DCTERMS, DCAT, PROV, XSD
 from rdflib import Namespace
 
 
@@ -25,6 +25,11 @@ def populate_report_with_results(report_graph,
 
     report_graph.add((
         measure_uri_ref,
+        PROV.generatedAtTime,
+        Literal('2022-12-30T10:10:30', datatype=XSD.dateTime)))
+
+    report_graph.add((
+        measure_uri_ref,
         DQV.computedOn,
         resource_uri_ref))
 
@@ -37,7 +42,9 @@ def populate_report_with_results(report_graph,
     report_graph.add((
         measure_uri_ref,
         DQV.value,
-        Literal("{}/{}".format(len(bad_uris_list), num_of_uris))))
+        # Literal("{}/{}".format(len(bad_uris_list), num_of_uris))))
+        Literal(round(len(bad_uris_list)/num_of_uris, 2), datatype=XSD.float)
+    ))
 
     for bad_uri in bad_uris_list:
         report_graph.add((
@@ -122,7 +129,7 @@ def build_graph(resource_uri, report_label, assessment_result, num_of_uris=0, nu
 
     if len(misused_owl_datatype_property) != 0:
         populate_report_with_results(report_graph=report_graph,
-                                     measure_uri_ref=resource_report.misusedOwlDatatypePropertyMeasurement,
+                                     measure_uri_ref=resource_report.misusedOwlDatatypePropertyMeasuresplment,
                                      bad_uris_list=misused_owl_datatype_property,
                                      num_of_uris=num_of_properties,
                                      resource_uri_ref=resource_uri_ref,
@@ -140,40 +147,4 @@ def build_graph(resource_uri, report_label, assessment_result, num_of_uris=0, nu
 
     return report_graph
 
-# :measurement1
-#     a dqv:QualityMeasurement ;
-#     dqv:computedOn :myDatasetDistribution ;
-#     dqv:isMeasurementOf :downloadURLAvailabilityMetric ;
-#     dqv:value "true"^^xsd:boolean
-#     .
-#
-# :measurement2
-#     a dqv:QualityMeasurement ;
-#     dqv:computedOn :myDatasetDistribution ;
-#     dqv:isMeasurementOf :csvCompletenessMetric ;
-#     dqv:value "0.5"^^xsd:double
-#     .
-#
-# #definition of dimensions and metrics
-# :availability
-#     a dqv:Dimension ;
-#     skos:prefLabel "Availability"@en ;
-#     skos:definition "Availability of a dataset is the extent to which data (or some
-#     portion of it) is present, obtainable and ready for use."@en ;
-#     dqv:inCategory :accessibility
 
-
-def generate_report_graph():
-    resource_uri_ref = URIRef('http://example.org/test.ttl')
-    report_label = 'test'
-    # assessment_result =
-
-    # report_graph = build_graph(resource_uri=resource_uri_ref,
-    #                            report_label=report_label,
-    #                            assessment_result=)
-
-    # print(report_graph.serialize())
-
-
-if __name__ == '__main__':
-    generate_report_graph()
