@@ -18,15 +18,16 @@ Two steps need to be performed to validate an RDF resource:
     the naming the assessment report and the directory for storing it. 
     2. Add {`LABEL`: `Path of RDF resource`} to `WhichResource`. 
     You should set correct `Path of RDF resource` so as to successfully load the test RDF resource. 
-    This `Path of RDF resource` can be a URI, e.g., `rdf': 'http://www.w3.org/1999/02/22-rdf-syntax-ns#'`; 
-    it can also be set to a local path, e.g., `'resources/foaf.rdf'`.
+    This `Path of RDF resource` can be a URI, e.g., `'rdf': 'http://www.w3.org/1999/02/22-rdf-syntax-ns#'`, 
+    or a local path, e.g., `'rdf':'resources/foaf.rdf'`.
     
 2. Run `$ python run_assessment.py`.
-    
-  After evaluation, an assessment report will be generated in the directory `output/{LABEL}/report-{LABEL}.ttl` 
-  in the form of Turtle.
-
-A report file in Turtle format will be generated in the `report` directory to list errors. 
+    1. After running, a pickle file of storing the RDF graph for the target resource will be generated in the directory 
+  `pickle/{LABEL}_graph.pickle'`. Once created, the tool will directly load the pickle, reducing the parsing time. 
+  This is very useful for resources of large size.
+    2. After evaluation, four CSV files will be generated that contains URIs with labels indicating resolvability, 
+    parsability, and consistency in the directory `output/{LABEL}/`; 
+    an assessment report will be generated in the directory `output/{LABEL}/report-{LABEL}.ttl` in the form of Turtle.
 
 ### Interpretation of Results
 

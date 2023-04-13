@@ -1,4 +1,4 @@
-ListOfLABEL = ['sato']
+ListOfLABEL = ['misfoaf']
 
 WhichResource = {
     # 'ordo-catalog-fdp': 'resources/rd-resources/ordo-catalog-fdp/ordo catalog fdp.ttl',
@@ -84,29 +84,38 @@ WhichResource = {
 
     'hpo': "resources/ontologies/hp.owl",
 
-    'ncit': "resources/ontologies/ncit.owl"
+    'ncit': "resources/ontologies/ncit.owl",
+
+    'snomedct_ttl': "resources/ontologies/snomed-turtle.ttl",
+
+    'cido': "resources/ontologies/cido.owl",
+
+    'misfoaf': "resources/temporary/mis_foaf.rdf",
+
+    'alaric-foaf': "resources/temporary/alaric-foaf.rdf"
 }
 
 
 ListOfLabelsForRareDiseaseResources = [
-                      'ordo-catalog-fdp',           # 0
-                      'rare-disease-resources',     # 1
-                      'head-and-neck-tumor',        # 2
-                      'primary-immune-deficiency',  # 3
-                      'ejp-metadata-ontology',      # 4
-                      'wikipathway',                # 5
-                      'hpscreg',                    # 6
-                      'nextprot-schema',            # 7
-                      'nextprot-terminology',       # 8
-                      'uniprot-ontology',           # 9
-                      'ordo',                       # 10    x
-                      'atc',                        # 11
-                      'geno',                       # 12
-                      'hpo',                        # 13    x
-                      'ncit',                       # 14    x
-                      'snomedct'                    # 15    x
+    'ordo-catalog-fdp',
+    'rare-disease-resources',
+    'head-and-neck-tumor',
+    'primary-immune-deficiency',
+    'ejp-metadata-ontology',
+    'wikipathway',
+    'hpscreg',
+    'nextprot-schema',
+    'nextprot-terminology',
+    'uniprot-ontology',
+    'ordo',
+    'atc',
+    'geno',
+    'hpo',
+    'ncit',
+    'snomedct'
 ]
 
+# Temporarily not in use
 WhichRareDiseaseResource = {
     'ordo-catalog-fdp': 'https://ejp-rd-dev1.vm.cesnet.cz/fdps/orphanet-catalog-fdp/?format=ttl',
     'rare-disease-resources': 'https://ejp-rd-dev1.vm.cesnet.cz/fdps/orphanet-catalog-fdp/catalog/2a3f1a0e-ddbb-4a07-960e-fa92e1e9f4bc',

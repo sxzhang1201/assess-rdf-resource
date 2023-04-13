@@ -3,6 +3,8 @@ import os
 import time
 import datetime
 import pandas as pd
+import pickle
+import os
 from rdflib.term import URIRef, BNode, Literal
 
 # Import metrics
@@ -35,21 +37,34 @@ def run_assessment(label, assess_resolvable=True, test_parsable=True, re_classif
     :return:
     """
 
-    # Calculate Time Cost
     print("Start quality assessment on the resource: {}: ".format(label))
 
-    # create a directory for storing results
+    # Create a directory for storing results
     create_directory("output/{}".format(label))
 
-    # Load resource with path based on a label
-    g = load_resource(WhichResource[label])
+    # If target RDF graph exists in pickle, load it.
+    if os.path.isfile('pickle/{}_graph.pickle'.format(label)):
+        print("The RDF graph already exists in Pickle format, thus loading the graph. ")
+        with open('pickle/{}_graph.pickle'.format(label), 'rb') as f:
+            g = pickle.load(f)
 
-    # Preview part of triples
-    view_number_of_triples = 5
+    # Else, parse it based on the path provided
+    else:
+        # Load resource with path based on a label
+        print("Parsing RDF graph from the given path, then storing it into Pickle file. ")
+        g = load_resource(WhichResource[label])
+
+        # Store the RDF graph as a pickle file
+        with open('pickle/{}_graph.pickle'.format(label), 'wb') as f:
+            # Pickle the 'data' dictionary using the highest protocol available.
+            pickle.dump(g, f, pickle.HIGHEST_PROTOCOL)
+
+    # Preview part of triples (here we set 10)
+    view_number_of_triples = 10
     print("View the first " + str(view_number_of_triples) + " triples: ")
     view_graph(g, view_number_of_triples)
 
-    # get a list of unique URIs in the test resource
+    # Get a list of unique URIs in the test resource
     uris = count_rdf_component(rdf_graph=g, rdf_term=URIRef)
     print("\nThis RDF resource has {} unique URIs. ".format(len(uris)))
 
@@ -63,8 +78,8 @@ def run_assessment(label, assess_resolvable=True, test_parsable=True, re_classif
 
     print("\nStep I. Test Resolvability of all URIs. ")
     if assess_resolvable:
-        # uris = uris[253551:]
-        # set chunks for a large list (so far 500)
+        uris = uris[500:]
+        # Set chunks for a large list (so far 500)
         if len(uris) > 500:
             split_uris = list(split(list_a=uris, chunk_size=500))
 
@@ -72,29 +87,29 @@ def run_assessment(label, assess_resolvable=True, test_parsable=True, re_classif
                 # run resolvable test
                 df_uris = get_http_status_code_and_content_type(split_uris[i])
 
-                # only add header for the first iteration
+                # Only add header for the first iteration
                 if i == 0:
                     df_uris.to_csv(path_dic['resolvable'], mode='a', header=True)
 
                 df_uris.to_csv(path_dic['resolvable'], mode='a', header=False)
 
         else:
-            # run resolvable test
+            # Run resolvable test
             df_uris = get_http_status_code_and_content_type(uris)
 
-            # export results
+            # Export results
             print("Resolvability results stored.")
             df_uris.to_csv(path_dic['resolvable'])
 
     print("Resolvability results loaded.")
     df_uris = pd.read_csv(path_dic['resolvable'], index_col=0)
 
-    # remove duplicates
+    # Remove duplicates
     df_uris.drop_duplicates(inplace=True)
 
     print("\nStep II. Test Parsability of resolvable URIs.")
 
-    # run Parsable test and export as csv
+    # Run Parsable test and export as csv
     if test_parsable:
         df_uris_parsable = assess_parsable(df_uris)
         print("Parsability results stored.")
@@ -105,7 +120,7 @@ def run_assessment(label, assess_resolvable=True, test_parsable=True, re_classif
 
     print("\nStep III. Classify Parsable URIs.")
     if re_classify:
-    # classify those parsable URIs
+        # To classify the parsable URIs
         uris_defined = get_uri_type(df_uris_parsable)
         print("Classification finishes. "
               "URIs are categorized into 'class', 'property', and 'unknown'. ")
@@ -127,12 +142,12 @@ def run_assessment(label, assess_resolvable=True, test_parsable=True, re_classif
     print("Consistency results loaded.")
     uris_consistency_check = pd.read_csv(path_dic['consistent'], index_col=0)
 
-    # extract errors from df
+    # Now having obtained all the errors in different lists, it is time to start analyzing them.
     print("\nStep VI: Get errors and calculate statistics from stored results.")
     assessment_result = quantitative_analysis(label)
 
     print("Step VII: Generate assessment report. ")
-    # get some baseline numbers
+    # Get some baseline numbers
     num_of_uris = len(uris)
     num_of_classes = len(uris_consistency_check.loc[uris_consistency_check['uri type'] == 'class'])
     num_of_properties = len(uris_consistency_check.loc[uris_consistency_check['uri type'] == 'property'])
@@ -150,7 +165,6 @@ def run_assessment(label, assess_resolvable=True, test_parsable=True, re_classif
 
 
 def execution():
-
     # decide whether run-assess a metric (True) or load existing results (False)
     whether_re_run = {'assess_resolvable': True,
                       'test_parsable': True,
@@ -162,12 +176,14 @@ def execution():
 
     for label in ListOfLABEL:
         print(label)
-        # set start time
+        # calculate time cost: set start time first
         start_time = time.time()
 
+        # run assessment
         assessment_result = run_assessment(label, **whether_re_run)
 
-        g = load_resource(WhichResource[label])
+        with open('pickle/{}_graph.pickle'.format(label), 'rb') as f:
+            g = pickle.load(f)
 
         # get affected triples (optional)
         # for non-resolvable URIs
@@ -177,7 +193,7 @@ def execution():
 
         # get count of affected triples (coat) due to non-resolvable URIs
         coat_non_resolvable_text = "{}/{}".format(coat_non_resolvability, len(g)) + \
-                                   " (" + f"{coat_non_resolvability/len(g):.1%}" + ")"
+                                   " (" + f"{coat_non_resolvability / len(g):.1%}" + ")"
         coat_non_resolvable_dict[label] = coat_non_resolvable_text
 
         # for undefined URIs
@@ -196,13 +212,13 @@ def execution():
         time_cost = int(end_time - start_time)
         print('Time Cost (hh:mm:ss) is: \n {}'.format(str(datetime.timedelta(seconds=time_cost))))
 
-    print("The Count of Affected Triples (COAT) due to non-resolvable URIs: ")
+    # Here only print two errors, more can be looked up in the RDF report (.ttl)
+    print("The Count of Affected Triples due to non-resolvable URIs: ")
     print(coat_non_resolvable_dict)
 
-    print("The Count of Affected Triples (COAT) due to undefined URIs: ")
+    print("The Count of Affected Triples due to undefined URIs: ")
     print(coat_undefined_dict)
 
 
 if __name__ == '__main__':
-
     execution()
