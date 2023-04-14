@@ -78,7 +78,6 @@ def run_assessment(label, assess_resolvable=True, test_parsable=True, re_classif
 
     print("\nStep I. Test Resolvability of all URIs. ")
     if assess_resolvable:
-        uris = uris[500:]
         # Set chunks for a large list (so far 500)
         if len(uris) > 500:
             split_uris = list(split(list_a=uris, chunk_size=500))
