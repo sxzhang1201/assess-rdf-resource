@@ -29,12 +29,13 @@ Two steps need to be performed to validate an RDF resource:
     parsability, and consistency in the directory `output/{LABEL}/`; 
     an assessment report will be generated in the directory `output/{LABEL}/report-{LABEL}.ttl` in the form of Turtle.
 
-### Interpretation of Results
+### Use case 
+So far there has been two use cases:  
+1. Evaluate 8 ontologies in RDF (see `test resources` file or `ListOfLabelsForConceptualPaper` in `config.py`) 
+2. Evaluate 16 rare disease resources in RDF (see `ListOfLabelsForRareDiseaseResources` in `config.py`)
 
-To add:
-1. structure of report (in ttl);
-2. structure of data frame (in excel);
-3. visualization of the report.
+If only assess these resources, you can assign  `ListOfLabelsForConceptualPaper` or 
+`ListOfLabelsForRareDiseaseResources` to `ListOfLABEL` .
     
 ### To Play With It 
 If you want to further customise this tool to your own 'playground', it might be necessary to have following information.
