@@ -48,3 +48,6 @@ There are four folders:
 * `functions`: contain scripts that implement some basic functions 
 
 The structure (and built-in functions) of assessment report is described in `functions/generate_report.py`. 
+
+### Issues
+If you have any questions or problems in using this tool, please create Issues.
