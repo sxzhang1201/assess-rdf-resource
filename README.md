@@ -11,6 +11,9 @@ Run the following command to install dependencies with `pip` installed:
 pip install -r requirements.txt
 ```
 
+## Python Support
+Require Python 3.7 or later.
+
 ## Basic Usage
 Two steps need to be performed to validate an RDF resource:
 1. Edit `config.py`. 
