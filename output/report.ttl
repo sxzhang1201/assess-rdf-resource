@@ -9,7 +9,7 @@
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
 @prefix skos: <http://www.w3.org/2004/02/skos/core#> .
 
-<http://example.org/ejp-metadata-ontology-report#resolvabilityMeasurement> a dqv:QualityMeasurement ;
+<http://w3id.org/rdfqar#ejp-metadata-ontology-report-resolvabilityMeasurement> a dqv:QualityMeasurement ;
     dcterms:relation <http://purl.obolibrary.org/obo/RO_0001901>,
         <http://purl.obolibrary.org/obo/bfo/axiom/0000004>,
         <http://purl.obolibrary.org/obo/bfo/axiom/0000005>,
@@ -41,7 +41,7 @@
     dqv:value "0.1"^^xsd:float ;
     prov:generatedAtTime "2022-12-30T10:10:30"^^xsd:dateTime .
 
-<http://example.org/ejp-metadata-ontology-report#undefinedURIsMeasurement> a dqv:QualityMeasurement ;
+<http://w3id.org/rdfqar#ejp-metadata-ontology-report-undefinedURIsMeasurement> a dqv:QualityMeasurement ;
     dcterms:relation <http://www.w3.org/ns/prov-o>,
         <http://www.w3.org/ns/prov-o-20130312> ;
     dqv:computedOn <https://raw.githubusercontent.com/ejp-rd-vp/resource-metadata-schema-ontology/main/ejprd_resource_metadata_ontology.owl> ;
@@ -51,12 +51,12 @@
 
 <https://raw.githubusercontent.com/ejp-rd-vp/resource-metadata-schema-ontology/main/ejprd_resource_metadata_ontology.owl> a dcat:Resource ;
     dcterms:title "ejp-metadata-ontology" ;
-    dqv:hasQualityMeasurement <http://example.org/ejp-metadata-ontology-report#resolvabilityMeasurement>,
-        <http://example.org/ejp-metadata-ontology-report#undefinedURIsMeasurement> .
+    dqv:hasQualityMeasurement <http://w3id.org/rdfqar#ejp-metadata-ontology-report-resolvabilityMeasurement>,
+        <http://w3id.org/rdfqar#ejp-metadata-ontology-report-undefinedURIsMeasurement> .
 
 
 
-<http://example.org/atc-report#resolvabilityMeasurement> a dqv:QualityMeasurement ;
+<http://w3id.org/rdfqar#atc-report-resolvabilityMeasurement> a dqv:QualityMeasurement ;
     dcterms:relation <http://bioportal.bioontology.org/ontologies/umls/cui>,
         <http://purl.bioontology.org/ontology/ATC/A07AA10>,
         <http://purl.bioontology.org/ontology/ATC/ATC_LEVEL>,
@@ -69,10 +69,10 @@
 
 <https://bioportal.bioontology.org/ontologies/ATC> a dcat:Resource ;
     dcterms:title "atc" ;
-    dqv:hasQualityMeasurement <http://example.org/atc-report#resolvabilityMeasurement> .
+    dqv:hasQualityMeasurement <http://w3id.org/rdfqar#atc-report-resolvabilityMeasurement> .
 
 
-<http://example.org/geno-report#resolvabilityMeasurement> a dqv:QualityMeasurement ;
+<http://w3id.org/rdfqar#geno-report-resolvabilityMeasurement> a dqv:QualityMeasurement ;
     dcterms:relation <http://purl.obolibrary.org/obo/HsapDv_0000000>,
         <http://purl.obolibrary.org/obo/RO_000244>,
         <http://purl.org/oban/association>,
@@ -85,7 +85,7 @@
     dqv:value "0.01"^^xsd:float ;
     prov:generatedAtTime "2022-12-30T10:10:30"^^xsd:dateTime .
 
-<http://example.org/geno-report#undefinedURIsMeasurement> a dqv:QualityMeasurement ;
+<http://w3id.org/rdfqar#geno-report-undefinedURIsMeasurement> a dqv:QualityMeasurement ;
     dcterms:relation <http://orcid.org/0000-0001-5208-3432>,
         <https://doi.org/10.1186/s13326-017-0126-0> ;
     dqv:computedOn <http://purl.obolibrary.org/obo/geno.owll> ;
@@ -95,10 +95,10 @@
 
 <http://purl.obolibrary.org/obo/geno.owl> a dcat:Resource ;
     dcterms:title "geno" ;
-    dqv:hasQualityMeasurement <http://example.org/geno-report#resolvabilityMeasurement>,
-        <http://example.org/geno-report#undefinedURIsMeasurement> .
+    dqv:hasQualityMeasurement <http://w3id.org/rdfqar#geno-report-resolvabilityMeasurement>,
+        <http://w3id.org/rdfqar#geno-report-undefinedURIsMeasurement> .
 
-<http://example.org/head-and-neck-tumor-report#resolvabilityMeasurement> a dqv:QualityMeasurement ;
+<http://w3id.org/rdfqar#head-and-neck-tumor-report-resolvabilityMeasurement> a dqv:QualityMeasurement ;
     dcterms:relation <http://purl.obolibrary.org/obo/ERO_0001843>,
         <http://purl.org/ejp-rd/vocabulary/populationCoverage>,
         <http://rdflicense.appspot.com/rdflicense/cc-by-nc-nd3.0>,
@@ -112,18 +112,18 @@
 
 <https://ejp-rd-dev1.vm.cesnet.cz/fdps/orphanet-catalog-fdp/patientRegistry/6759d7b2-73ee-4711-bffe-c0483ec0f214> a dcat:Resource ;
     dcterms:title "head-and-neck-tumor" ;
-    dqv:hasQualityMeasurement <http://example.org/head-and-neck-tumor-report#resolvabilityMeasurement> .
+    dqv:hasQualityMeasurement <http://w3id.org/rdfqar#head-and-neck-tumor-report-resolvabilityMeasurement> .
 
 
 
-<http://example.org/hpo-report#misusedOwlObjectPropertyMeasurement> a dqv:QualityMeasurement ;
+<http://w3id.org/rdfqar#hpo-report-misusedOwlObjectPropertyMeasurement> a dqv:QualityMeasurement ;
     dcterms:relation skos:closeMatch ;
     dqv:computedOn <http://purl.obolibrary.org/obo/hp.owl> ;
     dqv:isMeasurementOf fqm:misusedOwlDatatypeOrObjectPropertiesMetric ;
     dqv:value "0.01"^^xsd:float ;
     prov:generatedAtTime "2022-12-30T10:10:30"^^xsd:dateTime .
 
-<http://example.org/hpo-report#resolvabilityMeasurement> a dqv:QualityMeasurement ;
+<http://w3id.org/rdfqar#hpo-report-resolvabilityMeasurement> a dqv:QualityMeasurement ;
     dcterms:relation <http://anatomy.uams.edu/anatomyhtml/kidney.html>,
         <http://dev.biologists.org/content/128/22/4573.full>,
         <http://dictionary.reference.com/browse/mammary+ridge>,
@@ -357,7 +357,7 @@
     dqv:value "0.01"^^xsd:float ;
     prov:generatedAtTime "2022-12-30T10:10:30"^^xsd:dateTime .
 
-<http://example.org/hpo-report#undefinedURIsMeasurement> a dqv:QualityMeasurement ;
+<http://w3id.org/rdfqar#hpo-report-undefinedURIsMeasurement> a dqv:QualityMeasurement ;
     dcterms:relation <http://orcid.org/0000-0001-5208-3432>,
         <http://orcid.org/0000-0001-6595-0902>,
         <http://orcid.org/0000-0001-7258-9596>,
@@ -425,13 +425,13 @@
 
 <http://purl.obolibrary.org/obo/hp.owl> a dcat:Resource ;
     dcterms:title "hpo" ;
-    dqv:hasQualityMeasurement <http://example.org/hpo-report#misusedOwlObjectPropertyMeasurement>,
-        <http://example.org/hpo-report#resolvabilityMeasurement>,
-        <http://example.org/hpo-report#undefinedURIsMeasurement> .
+    dqv:hasQualityMeasurement <http://w3id.org/rdfqar#hpo-report-misusedOwlObjectPropertyMeasurement>,
+        <http://w3id.org/rdfqar#hpo-report-resolvabilityMeasurement>,
+        <http://w3id.org/rdfqar#hpo-report-undefinedURIsMeasurement> .
 
 
 
-<http://example.org/nextprot-schema-report#undefinedURIsMeasurement> a dqv:QualityMeasurement ;
+<http://w3id.org/rdfqar#nextprot-schema-report-undefinedURIsMeasurement> a dqv:QualityMeasurement ;
     dcterms:relation owl: ;
     dqv:computedOn <http://nextprot.org/rdf#> ;
     dqv:isMeasurementOf fqm:uriUndefinedMetric ;
@@ -440,9 +440,9 @@
 
 <http://nextprot.org/rdf#> a dcat:Resource ;
     dcterms:title "nextprot-schema" ;
-    dqv:hasQualityMeasurement <http://example.org/nextprot-schema-report#undefinedURIsMeasurement> .
+    dqv:hasQualityMeasurement <http://w3id.org/rdfqar#nextprot-schema-report-undefinedURIsMeasurement> .
 
-    <http://example.org/hpscreg-report#resolvabilityMeasurement> a dqv:QualityMeasurement ;
+    <http://w3id.org/rdfqar#hpscreg-report-resolvabilityMeasurement> a dqv:QualityMeasurement ;
     dcterms:relation <http://purl.obolibrary.org/obo/BFO_0000052>,
         <http://purl.obolibrary.org/obo/BFO_0000058>,
         <http://purl.obolibrary.org/obo/BFO_0000059>,
@@ -543,7 +543,7 @@
     dqv:value "0.1"^^xsd:float ;
     prov:generatedAtTime "2022-12-30T10:10:30"^^xsd:dateTime .
 
-<http://example.org/hpscreg-report#undefinedURIsMeasurement> a dqv:QualityMeasurement ;
+<http://w3id.org/rdfqar#hpscreg-report-undefinedURIsMeasurement> a dqv:QualityMeasurement ;
     dcterms:relation rdfs:source ;
     dqv:computedOn <https://hpscreg.eu/ontologies/hpscreg_clo.owl/v1> ;
     dqv:isMeasurementOf fqm:uriUndefinedMetric ;
@@ -552,14 +552,14 @@
 
 <https://hpscreg.eu/ontologies/hpscreg_clo.owl/v1> a dcat:Resource ;
     dcterms:title "hpscreg" ;
-    dqv:hasQualityMeasurement <http://example.org/hpscreg-report#resolvabilityMeasurement>,
-        <http://example.org/hpscreg-report#undefinedURIsMeasurement> .
+    dqv:hasQualityMeasurement <http://w3id.org/rdfqar#hpscreg-report-resolvabilityMeasurement>,
+        <http://w3id.org/rdfqar#hpscreg-report-undefinedURIsMeasurement> .
 
 
 
 
 
-<http://example.org/primary-immune-deficiency-report#resolvabilityMeasurement> a dqv:QualityMeasurement ;
+<http://w3id.org/rdfqar#primary-immune-deficiency-report-resolvabilityMeasurement> a dqv:QualityMeasurement ;
     dcterms:relation <http://rdflicense.appspot.com/rdflicense/cc-by-nc-nd3.0>,
         <http://www.uzgent.be/nl/zorgaanbod/mdteams/Primaire-Immuunstoornissen/Paginas/default.aspx>,
         foaf:Organisation,
@@ -572,9 +572,9 @@
 
 <https://ejp-rd-dev1.vm.cesnet.cz/fdps/orphanet-catalog-fdp/biobank/d7cdf993-e7f8-459f-9aad-3a5cf437bf20> a dcat:Resource ;
     dcterms:title "primary-immune-deficiency" ;
-    dqv:hasQualityMeasurement <http://example.org/primary-immune-deficiency-report#resolvabilityMeasurement> .
+    dqv:hasQualityMeasurement <http://w3id.org/rdfqar#primary-immune-deficiency-report-resolvabilityMeasurement> .
 
-<http://example.org/ordo-catalog-fdp-report#resolvabilityMeasurement> a dqv:QualityMeasurement ;
+<http://w3id.org/rdfqar#ordo-catalog-fdp-report-resolvabilityMeasurement> a dqv:QualityMeasurement ;
     dcterms:relation <http://rdflicense.appspot.com/rdflicense/cc-by-nc-nd3.0>,
         <https://w3id.org/ejp-rd/fairdatapoints/orphanet-catalog-fdp/catalog/>,
         <https://w3id.org/ejp-rd/fairdatapoints/orphanet-catalog-fdp/metrics/445c0a70d1e214e545b261559e2842f4>,
@@ -586,12 +586,12 @@
 
 <https://ejp-rd-dev1.vm.cesnet.cz/fdps/orphanet-catalog-fdp/?format=ttl> a dcat:Resource ;
     dcterms:title "ordo-catalog-fdp" ;
-    dqv:hasQualityMeasurement <http://example.org/ordo-catalog-fdp-report#resolvabilityMeasurement> .
+    dqv:hasQualityMeasurement <http://w3id.org/rdfqar#ordo-catalog-fdp-report-resolvabilityMeasurement> .
 
 <http://nextprot.org/rdf/terminology/> a dcat:Resource ;
     dcterms:title "nextprot-terminology" .
 
-<http://example.org/rare-disease-resources-report#resolvabilityMeasurement> a dqv:QualityMeasurement ;
+<http://w3id.org/rdfqar#rare-disease-resources-report-resolvabilityMeasurement> a dqv:QualityMeasurement ;
     dcterms:relation <http://rdflicense.appspot.com/rdflicense/cc-by-nc-nd3.0>,
         <https://w3id.org/ejp-rd/fairdatapoints/orphanet-catalog-fdp/biobank/>,
         <https://w3id.org/ejp-rd/fairdatapoints/orphanet-catalog-fdp/catalog/2a3f1a0e-ddbb-4a07-960e-fa92e1e9f4bc/metrics/445c0a70d1e214e545b261559e2842f4>,
@@ -604,11 +604,11 @@
 
 <https://ejp-rd-dev1.vm.cesnet.cz/fdps/orphanet-catalog-fdp/catalog/2a3f1a0e-ddbb-4a07-960e-fa92e1e9f4bc> a dcat:Resource ;
     dcterms:title "rare-disease-resources" ;
-    dqv:hasQualityMeasurement <http://example.org/rare-disease-resources-report#resolvabilityMeasurement> .
+    dqv:hasQualityMeasurement <http://w3id.org/rdfqar#rare-disease-resources-report-resolvabilityMeasurement> .
 
 
 
-<http://example.org/uniprot-ontology-report#undefinedURIsMeasurement> a dqv:QualityMeasurement ;
+<http://w3id.org/rdfqar#uniprot-ontology-report-undefinedURIsMeasurement> a dqv:QualityMeasurement ;
     dcterms:relation <http://www.w3.org/1999/02/22-rdf-syntax-ns>,
         <http://www.w3.org/2000/01/rdf-schema> ;
     dqv:computedOn <http://purl.uniprot.org/core/> ;
@@ -618,18 +618,18 @@
 
 <http://purl.uniprot.org/core/> a dcat:Resource ;
     dcterms:title "uniprot-ontology" ;
-    dqv:hasQualityMeasurement <http://example.org/uniprot-ontology-report#undefinedURIsMeasurement> .
+    dqv:hasQualityMeasurement <http://w3id.org/rdfqar#uniprot-ontology-report-undefinedURIsMeasurement> .
 
 
 
-<http://example.org/wikipathway-report#misusedOwlObjectPropertyMeasurement> a dqv:QualityMeasurement ;
+<http://w3id.org/rdfqar#wikipathway-report-misusedOwlObjectPropertyMeasurement> a dqv:QualityMeasurement ;
     dcterms:relation dcat:mediaType ;
     dqv:computedOn <https://wikipathways-data.wmcloud.org/20220410/rdf/wikipathways-20220410-rdf-void.ttl> ;
     dqv:isMeasurementOf fqm:misusedOwlDatatypeOrObjectPropertiesMetric ;
     dqv:value "0.05"^^xsd:float ;
     prov:generatedAtTime "2022-12-30T10:10:30"^^xsd:dateTime .
 
-<http://example.org/wikipathway-report#resolvabilityMeasurement> a dqv:QualityMeasurement ;
+<http://w3id.org/rdfqar#wikipathway-report-resolvabilityMeasurement> a dqv:QualityMeasurement ;
     dcterms:relation <http://data.wikipathways.org/20220410/datasetDescription/>,
         <http://data.wikipathways.org/20220410/linkset/chebi>,
         <http://data.wikipathways.org/20220410/linkset/complexportal>,
@@ -652,7 +652,7 @@
     dqv:value "0.14"^^xsd:float ;
     prov:generatedAtTime "2022-12-30T10:10:30"^^xsd:dateTime .
 
-<http://example.org/wikipathway-report#undefinedURIsMeasurement> a dqv:QualityMeasurement ;
+<http://w3id.org/rdfqar#wikipathway-report-undefinedURIsMeasurement> a dqv:QualityMeasurement ;
     dcterms:relation dcterms:accuralPeriodicity ;
     dqv:computedOn <https://wikipathways-data.wmcloud.org/20220410/rdf/wikipathways-20220410-rdf-void.ttl> ;
     dqv:isMeasurementOf fqm:uriUndefinedMetric ;
@@ -661,12 +661,12 @@
 
 <https://wikipathways-data.wmcloud.org/20220410/rdf/wikipathways-20220410-rdf-void.ttl> a dcat:Resource ;
     dcterms:title "wikipathway" ;
-    dqv:hasQualityMeasurement <http://example.org/wikipathway-report#misusedOwlObjectPropertyMeasurement>,
-        <http://example.org/wikipathway-report#resolvabilityMeasurement>,
-        <http://example.org/wikipathway-report#undefinedURIsMeasurement> .
+    dqv:hasQualityMeasurement <http://w3id.org/rdfqar#wikipathway-report-misusedOwlObjectPropertyMeasurement>,
+        <http://w3id.org/rdfqar#wikipathway-report-resolvabilityMeasurement>,
+        <http://w3id.org/rdfqar#wikipathway-report-undefinedURIsMeasurement> .
 
 
-<http://example.org/hpscreg-report#resolvabilityMeasurement> a dqv:QualityMeasurement ;
+<http://w3id.org/rdfqar#hpscreg-report-resolvabilityMeasurement> a dqv:QualityMeasurement ;
     dcterms:relation <http://purl.obolibrary.org/obo/BFO_0000052>,
         <http://purl.obolibrary.org/obo/BFO_0000058>,
         <http://purl.obolibrary.org/obo/BFO_0000059>,
@@ -767,7 +767,7 @@
     dqv:value "0.1"^^xsd:float ;
     prov:generatedAtTime "2022-12-30T10:10:30"^^xsd:dateTime .
 
-<http://example.org/hpscreg-report#undefinedURIsMeasurement> a dqv:QualityMeasurement ;
+<http://w3id.org/rdfqar#hpscreg-report-undefinedURIsMeasurement> a dqv:QualityMeasurement ;
     dcterms:relation rdfs:source ;
     dqv:computedOn <https://hpscreg.eu/ontologies/hpscreg_clo.owl/v1> ;
     dqv:isMeasurementOf fqm:uriUn definedMetric ;
@@ -776,7 +776,7 @@
 
 <https://hpscreg.eu/ontologies/hpscreg_clo.owl/v1> a dcat:Resource ;
     dcterms:title "hpscreg" ;
-    dqv:hasQualityMeasurement <http://example.org/hpscreg-report#resolvabilityMeasurement>,
-        <http://example.org/hpscreg-report#undefinedURIsMeasurement> .
+    dqv:hasQualityMeasurement <http://w3id.org/rdfqar#hpscreg-report-resolvabilityMeasurement>,
+        <http://w3id.org/rdfqar#hpscreg-report-undefinedURIsMeasurement> .
 
 

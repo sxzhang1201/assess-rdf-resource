@@ -2,6 +2,7 @@ from rdflib.graph import Graph
 from rdflib.term import URIRef, Literal
 from rdflib.namespace import RDF, RDFS, DCTERMS, DCAT, PROV, XSD
 from rdflib import Namespace
+from datetime import datetime
 
 
 def populate_report_with_results(report_graph,
@@ -10,6 +11,8 @@ def populate_report_with_results(report_graph,
                                  num_of_uris,
                                  resource_uri_ref,
                                  metric_uri_ref):
+
+    now = datetime.now().strftime('%Y-%m-%dT%H:%M:%S')
 
     DQV = Namespace("http://www.w3.org/ns/dqv#")
 
@@ -26,7 +29,8 @@ def populate_report_with_results(report_graph,
     report_graph.add((
         measure_uri_ref,
         PROV.generatedAtTime,
-        Literal('2022-12-30T10:10:30', datatype=XSD.dateTime)))
+        # Literal('2022-12-30T10:10:30', datatype=XSD.dateTime)))
+        Literal(now, datatype=XSD.dateTime)))
 
     report_graph.add((
         measure_uri_ref,
@@ -55,7 +59,7 @@ def populate_report_with_results(report_graph,
 
 def build_graph(resource_uri, report_label, assessment_result, num_of_uris=0, num_of_classes=0, num_of_properties=0):
     # specify namespaces
-    resource_report = Namespace("http://example.org/{}-report#".format(report_label))
+    resource_report = Namespace("https://w3id.org/rdfqar#{}-".format(report_label))
 
     FQM = Namespace("http://purl.org/fqm#")
 
