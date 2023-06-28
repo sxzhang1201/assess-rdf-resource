@@ -770,7 +770,7 @@
 <http://w3id.org/rdfqar#hpscreg-report-undefinedURIsMeasurement> a dqv:QualityMeasurement ;
     dcterms:relation rdfs:source ;
     dqv:computedOn <https://hpscreg.eu/ontologies/hpscreg_clo.owl/v1> ;
-    dqv:isMeasurementOf fqm:uriUn definedMetric ;
+    dqv:isMeasurementOf fqm:uriUndefinedMetric ;
     dqv:value "0.0"^^xsd:float ;
     prov:generatedAtTime "2022-12-30T10:10:30"^^xsd:dateTime .
 

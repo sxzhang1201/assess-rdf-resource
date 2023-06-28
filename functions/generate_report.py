@@ -59,7 +59,7 @@ def populate_report_with_results(report_graph,
 
 def build_graph(resource_uri, report_label, assessment_result, num_of_uris=0, num_of_classes=0, num_of_properties=0):
     # specify namespaces
-    resource_report = Namespace("https://w3id.org/rdfqar#{}-".format(report_label))
+    resource_report = Namespace("https://w3id.org/rdfqar#{}-report-".format(report_label))
 
     FQM = Namespace("http://purl.org/fqm#")
 
