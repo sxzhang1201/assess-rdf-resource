@@ -1,0 +1,12 @@
+    PREFIX  dcat: <http://www.w3.org/ns/dcat#>
+    PREFIX  dqv:  <http://www.w3.org/ns/dqv#>
+    PREFIX  fqm:  <http://purl.org/fqm#>
+    PREFIX  dcterms:  <http://purl.org/dc/terms/>
+
+    SELECT DISTINCT ?resource  ?undefined_uris
+    WHERE {
+        ?resource a dcat:Resource .
+        ?resource dqv:hasQualityMeasurement ?measure .
+        ?measure  dqv:isMeasurementOf fqm:uriUndefinedMetric .
+        ?measure  dcterms:relation ?undefined_uris .
+    }

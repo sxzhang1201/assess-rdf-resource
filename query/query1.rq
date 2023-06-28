@@ -1,0 +1,12 @@
+    PREFIX  dcat: <http://www.w3.org/ns/dcat#>
+    PREFIX  dqv:  <http://www.w3.org/ns/dqv#>
+    PREFIX  fqm:  <http://purl.org/fqm#>
+
+    SELECT DISTINCT ?rname  ?value
+    WHERE {
+        ?rname a dcat:Resource .
+        ?rname dqv:hasQualityMeasurement ?resolvable_measure .
+        ?resolvable_measure dqv:isMeasurementOf fqm:uriNonResolvableMetric .
+        ?resolvable_measure dqv:value ?value .
+        FILTER (?value > 0.1)
+    }

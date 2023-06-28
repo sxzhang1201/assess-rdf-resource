@@ -1,0 +1,12 @@
+    PREFIX  dcat: <http://www.w3.org/ns/dcat#>
+    PREFIX  dqv:  <http://www.w3.org/ns/dqv#>
+    PREFIX  fqm:  <http://purl.org/fqm#>
+    PREFIX  skos:  <http://www.w3.org/2004/02/skos/core#>
+
+    SELECT DISTINCT ?measure ?metric ?definition
+    WHERE {
+        <https://wikipathways-data.wmcloud.org/20220410/rdf/wikipathways-20220410-rdf-void.ttl>
+        dqv:hasQualityMeasurement ?measure .
+        ?measure  dqv:isMeasurementOf ?metric .
+        ?metric skos:definition  ?definition .
+    }
