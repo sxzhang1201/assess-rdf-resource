@@ -1,4 +1,5 @@
-ListOfLABEL = ['misfoaf']
+ListOfLABEL = ['geno']
+ChunkSize = 50
 
 WhichResource = {
     # 'ordo-catalog-fdp': 'resources/rd-resources/ordo-catalog-fdp/ordo catalog fdp.ttl',
@@ -187,9 +188,9 @@ QUERY3 = """
     
     SELECT DISTINCT ?measure ?metric ?definition
     WHERE {
-        <https://wikipathways-data.wmcloud.org/20220410/rdf/wikipathways-20220410-rdf-void.ttl> dqv:hasQualityMeasurement ?measure .
-        ?measure  dqv:isMeasurementOf ?metric .
-    
+        <https://wikipathways-data.wmcloud.org/20220410/rdf/wikipathways-20220410-rdf-void.ttl> 
+        dqv:hasQualityMeasurement ?measure .
+        ?measure  dqv:isMeasurementOf ?metric .     
         ?metric skos:definition  ?definition .
     }
     """

@@ -6,6 +6,7 @@ import pandas as pd
 import pickle
 import os
 from rdflib.term import URIRef, BNode, Literal
+from rdflib.graph import Graph
 
 # Import metrics
 from metrics.coverage import count_rdf_component
@@ -20,10 +21,12 @@ from functions.inspect_items import view_graph
 from functions.generate_report import build_graph
 from functions.create_directory import create_directory
 from functions.split_list import split
+from functions.filter import filtering
 from quantitative_analysis import quantitative_analysis, calculate_affected_triples_all
 
+
 # Import human-configurable
-from config import WhichResource, ListOfLabelsForRareDiseaseResources, ListOfLABEL
+from config import WhichResource, ListOfLabelsForRareDiseaseResources, ListOfLABEL, ChunkSize
 
 
 def run_assessment(label, assess_resolvable=True, test_parsable=True, re_classify=True, assess_consistency=True):
@@ -37,7 +40,7 @@ def run_assessment(label, assess_resolvable=True, test_parsable=True, re_classif
     :return:
     """
 
-    print("Start quality assessment on the resource: {}: ".format(label))
+    print("Start quality assessment on the resource: {}. ".format(label))
 
     # Create a directory for storing results
     create_directory("output/{}".format(label))
@@ -68,6 +71,9 @@ def run_assessment(label, assess_resolvable=True, test_parsable=True, re_classif
     uris = count_rdf_component(rdf_graph=g, rdf_term=URIRef)
     print("\nThis RDF resource has {} unique URIs. ".format(len(uris)))
 
+    # print("\nThis RDF resource has {} unique URIs after filtering ".format(len(uris)))
+    # uris = filtering(uris, 'http://snomed.info/')
+
     path_dic = {
         'resolvable': 'output/{}/uri-resolvable-{}.csv'.format(label, label),
         'parsable': 'output/{}/uri-parsable-{}.csv'.format(label, label),
@@ -77,10 +83,10 @@ def run_assessment(label, assess_resolvable=True, test_parsable=True, re_classif
     }
 
     print("\nStep I. Test Resolvability of all URIs. ")
-    if assess_resolvable:
+    if assess_resolvable == True:
         # Set chunks for a large list (so far 500)
-        if len(uris) > 500:
-            split_uris = list(split(list_a=uris, chunk_size=500))
+        if len(uris) > ChunkSize:
+            split_uris = list(split(list_a=uris, chunk_size=ChunkSize))
 
             for i in range(len(split_uris)):
                 # run resolvable test
@@ -187,6 +193,7 @@ def execution():
         # get affected triples (optional)
         # for non-resolvable URIs
         result_resolvability = assessment_result['non_resolvable_uris']
+
         coat_non_resolvability = calculate_affected_triples_all(list_of_bad_uris=result_resolvability,
                                                                 target_graph=g)
 

@@ -62,13 +62,3 @@ def assess_parsable(df_uris):
     return uris_status_23
 
 
-if __name__ == '__main__':
-    # g = Graph().parse('http://purl.obolibrary.org/obo/IAO_0000120')
-    g = Graph().parse('http://purl.obolibrary.org/obo/IAO_0000102')
-
-    # g = Graph().parse('http://purl.obolibrary.org/obo/IAO_0000708')
-    # g = Graph().parse('http://www.w3.org/2002/07/owl#NamedIndividual')
-
-    for s, p, o in g:
-        print(s, p, o)
-

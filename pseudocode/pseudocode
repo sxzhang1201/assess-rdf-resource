@@ -1,0 +1,178 @@
+Algorithm Foundational quality assessment pseudocode.
+Input: p: path where an RDF resource is stored
+Output: Lists of errors that are identified by metrics
+
+Methods:
+  parse p to yield a set of triples (i.e., an RDF graph) as g
+
+  apply the following function to get a list of unique URIs (u) as:
+  function GetUniqueURIs(g) {
+    u = an empty list
+    for subject, predicate, object in triples of g do
+        if subject is a URI then
+          add subject to u
+        end if
+        if predicate is a URI then
+          add predicate to u
+        end if
+        if object is a URI then
+          add object to u
+        end if
+    end for
+    set each URI in u unique
+    return u
+  }
+  u = GetUniqueURIs(g)
+
+  apply the following function to get lists of non-resolvable (u_nonresolv) and resolvable URIs (u_resolv)
+  function GetURIResolvability (u) {
+    u_nonresolv = an empty list
+    for each URI in u do
+        get status code of the URI as sc
+        if sc starts with "4" or "5" then
+          add the URI to u_nonresolv
+        end if
+    end for
+    return u_nonresolv
+  }
+  u_nonresolv = GetURIResolvability(u)
+  u_resolv = u - u_nonresolv
+
+  apply the following function to get lists of non-parsable (u_nonpars) and parsable URIs (u_parse)
+  function GetURIParsability (u_resolv) {
+    compose a list of RDF content-type
+    CT4RDF = ["text/turtle", "application/rdf+xml", "application/ld+json", "text/n3", "application/x-turtle"]
+    u_nonpars = an empty list
+    for each URI in u_resolv do
+        get content type of the URI as ct
+        if ct is in CT4RDF then
+          parse the URI to yield a set of triples (i.e., an RDF graph) as g1
+          if g1 is empty then
+            add the URI to u_nonpars
+          end if
+        end if
+    end for
+    return u_nonpars
+  }
+  u_nonpars = GetURIParsability(u_resolv)
+  u_parse = u_resolv - u_nonpars
+
+  apply the following function to get lists of non-defined (u_nondef) defined URIs (u_defined)
+  function IdentifyURIDefinition(u_parse) {
+    u_nondef = an empty list
+    for each URI in u_parse do
+      parse the URI to yield a set of triples (i.e., an RDF graph) as g1
+      subset triples in g1 with the URI as the subject to g2
+      if g2 is empty then
+          add the URI to u_nondef
+      end if
+    end for
+    return u_nondef
+  }
+  u_nondef = IdentifyURIDefinition(u_parse)
+  u_defined = u_parse - u_nondef
+
+  apply the following function to get lists of classes (u_class) and properties (u_prop)
+  function ClassifyURIs(u_defined) {
+    u_class = an empty list
+    u_prop = an empty list
+    for each URI in u_parse do
+      parse the URI to yield a set of triples (i.e., an RDF graph) as g1
+      subset g1 with the URI as the subject & rdf:type as the predicate to g2
+      if the object in g2 is any type of property then
+          add the URI to u_prop
+      else if the object in g2 is any type of class then
+          add the URI to u_class
+      end if
+    end for
+    return u_class, u_prop
+  }
+  u_class, u_prop = ClassifyURIs(u_defined)
+
+  apply the following function to identify deprecated classes (u_dep_class) and deprecated properties (u_dep_prop)
+  function AssessDeprecation(u_defined) {
+    u_dep = an empty list
+    u_nondep = an empty list
+    for each URI in u_defined do
+      parse the URI to yield a set of triples (i.e., an RDF graph) as g1
+      examine if the following triple exists in g1:
+        Subject: the URI
+        Predicate: owl:deprecated
+        Object: 'True'
+      if the triple exists then
+        add the URI to u_dep
+      end if
+    end for
+    return u_dep
+  }
+  u_dep_class = AssessDeprecation(u_class)
+  u_nondep_class = u_class - u_dep_class
+
+  u_dep_prop = AssessDeprecation(u_prop)
+  u_nondep_prop = u_prop - u_dep_prop
+
+  apply the following function to identify misplaced classes (u_mis_class)
+  function IdentifyMisplacedClasses(u_nondep_class) {
+    u_mis_class = an empty list
+    for each class URI in u_nondep_class do
+      subset triples in g with the class URI as the predicate to g_sub
+      if g_sub is not empty then
+        add the URI to u_mis_class
+      end if
+    end for
+    return u_mis_class
+  }
+  u_mis_class = IdentifyMisplacedClasses(u_nondep_class)
+
+  apply the following function to identify misplaced properties (u_misp_prop)
+  function IdentifyMisplacedProperties(u_nondep_prop) {
+    u_misp_prop = an empty list
+    for each property URI in u_nondep_prop do
+      subset triples in g with the predicate as rdf:type & the URI as the object to g_sub
+      if g_sub is not empty then
+        add the URI to u_misp_prop
+      end if
+    end for
+    return u_misp_prop
+  }
+  u_misp_prop = IdentifyMisplacedProperties(u_nondep_prop)
+  u_ok_prop = u_nondep_prop - u_misp_prop
+
+  apply the following function to identify misused properties (u_misuse_prop)
+  function IdentifyMisusedProperties(u_ok_prop) {
+    u_misuse_prop = an empty list
+    for each property URI in u_ok_prop do
+      subset g as g_sub by following condition
+        subject: anything
+        predicate: the property URI
+        object: anything
+
+      for s, p, o in g_sub:
+        if the URI is a type of owl:datatypeProperty then
+          if o is also a resource then
+              add the URI to u_misuse_prop
+          end if
+        end if
+
+        if the URI is a type of owl:objectProperty then
+          if o is also a literal then
+              add the URI to u_misuse_prop
+          end if
+        end if
+      end for
+    end for
+    return u_misuse_prop
+  }
+  u_misuse_prop = IdentifyMisusedProperties(u_ok_prop)
+
+  End
+
+Here are the list of all errors:
+  non-resolvable URIs(u_nonresolv)
+  non-parsable URIs(u_nonpars)
+  non-defined URIs (u_nondef)
+  deprecated classes (u_dep_class)
+  deprecated properties (u_dep_prop)
+  misplaced classes (u_mis_class)
+  misplaced properties (u_misp_prop)
+  misused properties (u_misuse_prop)

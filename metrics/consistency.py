@@ -39,8 +39,8 @@ def detect_misplaced_property(graph, property_uri):
     temp_graph += graph.triples((None, RDF.type, URIRef(property_uri)))
     temp_graph += graph.triples((None, RDFS.subClassOf, URIRef(property_uri)))
 
-    for s, p, o in temp_graph:
-        print(s, p, o)
+    # for s, p, o in temp_graph:
+    #     print(s, p, o)
 
     # if in, meaning that this triple is the one to define a new property, thus not regarded as an error
     if property_uri in PropertyList:
@@ -87,7 +87,7 @@ def detect_misused_datatype_or_object_property(graph, property_uri, property_typ
 
                 return 'misused'
 
-    print(" The property {} is correctly used.".format(property_uri))
+    # print(" The property {} is correctly used.".format(property_uri))
 
     return 'correct'
 
