@@ -33,15 +33,30 @@ def get_http_status_code_and_content_type(uris):
         try:
             r = s.get(uri, headers=Headers)
             status_code = str(r.status_code)
-            content_type = r.headers["content-type"].split(";", 1)[0]
+            print(status_code)
 
         except Exception as e:
-            status_code = e
-            content_type = e
+            print(" - There is exception here: {}".format(e))
+            print(e)
+            status_code = 'RequestError'
+
+        if str(status_code).startswith('4') or str(status_code).startswith('5') or \
+                str(status_code).startswith('RequestError'):
+            content_type = 'Not applicable because non-resolvable.'
+        else:
+            try:
+                # status_code = str(r.status_code)
+                content_type = r.headers["content-type"].split(";", 1)[0]
+            except Exception as error:
+                print(" - Resolvable but unable to get content-type for {}. ".format(str(uri)))
+                content_type = error
 
         # get items (i.e., status-code and content-type) to lists
         code_list.append(status_code)
         type_list.append(content_type)
+
+        print(" - Status code is: {}".format(status_code))
+        print(" - Content type is: {}".format(content_type))
 
         count = count + 1
 
@@ -81,8 +96,4 @@ def group_uris_by_resolvability(uris):
     uris_status_23, uris_status_45 = divide_uris_by_resolvability(df_uris)
 
     return uris_status_23, uris_status_45
-
-
-
-
 
