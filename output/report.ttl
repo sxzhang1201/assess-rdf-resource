@@ -72,36 +72,31 @@
     dqv:hasQualityMeasurement <http://w3id.org/rdfqar#atc-report-resolvabilityMeasurement> .
 
 
-<https://w3id.org/rdfqar#geno-report-resolvabilityMeasurement> a dqv:QualityMeasurement ;
-    dcterms:relation <http://purl.obolibrary.org/obo/IAO_alt_id>,
-        <http://purl.obolibrary.org/obo/IAO_created_by>,
-        <http://purl.obolibrary.org/obo/IAO_creation_date>,
-        <http://purl.obolibrary.org/obo/IAO_id>,
-        <http://purl.obolibrary.org/obo/IAO_subset>,
-        <http://purl.obolibrary.org/obo/IAO_xref>,
+<http://w3id.org/rdfqar#geno-report-resolvabilityMeasurement> a dqv:QualityMeasurement ;
+    dcterms:relation <http://purl.obolibrary.org/obo/HsapDv_0000000>,
         <http://purl.obolibrary.org/obo/RO_000244>,
         <http://purl.org/oban/association>,
         <http://purl.org/oban/association_has_object>,
         <http://purl.org/oban/association_has_predicate>,
         <http://purl.org/oban/association_has_subject>,
         <http://www.geneontology.org/page/go-slim-and-subset-guide> ;
-    dqv:computedOn <resources/ontologies/geno.owl> ;
+    dqv:computedOn <http://purl.obolibrary.org/obo/geno.owl> ;
     dqv:isMeasurementOf fqm:uriNonResolvableMetric ;
-    dqv:value "0.02"^^xsd:float ;
-    prov:generatedAtTime "2023-10-10T13:49:34"^^xsd:dateTime .
+    dqv:value "0.01"^^xsd:float ;
+    prov:generatedAtTime "2022-12-30T10:10:30"^^xsd:dateTime .
 
-<https://w3id.org/rdfqar#geno-report-undefinedURIsMeasurement> a dqv:QualityMeasurement ;
+<http://w3id.org/rdfqar#geno-report-undefinedURIsMeasurement> a dqv:QualityMeasurement ;
     dcterms:relation <http://orcid.org/0000-0001-5208-3432>,
         <https://doi.org/10.1186/s13326-017-0126-0> ;
-    dqv:computedOn <resources/ontologies/geno.owl> ;
+    dqv:computedOn <http://purl.obolibrary.org/obo/geno.owll> ;
     dqv:isMeasurementOf fqm:uriUndefinedMetric ;
     dqv:value "0.0"^^xsd:float ;
-    prov:generatedAtTime "2023-10-10T13:49:34"^^xsd:dateTime .
+    prov:generatedAtTime "2022-12-30T10:10:30"^^xsd:dateTime .
 
 <http://purl.obolibrary.org/obo/geno.owl> a dcat:Resource ;
     dcterms:title "geno" ;
-    dqv:hasQualityMeasurement <https://w3id.org/rdfqar#geno-report-resolvabilityMeasurement>,
-        <https://w3id.org/rdfqar#geno-report-undefinedURIsMeasurement> .
+    dqv:hasQualityMeasurement <http://w3id.org/rdfqar#geno-report-resolvabilityMeasurement>,
+        <http://w3id.org/rdfqar#geno-report-undefinedURIsMeasurement> .
 
 <http://w3id.org/rdfqar#head-and-neck-tumor-report-resolvabilityMeasurement> a dqv:QualityMeasurement ;
     dcterms:relation <http://purl.obolibrary.org/obo/ERO_0001843>,
