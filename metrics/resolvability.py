@@ -1,99 +1,94 @@
+"""Resolvability metric: check if URIs return valid HTTP responses."""
+
+import logging
+from typing import List
+
+import pandas as pd
 import requests
 from requests.adapters import HTTPAdapter
 from urllib3.util.retry import Retry
-import pandas as pd
+
+from core.constants import (
+    COL_CONTENT_TYPE,
+    COL_STATUS_CODE,
+    COL_URIS,
+    HTTP_ACCEPT_HEADERS,
+    REQUEST_ERROR_STATUS,
+    STATUS_NON_RESOLVABLE,
+)
+
+logger = logging.getLogger("assess_rdf")
 
 
-from corpus import Headers
+def _create_session() -> requests.Session:
+    """Create a requests session with retry logic."""
+    session = requests.Session()
+    retry = Retry(connect=3, backoff_factor=0.5)
+    adapter = HTTPAdapter(max_retries=retry)
+    session.mount("http://", adapter)
+    session.mount("https://", adapter)
+    return session
 
 
-def get_http_status_code_and_content_type(uris):
+def _check_uri(uri: str, session: requests.Session, index: int, total: int) -> tuple:
     """
+    Check a single URI for resolvability.
 
-    :param uris: a list of strings, each as a URI.
-    :return: a pandas data frame with two columns: 'uris' and 'status_code'.
+    Returns:
+        Tuple of (status_code, content_type).
     """
-    # get a list of status code
-    # r = [*map(lambda x: str(requests.get(x, headers=Headers).status_code), uris)]
+    # Log progress: every 50 for large runs, or every 5 for small runs, plus first/last
+    if index <= 1 or index == total:
+        logger.info("Resolvability: checking URI %d/%d", index, total)
+    elif total > 20 and index % 50 == 0:
+        logger.info("Resolvability: checking URI %d/%d", index, total)
+    elif total <= 20 and index % 5 == 0:
+        logger.info("Resolvability: checking URI %d/%d", index, total)
 
+    try:
+        response = session.get(uri, headers=HTTP_ACCEPT_HEADERS, timeout=15)
+        status_code = str(response.status_code)
+
+        if (
+            status_code.startswith(STATUS_NON_RESOLVABLE)
+            or status_code == REQUEST_ERROR_STATUS
+        ):
+            content_type = "Not applicable because non-resolvable."
+        else:
+            try:
+                content_type = response.headers["content-type"].split(";", 1)[0]
+            except (KeyError, AttributeError) as e:
+                logger.warning("Could not get content-type for %s: %s", uri, e)
+                content_type = str(e)
+
+        return status_code, content_type
+
+    except Exception as e:
+        logger.warning("Request failed for %s: %s", uri, e)
+        return REQUEST_ERROR_STATUS, "Not applicable because non-resolvable."
+
+
+def get_http_status_code_and_content_type(uris: List[str]) -> pd.DataFrame:
+    """
+    Check resolvability of URIs via HTTP GET.
+
+    Args:
+        uris: List of URI strings to check.
+
+    Returns:
+        DataFrame with columns: uris, status_code, content-type.
+    """
+    session = _create_session()
     code_list = []
     type_list = []
 
-    count = 1
-
-    for uri in uris:
-        print("Analyzing URIs (" + "{}/{}".format(count, len(uris)) + ') :' + str(uri))
-
-        s = requests.Session()
-        retry = Retry(connect=3, backoff_factor=0.5)
-        adapter = HTTPAdapter(max_retries=retry)
-        s.mount('http://', adapter)
-        s.mount('https://', adapter)
-
-        try:
-            r = s.get(uri, headers=Headers)
-            status_code = str(r.status_code)
-            print(status_code)
-
-        except Exception as e:
-            print(" - There is exception here: {}".format(e))
-            print(e)
-            status_code = 'RequestError'
-
-        if str(status_code).startswith('4') or str(status_code).startswith('5') or \
-                str(status_code).startswith('RequestError'):
-            content_type = 'Not applicable because non-resolvable.'
-        else:
-            try:
-                # status_code = str(r.status_code)
-                content_type = r.headers["content-type"].split(";", 1)[0]
-            except Exception as error:
-                print(" - Resolvable but unable to get content-type for {}. ".format(str(uri)))
-                content_type = error
-
-        # get items (i.e., status-code and content-type) to lists
+    for i, uri in enumerate(uris, 1):
+        status_code, content_type = _check_uri(uri, session, i, len(uris))
         code_list.append(status_code)
         type_list.append(content_type)
 
-        print(" - Status code is: {}".format(status_code))
-        print(" - Content type is: {}".format(content_type))
-
-        count = count + 1
-
-    # put URIs with their status codes into a data frame
-    df_uris = pd.DataFrame({'uris': uris,
-                            'status_code': code_list,
-                            'content-type': type_list})
-
-    return df_uris
-
-
-def divide_uris_by_resolvability(df_uris):
-    """
-    Category URIs based on their status code: 2XX and 3XX as resolvable while 4XX and 5XX as non-resolvable
-    :param df_uris: a two-column data frame.
-                    'uris": a list of URIs as string;
-                    'status_code": a list of status code as string;
-    :return: two lists, respectively containing URIs with "2XX + 3XX" and "4XX + 5XX".
-    """
-    uris_status_23 = df_uris[df_uris['status_code'].str.startswith(('2', '3'))]
-    uris_status_45 = df_uris[df_uris['status_code'].str.startswith(('4', '5'))]
-
-    return uris_status_23, uris_status_45
-
-
-def group_uris_by_resolvability(uris):
-    """
-    A function getting a list of URIs as input and returning two lists of URIs. Besides, a CSV file
-    is generated containing all URIs with their status codes.
-    :param uris: a list of strings, each as a URI.
-    :return: two lists, respectively containing URIs with "2XX + 3XX" and "4XX + 5XX".
-    """
-    # get a data frame containing all URIs with status-code and content-type
-    df_uris = get_http_status_code_and_content_type(uris)
-
-    # divide URIs into two group lists, based on status-code
-    uris_status_23, uris_status_45 = divide_uris_by_resolvability(df_uris)
-
-    return uris_status_23, uris_status_45
-
+    return pd.DataFrame({
+        COL_URIS: uris,
+        COL_STATUS_CODE: code_list,
+        COL_CONTENT_TYPE: type_list,
+    })

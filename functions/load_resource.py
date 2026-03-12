@@ -1,56 +1,73 @@
-import os.path
-from rdflib.graph import Graph
+"""Load RDF resources from local paths or remote URIs."""
+
+import logging
+from pathlib import Path
+from typing import Union
+
 import requests
-import corpus
+from rdflib import Graph
+
+from core.constants import CONTENT_TYPE_TO_FORMAT, HTTP_ACCEPT_HEADERS
+
+logger = logging.getLogger("assess_rdf")
 
 
-def parse_data_local_or_remote(data_path):
+def _is_remote_path(path: Union[str, Path]) -> bool:
+    """Check if path appears to be a remote URI."""
+    return "http" in str(path)
 
-    # initiate a graph
-    g = Graph()
 
-    if 'http' in str(data_path):
-        print("Loading resource from " + str(data_path))
-        r = requests.get(data_path, headers=corpus.Headers)
-        content_type_this_uri = r.headers["content-type"].split(";", 1)[0]
+def parse_data_local_or_remote(data_path: Union[str, Path]) -> Graph:
+    """
+    Parse RDF from a local file or remote URI.
 
-        print("The Content-type of this resource is " + str(content_type_this_uri))
-        parse_format = corpus.MapContentTypeToParserFormat[content_type_this_uri]
+    Args:
+        data_path: Local file path or HTTP(S) URI.
+
+    Returns:
+        RDFlib Graph containing the parsed triples.
+
+    Raises:
+        OSError: If local file does not exist.
+        Exception: If parsing fails.
+    """
+    graph = Graph()
+    path_str = str(data_path)
+
+    if _is_remote_path(data_path):
+        logger.info("Loading resource from %s", path_str)
+        response = requests.get(path_str, headers=HTTP_ACCEPT_HEADERS, timeout=60)
+        response.raise_for_status()
+
+        content_type = response.headers.get("content-type", "").split(";", 1)[0]
+        logger.info("Content-Type: %s", content_type)
+
+        parse_format = CONTENT_TYPE_TO_FORMAT.get(
+            content_type,
+            CONTENT_TYPE_TO_FORMAT.get("text/plain", "xml"),
+        )
         try:
-            g.parse(data_path, format=parse_format)
-        except:
-            raise Exception(
-                print("The resource from " + str(data_path) + " cannot be parsed. Please check. ")
-            )
-
+            graph.parse(data=response.content, format=parse_format)
+        except Exception as e:
+            raise ValueError(
+                f"Cannot parse resource from {path_str}: {e}"
+            ) from e
     else:
-        print("Parse resource from local path: " + str(data_path))
+        path = Path(data_path)
+        if not path.exists():
+            raise OSError(f"Resource not found: {path}")
 
-        # Check if the resource exists, otherwise it returns error
-        if os.path.exists(data_path):
-            try:
-                # Note that local resource we cannot specify parse type
-                g.parse(data_path)
-            except:
-                raise Exception(
-                    "The local resource from {} cannot be parsed. Please check. ".format(data_path))
-        else:
-            raise OSError("The resource at {} is not found. ".format(data_path))
+        logger.info("Parsing local resource: %s", path_str)
+        try:
+            graph.parse(path)
+        except Exception as e:
+            raise ValueError(
+                f"Cannot parse local resource from {path_str}: {e}"
+            ) from e
 
-    if len(g) == 0:
-        print("The resource has no triples loaded. Please check! ")
+    if len(graph) == 0:
+        logger.warning("Resource has no triples loaded")
     else:
-        print("The resource is successfully loaded. \n")
+        logger.info("Successfully loaded %d triples", len(graph))
 
-    return g
-
-
-# if __name__ == '__main__':
-#     path_list = ['https://ejp-rd-dev1.vm.cesnet.cz/fdps/orphanet-catalog-fdp/?format=ttl',
-#                  '../resources/rd-resources/ordo-catalog-fdp/A multicenter registry for nasopharyngeal cancer in children.ttl']
-#
-#     for path in path_list:
-#
-#         g = parse_data_local_or_remote(path)
-#
-#         print("Graph has those triples: " + str(len(g)))
+    return graph

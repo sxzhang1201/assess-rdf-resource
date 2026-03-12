@@ -129,7 +129,11 @@ report/
 resources/fhir
 
 .idea/
+.cursor/
 
 .DS_Store
 
 parse-test.py
+.DS_Store
+*.csv
+*.pickle

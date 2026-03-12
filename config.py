@@ -1,6 +1,30 @@
-ListOfLABEL = ['geno']
+"""
+Configuration for RDF resource assessment.
+
+Quick start:
+  1. Set ListOfLABEL to the resources you want to assess (see presets below).
+  2. Run: python run_assessment.py
+
+Presets (copy one to ListOfLABEL):
+  - QUICK_START:  ['hpscreg']              # Single local file (included in repo)
+  - CONCEPTUAL:   ListOfLabelsForConceptualPaper   # 8 ontologies from the paper
+  - RARE_DISEASE: ListOfLabelsForRareDiseaseResources  # 16 rare-disease resources
+
+To add your own resource: add {label: path_or_uri} to WhichResource, then use the label in ListOfLABEL.
+"""
+
+# --- Resources to assess (edit this) ---
+QUICK_START = ['hpscreg']  # Local file included in repo (943 URIs ~30 min; set MaxURIsForQuickTest=20 for ~1 min test)
+ListOfLABEL = QUICK_START  # Change to ListOfLabelsForConceptualPaper or ListOfLabelsForRareDiseaseResources for full runs
+
+# --- Optional: batch size for HTTP requests (only affects large URI lists) ---
 ChunkSize = 50
 
+# --- Quick test: limit URIs to assess (set to None for full assessment) ---
+# Use e.g. 20 to verify the pipeline works without waiting 30+ min for large resources
+MaxURIsForQuickTest = None  # Set to 20 for ~1 min quick test; None = full assessment
+
+# --- Resource registry: label -> path or URI ---
 WhichResource = {
     # 'ordo-catalog-fdp': 'resources/rd-resources/ordo-catalog-fdp/ordo catalog fdp.ttl',
     'ordo-catalog-fdp': 'https://ejp-rd-dev1.vm.cesnet.cz/fdps/orphanet-catalog-fdp/?format=ttl',
@@ -39,8 +63,7 @@ WhichResource = {
     # others
     'addison': 'resources/addison_dataset.ttl',
 
-    # 'SIO': 'http://semanticscience.org/ontology/sio.owl',
-    'sio': 'resources/sio-release.owl',
+    'sio': 'http://semanticscience.org/ontology/sio.owl',
 
     'rdf': 'http://www.w3.org/1999/02/22-rdf-syntax-ns#',
 

@@ -1,132 +1,139 @@
-from rdflib.graph import Graph
-from corpus import PropertyList
+"""Consistency metrics: misplaced classes/properties, misused OWL property types."""
+
+import logging
+
+from rdflib import Graph
 from rdflib.namespace import RDF, RDFS
-from rdflib.term import URIRef, Literal
+from rdflib.term import Literal, URIRef
+
+from core.constants import PROPERTY_LIST
+
+logger = logging.getLogger("assess_rdf")
 
 
-def detect_misplaced_class(graph, class_uri):
+def detect_misplaced_class(graph: Graph, class_uri: str) -> str:
     """
+    Check if a class URI is incorrectly used as a predicate.
 
-    :param graph: rdflib graph object, i.e., the target graph that each URI is being used.
-    :param class_uri: pandas data frame, containing all URIs of 'class' type.
-    :return: updated pandas data frame having an additional column describing the results of misplaced class metric.
+    Args:
+        graph: RDF graph to check.
+        class_uri: URI of the class.
+
+    Returns:
+        'misplaced' if used as predicate, else 'correct'.
     """
-
-    temp_graph = Graph()
-    temp_graph += graph.triples((None, URIRef(class_uri), None))
-
-    # If zero, indicating this is no misused classes.
-    if len(temp_graph) != 0:
-
-        print("The URI {} as a class is incorrectly used as a predicate in this triple: ".format(class_uri))
-        for s, p, o in temp_graph:
-            print(s, p, o)
-        return 'misplaced'
-
-    else:
-        return 'correct'
+    triples = list(graph.triples((None, URIRef(class_uri), None)))
+    if triples:
+        for s, p, o in triples:
+            logger.debug("Misplaced class %s as predicate in: %s %s %s", class_uri, s, p, o)
+        return "misplaced"
+    return "correct"
 
 
-def detect_misplaced_property(graph, property_uri):
+def detect_misplaced_property(graph: Graph, property_uri: str) -> str:
     """
+    Check if a property URI is incorrectly used as a class (rdf:type or rdfs:subClassOf).
 
-    :param graph:
-    :param property_uri:
-    :return:
+    Args:
+        graph: RDF graph to check.
+        property_uri: URI of the property.
+
+    Returns:
+        'error' if misused as class, 'warning for definition' if in PropertyList, else 'correct'.
     """
+    triples = list(graph.triples((None, RDF.type, URIRef(property_uri))))
+    triples += list(graph.triples((None, RDFS.subClassOf, URIRef(property_uri))))
 
-    temp_graph = Graph()
-    temp_graph += graph.triples((None, RDF.type, URIRef(property_uri)))
-    temp_graph += graph.triples((None, RDFS.subClassOf, URIRef(property_uri)))
-
-    # for s, p, o in temp_graph:
-    #     print(s, p, o)
-
-    # if in, meaning that this triple is the one to define a new property, thus not regarded as an error
-    if property_uri in PropertyList:
+    if property_uri in PROPERTY_LIST:
         return "warning for definition"
 
-    # If not zero, meaning that this property is
-    if len(temp_graph) != 0:
-        print("The property {} is incorrectly used as a class in this triple: ".format(property_uri))
-        for s, p, o in temp_graph:
-            print(s, p, o)
-        return 'error'
-
-    else:
-        return 'correct'
+    if triples:
+        for s, p, o in triples:
+            logger.debug("Misplaced property %s as class in: %s %s %s", property_uri, s, p, o)
+        return "error"
+    return "correct"
 
 
-def detect_misused_datatype_or_object_property(graph, property_uri, property_type):
+def detect_misused_datatype_or_object_property(
+    graph: Graph,
+    property_uri: str,
+    property_type: str,
+) -> str:
     """
+    Check if owl:DatatypeProperty or owl:ObjectProperty is used correctly.
 
-    :param graph: rdflib graph
-    :param property_uri:
-    :param  property_type:
-    :return:
+    DatatypeProperty must have Literal objects; ObjectProperty must have URI objects.
+
+    Args:
+        graph: RDF graph to check.
+        property_uri: URI of the property.
+        property_type: 'owl_datatype_property' or 'owl_object_property'.
+
+    Returns:
+        'misused' if incorrect usage, else 'correct'.
     """
+    triples = list(graph.triples((None, URIRef(property_uri), None)))
 
-    # subset all triples using this property
-    temp_graph = Graph()
-    temp_graph += graph.triples((None, URIRef(property_uri), None))
-
-    if str(property_type) == 'owl_datatype_property':
-
-        for subj, pred, obj in temp_graph:
+    if property_type == "owl_datatype_property":
+        for subj, pred, obj in triples:
             if not isinstance(obj, Literal):
-                print(" The owl:DatatypeProperty {} is incorrectly used in {} {} {} \n because {} is not literal. ".
-                      format(property_uri, subj, pred, obj, obj))
+                logger.debug(
+                    "DatatypeProperty %s misused: %s has non-literal object %s",
+                    property_uri, subj, obj,
+                )
+                return "misused"
 
-                return 'misused'
-
-    if str(property_type) == 'owl_object_property':
-        for subj, pred, obj in temp_graph:
+    elif property_type == "owl_object_property":
+        for subj, pred, obj in triples:
             if not isinstance(obj, URIRef):
-                print(" The owl:ObjectProperty {} is incorrectly used in {} {} {} \n because {} is not a URI. ".
-                      format(property_uri, subj, pred, obj, obj))
+                logger.debug(
+                    "ObjectProperty %s misused: %s has non-URI object %s",
+                    property_uri, subj, obj,
+                )
+                return "misused"
 
-                return 'misused'
-
-    # print(" The property {} is correctly used.".format(property_uri))
-
-    return 'correct'
+    return "correct"
 
 
-def run_consistency_assessment(graph, df_uris_defined):
+def run_consistency_assessment(graph: Graph, df_uris_defined: "pd.DataFrame") -> "pd.DataFrame":
+    """
+    Run consistency checks on classified URIs.
 
-    # Initiate an empty list to store results of consistency checking
+    Args:
+        graph: RDF graph being assessed.
+        df_uris_defined: DataFrame with uri type and property type columns.
+
+    Returns:
+        DataFrame with added columns: misplaced, misused owl property.
+    """
+    import pandas as pd
+
+    df = df_uris_defined.copy()
     misplaced_list = []
-    misused_owl_property_list = []
+    misused_list = []
 
-    # Examine each URI
-    for index, row in df_uris_defined.iterrows():
-        uri = row['uris']
-        uri_type = row['uri type']
+    for _, row in df.iterrows():
+        uri = row["uris"]
+        uri_type = str(row["uri type"])
 
-        # assess metric: misplaced classes
-        if str(uri_type) == 'class':
+        if uri_type == "class":
             misplaced_list.append(detect_misplaced_class(graph, uri))
-            misused_owl_property_list.append('not applicable')
+            misused_list.append("not applicable")
 
-        elif str(uri_type) == 'property':
+        elif uri_type == "property":
             misplaced_list.append(detect_misplaced_property(graph, uri))
-
-            # get the type of a property: whether datatype or object property (owl)
-            property_type = row['property type']
-
-            if str(property_type) == 'owl_datatype_property' or str(property_type) == 'owl_object_property':
-                misused_owl_property_list.append(detect_misused_datatype_or_object_property(graph, uri, property_type))
+            prop_type = str(row.get("property type", ""))
+            if prop_type in ("owl_datatype_property", "owl_object_property"):
+                misused_list.append(
+                    detect_misused_datatype_or_object_property(graph, uri, prop_type)
+                )
             else:
-                misused_owl_property_list.append('not applicable')
+                misused_list.append("not applicable")
 
         else:
-            misplaced_list.append('not applicable')
-            misused_owl_property_list.append('not applicable')
+            misplaced_list.append("not applicable")
+            misused_list.append("not applicable")
 
-    # add results of detecting misplaced classes or properties to the original data frame
-    df_uris_defined.loc[:, 'misplaced'] = misplaced_list
-
-    # add results of misused owl:datatypeProperty or owl:objectProperty
-    df_uris_defined.loc[:, 'misused owl property'] = misused_owl_property_list
-
-    return df_uris_defined
+    df["misplaced"] = misplaced_list
+    df["misused owl property"] = misused_list
+    return df

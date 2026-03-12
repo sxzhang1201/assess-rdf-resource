@@ -1,97 +1,98 @@
-from rdflib.graph import Graph
+"""URI classification: determine if URIs are classes, properties, or unknown."""
+
+import logging
+from typing import Tuple
+
+import pandas as pd
+from rdflib import Graph
 from rdflib.namespace import RDF, RDFS
-import corpus
 from rdflib.term import URIRef
 
+from core.constants import COL_CONTENT_TYPE, COL_PROPERTY_TYPE, COL_URI_TYPE, CONTENT_TYPE_TO_FORMAT
 
-def get_uri_type(uris_rdf):
+logger = logging.getLogger("assess_rdf")
+
+# OWL/RDF type URIs for classification
+OWL_DATATYPE_PROPERTY = "http://www.w3.org/2002/07/owl#DatatypeProperty"
+OWL_OBJECT_PROPERTY = "http://www.w3.org/2002/07/owl#ObjectProperty"
+OWL_CLASS = "http://www.w3.org/2002/07/owl#Class"
+RDFS_CLASS = "http://www.w3.org/2000/01/rdf-schema#Class"
+RDF_PROPERTY = "http://www.w3.org/1999/02/22-rdf-syntax-ns#Property"
+
+PROPERTY_TYPES = [
+    OWL_DATATYPE_PROPERTY,
+    "http://www.w3.org/2002/07/owl#InverseFunctionalProperty",
+    "http://www.w3.org/2002/07/owl#FunctionalProperty",
+    "http://www.w3.org/2002/07/owl#TransitiveProperty",
+    "http://www.w3.org/2002/07/owl#SymmetricProperty",
+    "http://www.w3.org/2002/07/owl#AnnotationProperty",
+    "http://www.w3.org/2002/07/owl#OntologyProperty",
+    "http://www.w3.org/2002/07/owl#DeprecatedProperty",
+]
+
+
+def _classify_uri(uri: str, content_type: str) -> Tuple[str, str]:
     """
+    Classify a single URI as class, property (with subtype), or unknown.
 
-    :param uris_rdf: a data frame with six columns:
-    'uris',
-    'status_code', all should be 2xx or 3xx
-    'content-type',
-    'if_rdf_content',
-    'parsing',
-    'undefined',
-    :return:
+    Returns:
+        Tuple of (uri_type, property_type).
     """
+    parse_format = CONTENT_TYPE_TO_FORMAT.get(content_type, "xml")
+    graph = Graph().parse(uri, format=parse_format)
+    uri_ref = URIRef(uri)
 
-    uri_type = []
-    property_type = []
+    # Check for DatatypeProperty (or rdfs:range Literal)
+    if (uri_ref, RDF.type, URIRef(OWL_DATATYPE_PROPERTY)) in graph:
+        return "property", "owl_datatype_property"
+    if (uri_ref, RDFS.range, RDFS.Literal) in graph:
+        return "property", "owl_datatype_property"
 
-    # only focus on defined URIs, so subset:
-    uris_defined = uris_rdf.loc[uris_rdf["whether defined"] == "defined"]
+    # Check for ObjectProperty
+    if (uri_ref, RDF.type, URIRef(OWL_OBJECT_PROPERTY)) in graph:
+        return "property", "owl_object_property"
 
-    # Investigate an URI
-    for index, row in uris_defined.iterrows():
+    # Check for other property types
+    for prop_uri in PROPERTY_TYPES:
+        if (uri_ref, RDF.type, URIRef(prop_uri)) in graph:
+            return "property", "other_property"
 
-        uri = row['uris']
+    # Check for rdf:Property
+    if (uri_ref, RDF.type, URIRef(RDF_PROPERTY)) in graph:
+        return "property", "other_property"
 
-        print(str(index) + '. ' + uri + ", " + row['content-type'])
+    # Check for class
+    if (uri_ref, RDF.type, URIRef(OWL_CLASS)) in graph:
+        return "class", "not applicable"
+    if (uri_ref, RDF.type, URIRef(RDFS_CLASS)) in graph:
+        return "class", "not applicable"
 
-        # get parsing content of the URI
-        g = Graph().parse(uri, format=corpus.MapContentTypeToParserFormat[row['content-type']])
+    return "unknown", "not applicable"
 
-        # 'contains' checking
-        if (URIRef(uri), RDF.type, URIRef("http://www.w3.org/2002/07/owl#DatatypeProperty")) in g or \
-                (URIRef(uri), RDFS.range, RDFS.Literal) in g:
-            uri_type.append("property")
-            property_type.append('owl_datatype_property')
-            continue
 
-        elif (URIRef(uri), RDF.type, URIRef("http://www.w3.org/2002/07/owl#ObjectProperty")) in g:
-            uri_type.append("property")
-            property_type.append('owl_object_property')
-            continue
+def get_uri_type(uris_rdf: pd.DataFrame) -> pd.DataFrame:
+    """
+    Classify parsable URIs as class, property, or unknown.
 
-        elif (URIRef(uri), RDF.type, URIRef("http://www.w3.org/2002/07/owl#InverseFunctionalProperty")) in g \
-                or (URIRef(uri), RDF.type, URIRef("http://www.w3.org/2002/07/owl#FunctionalProperty")) in g:
-            uri_type.append("property")
-            property_type.append('other_property')
-            continue
+    Args:
+        uris_rdf: DataFrame with parsability results. Must include 'whether defined' == 'defined'.
 
-        elif (URIRef(uri), RDF.type, URIRef("http://www.w3.org/2002/07/owl#TransitiveProperty")) in g:
-            uri_type.append("property")
-            property_type.append('other_property')
-            continue
+    Returns:
+        DataFrame with added columns: uri type, property type.
+    """
+    defined = uris_rdf[uris_rdf["whether defined"] == "defined"].copy()
+    uri_types = []
+    property_types = []
 
-        elif (URIRef(uri), RDF.type, URIRef("http://www.w3.org/2002/07/owl#SymmetricProperty")) in g:
-            uri_type.append("property")
-            property_type.append('other_property')
-            continue
+    for index, row in defined.iterrows():
+        uri = row["uris"]
+        content_type = row[COL_CONTENT_TYPE]
+        logger.debug("Classifying URI: %s", uri)
 
-        elif (URIRef(uri), RDF.type, URIRef("http://www.w3.org/2002/07/owl#AnnotationProperty")) in g:
-            uri_type.append("property")
-            property_type.append('other_property')
-            continue
+        uri_type, prop_type = _classify_uri(uri, content_type)
+        uri_types.append(uri_type)
+        property_types.append(prop_type)
 
-        elif (URIRef(uri), RDF.type, URIRef("http://www.w3.org/2002/07/owl#OntologyProperty")) in g:
-            uri_type.append("property")
-            property_type.append('other_property')
-            continue
-
-        elif (URIRef(uri), RDF.type, URIRef("http://www.w3.org/2002/07/owl#DeprecatedProperty")) in g:
-            uri_type.append("property")
-            property_type.append('other_property')
-            continue
-
-        elif (URIRef(uri), RDF.type, URIRef("http://www.w3.org/1999/02/22-rdf-syntax-ns#Property")) in g:
-            uri_type.append("property")
-            property_type.append('other_property')
-            continue
-
-        elif (URIRef(uri), RDF.type, URIRef("http://www.w3.org/2000/01/rdf-schema#Class")) in g or \
-                (URIRef(uri), RDF.type, URIRef("http://www.w3.org/2002/07/owl#Class")) in g:
-            uri_type.append("class")
-            property_type.append('not applicable')
-            continue
-        else:
-            uri_type.append("unknown")
-            property_type.append('not applicable')
-
-    # add URI type to a new column
-    uris_defined.loc[:, 'uri type'] = uri_type
-    uris_defined.loc[:, 'property type'] = property_type
-
-    return uris_defined
+    defined[COL_URI_TYPE] = uri_types
+    defined[COL_PROPERTY_TYPE] = property_types
+    return defined

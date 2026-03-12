@@ -42,12 +42,12 @@ def populate_report_with_results(report_graph,
         DQV.isMeasurementOf,
         metric_uri_ref))
 
-    # add percentage
+    # Add percentage (avoid division by zero)
+    ratio = len(bad_uris_list) / num_of_uris if num_of_uris > 0 else 0.0
     report_graph.add((
         measure_uri_ref,
         DQV.value,
-        # Literal("{}/{}".format(len(bad_uris_list), num_of_uris))))
-        Literal(round(len(bad_uris_list)/num_of_uris, 2), datatype=XSD.float)
+        Literal(round(ratio, 2), datatype=XSD.float)
     ))
 
     for bad_uri in bad_uris_list:
@@ -146,8 +146,6 @@ def build_graph(resource_uri, report_label, assessment_result, num_of_uris=0, nu
                                      num_of_uris=num_of_properties,
                                      resource_uri_ref=resource_uri_ref,
                                      metric_uri_ref=FQM.misusedOwlDatatypeOrObjectPropertiesMetric)
-
-    print(report_graph.serialize())
 
     return report_graph
 
